@@ -24,10 +24,10 @@ class ConfigManager {
    * 加载配置到UI
    */
   loadConfig() {
-    console.log('[HoyoBlock-Options] Loading configuration...');
+    DebugLogger.log('[HoyoBlock-Options] Loading configuration...');
 
     chrome.storage.sync.get(null, (result) => {
-      console.log('[HoyoBlock-Options] Raw config loaded:', result);
+      DebugLogger.log('[HoyoBlock-Options] Raw config loaded:', result);
 
       // 加载B站配置
       document.getElementById('bili-title').value = result.blockTitleBili || '';
@@ -44,7 +44,7 @@ class ConfigManager {
       document.getElementById('twitter-users').value = result.blockUsersTwitter || '';
       document.getElementById('twitter-whitelist').value = result.blockUsersWhiteTwitter || '';
 
-      console.log('[HoyoBlock-Options] Configuration loaded to UI');
+      DebugLogger.log('[HoyoBlock-Options] Configuration loaded to UI');
     });
   }
 
@@ -52,7 +52,7 @@ class ConfigManager {
    * 保存配置
    */
   saveRules() {
-    console.log('[HoyoBlock-Options] Saving rules...');
+    DebugLogger.log('[HoyoBlock-Options] Saving rules...');
 
     const config = {
       blockTitleBili: document.getElementById('bili-title').value,
@@ -68,19 +68,19 @@ class ConfigManager {
       blockUsersWhiteTwitter: document.getElementById('twitter-whitelist').value
     };
 
-    console.log('[HoyoBlock-Options] Config to save:', config);
+    DebugLogger.log('[HoyoBlock-Options] Config to save:', config);
 
     chrome.storage.sync.set(config, () => {
       if (chrome.runtime.lastError) {
         console.error('[HoyoBlock-Options] Error saving config:', chrome.runtime.lastError);
         window.Utils.showMessage('保存失败: ' + chrome.runtime.lastError.message, 'error');
       } else {
-        console.log('[HoyoBlock-Options] Config saved successfully');
+        DebugLogger.log('[HoyoBlock-Options] Config saved successfully');
         window.Utils.showMessage('规则保存成功！', 'success');
 
         // 验证保存结果
         chrome.storage.sync.get(null, (result) => {
-          console.log('[HoyoBlock-Options] Verification - saved config:', result);
+          DebugLogger.log('[HoyoBlock-Options] Verification - saved config:', result);
         });
       }
     });

@@ -89,7 +89,7 @@ function localizeTitle() {
   const titleElement = document.querySelector('title');
   if (titleElement && titleElement.textContent.includes('__MSG_')) {
     titleElement.textContent = processText(titleElement.textContent);
-    console.log('Title localized:', titleElement.textContent);
+    DebugLogger.log('Title localized:', titleElement.textContent);
   }
 }
 

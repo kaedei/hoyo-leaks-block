@@ -33,11 +33,11 @@ class AreaManager {
    * 加载区域列表
    */
   loadAreaList() {
-    console.log('[HoyoBlock-Options] Loading area list...');
+    DebugLogger.log('[HoyoBlock-Options] Loading area list...');
 
     chrome.storage.sync.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
-      console.log('[HoyoBlock-Options] Area list loaded:', areaList);
+      DebugLogger.log('[HoyoBlock-Options] Area list loaded:', areaList);
 
       const container = document.getElementById('area-items');
       container.innerHTML = '';
@@ -52,7 +52,7 @@ class AreaManager {
       }
 
       areaList.forEach((area, index) => {
-        console.log(`[HoyoBlock-Options] Processing area ${index}: ${area.name} (${area.area}) - ${area.on ? 'enabled' : 'disabled'}`);
+        DebugLogger.log(`[HoyoBlock-Options] Processing area ${index}: ${area.name} (${area.area}) - ${area.on ? 'enabled' : 'disabled'}`);
 
         const areaItem = document.createElement('div');
         areaItem.className = 'area-item';
@@ -75,7 +75,7 @@ class AreaManager {
         container.appendChild(areaItem);
       });
 
-      console.log('[HoyoBlock-Options] Area list UI updated');
+      DebugLogger.log('[HoyoBlock-Options] Area list UI updated');
     });
   }
 
@@ -283,7 +283,7 @@ class AreaManager {
   initAreaData() {
     chrome.storage.sync.get(['areaList'], (result) => {
       if (!result.areaList || result.areaList.length === 0) {
-        console.log('[HoyoBlock-Options] No area data found, loading sample data');
+        DebugLogger.log('[HoyoBlock-Options] No area data found, loading sample data');
         this.loadSampleAreaData();
       }
     });

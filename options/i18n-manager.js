@@ -19,12 +19,12 @@ class I18nManager {
       return;
     }
 
-    console.log('[I18nManager] Initializing i18n...');
+    DebugLogger.log('[I18nManager] Initializing i18n...');
 
     try {
       this.localizeHTML();
       this.initialized = true;
-      console.log('[I18nManager] I18n initialized successfully');
+      DebugLogger.log('[I18nManager] I18n initialized successfully');
     } catch (error) {
       console.error('[I18nManager] Error initializing i18n:', error);
       throw error;
@@ -156,7 +156,7 @@ class I18nManager {
     const titleElement = document.querySelector('title');
     if (titleElement && titleElement.textContent.includes('__MSG_')) {
       titleElement.textContent = this.processText(titleElement.textContent);
-      console.log('[I18nManager] Title localized:', titleElement.textContent);
+      DebugLogger.log('[I18nManager] Title localized:', titleElement.textContent);
     }
   }
 }

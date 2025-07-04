@@ -1,5 +1,8 @@
 // Background script for the extension
-console.log('Hoyo Leaks Block Extension background script loaded');
+// Import debug logger
+importScripts('core/debug-logger.js');
+
+DebugLogger.log('Hoyo Leaks Block Extension background script loaded');
 
 // Initialize default storage values
 chrome.runtime.onInstalled.addListener(() => {
@@ -214,25 +217,25 @@ async function fetchDefaultAreaList() {
 
 // 监听来自content script的消息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('[HoyoBlock-Background] Received message:', request);
+  DebugLogger.log('[HoyoBlock-Background] Received message:', request);
 
   if (request.action === 'getConfig') {
-    console.log('[HoyoBlock-Background] Getting config...');
+    DebugLogger.log('[HoyoBlock-Background] Getting config...');
     chrome.storage.sync.get(null, (result) => {
-      console.log('[HoyoBlock-Background] Config retrieved:', result);
+      DebugLogger.log('[HoyoBlock-Background] Config retrieved:', result);
       sendResponse(result);
     });
     return true;
   }
 
   if (request.action === 'setConfig') {
-    console.log('[HoyoBlock-Background] Setting config:', request.config);
+    DebugLogger.log('[HoyoBlock-Background] Setting config:', request.config);
     chrome.storage.sync.set(request.config, () => {
       if (chrome.runtime.lastError) {
         console.warn('[HoyoBlock-Background] Error saving config:', chrome.runtime.lastError);
         sendResponse({ success: false, error: chrome.runtime.lastError.message });
       } else {
-        console.log('[HoyoBlock-Background] Config saved successfully');
+        DebugLogger.log('[HoyoBlock-Background] Config saved successfully');
         sendResponse({ success: true });
       }
     });
@@ -246,7 +249,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           console.warn('打开选项页面失败:', chrome.runtime.lastError);
           sendResponse({ success: false, error: chrome.runtime.lastError.message });
         } else {
-          console.log('选项页面已打开');
+          DebugLogger.log('选项页面已打开');
           sendResponse({ success: true });
         }
       });

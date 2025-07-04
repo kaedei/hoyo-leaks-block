@@ -27,7 +27,7 @@ class OptionsController {
       return;
     }
 
-    console.log('[HoyoBlock-Options] Initializing options page...');
+    DebugLogger.log('[HoyoBlock-Options] Initializing options page...');
 
     try {
       // 初始化国际化
@@ -46,7 +46,7 @@ class OptionsController {
       window.AreaManager.initAreaData();
 
       this.initialized = true;
-      console.log('[HoyoBlock-Options] Options page initialized successfully');
+      DebugLogger.log('[HoyoBlock-Options] Options page initialized successfully');
 
     } catch (error) {
       console.error('[HoyoBlock-Options] Error initializing options page:', error);
@@ -93,12 +93,12 @@ function waitForModules() {
     const checkModules = () => {
       attempts++;
 
-      console.log(`[HoyoBlock-Options] Checking modules (attempt ${attempts}/${maxAttempts})...`);
-      console.log(`[HoyoBlock-Options] I18nManager: ${typeof window.I18nManager !== 'undefined' ? 'defined' : 'undefined'}`);
-      console.log(`[HoyoBlock-Options] UIManager: ${typeof window.UIManager !== 'undefined' ? 'defined' : 'undefined'}, has init: ${typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' ? 'yes' : 'no'}`);
-      console.log(`[HoyoBlock-Options] ConfigManager: ${typeof window.ConfigManager !== 'undefined' ? 'defined' : 'undefined'}`);
-      console.log(`[HoyoBlock-Options] AreaManager: ${typeof window.AreaManager !== 'undefined' ? 'defined' : 'undefined'}`);
-      console.log(`[HoyoBlock-Options] Utils: ${typeof window.Utils !== 'undefined' ? 'defined' : 'undefined'}`);
+      DebugLogger.log(`[HoyoBlock-Options] Checking modules (attempt ${attempts}/${maxAttempts})...`);
+      DebugLogger.log(`[HoyoBlock-Options] I18nManager: ${typeof window.I18nManager !== 'undefined' ? 'defined' : 'undefined'}`);
+      DebugLogger.log(`[HoyoBlock-Options] UIManager: ${typeof window.UIManager !== 'undefined' ? 'defined' : 'undefined'}, has init: ${typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' ? 'yes' : 'no'}`);
+      DebugLogger.log(`[HoyoBlock-Options] ConfigManager: ${typeof window.ConfigManager !== 'undefined' ? 'defined' : 'undefined'}`);
+      DebugLogger.log(`[HoyoBlock-Options] AreaManager: ${typeof window.AreaManager !== 'undefined' ? 'defined' : 'undefined'}`);
+      DebugLogger.log(`[HoyoBlock-Options] Utils: ${typeof window.Utils !== 'undefined' ? 'defined' : 'undefined'}`);
 
       if (typeof window.I18nManager !== 'undefined' && window.I18nManager &&
         typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' &&
@@ -106,7 +106,7 @@ function waitForModules() {
         typeof window.AreaManager !== 'undefined' && window.AreaManager &&
         typeof window.Utils !== 'undefined' && window.Utils) {
 
-        console.log('[HoyoBlock-Options] All modules loaded successfully');
+        DebugLogger.log('[HoyoBlock-Options] All modules loaded successfully');
         resolve();
       } else if (attempts >= maxAttempts) {
         const missingModules = [];
@@ -129,7 +129,7 @@ function waitForModules() {
 // 页面加载完成后等待模块加载然后初始化
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    console.log('[HoyoBlock-Options] DOM loaded, waiting for modules...');
+    DebugLogger.log('[HoyoBlock-Options] DOM loaded, waiting for modules...');
     await waitForModules();
     optionsController.init();
   } catch (error) {

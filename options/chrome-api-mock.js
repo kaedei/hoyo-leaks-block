@@ -4,7 +4,7 @@
 
 // 模拟Chrome API用于测试
 if (!window.chrome || !window.chrome.storage) {
-  console.log('[HoyoBlock-Options] Creating mock Chrome API for testing...');
+  DebugLogger.log('[HoyoBlock-Options] Creating mock Chrome API for testing...');
 
   window.chrome = {
     storage: {
@@ -47,13 +47,13 @@ if (!window.chrome || !window.chrome.storage) {
           }, 100);
         },
         set: function (items, callback) {
-          console.log('[HoyoBlock-Options] Mock storage set:', items);
+          DebugLogger.log('[HoyoBlock-Options] Mock storage set:', items);
           setTimeout(() => {
             if (callback) callback();
           }, 100);
         },
         clear: function (callback) {
-          console.log('[HoyoBlock-Options] Mock storage clear');
+          DebugLogger.log('[HoyoBlock-Options] Mock storage clear');
           setTimeout(() => {
             if (callback) callback();
           }, 100);
@@ -61,7 +61,7 @@ if (!window.chrome || !window.chrome.storage) {
       },
       local: {
         clear: function (callback) {
-          console.log('[HoyoBlock-Options] Mock local storage clear');
+          DebugLogger.log('[HoyoBlock-Options] Mock local storage clear');
           setTimeout(() => {
             if (callback) callback();
           }, 100);

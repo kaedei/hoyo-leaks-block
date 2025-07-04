@@ -15,11 +15,11 @@ class UIManager {
    * 初始化UI
    */
   init() {
-    console.log('[UIManager] Starting initialization...');
-    console.log('[UIManager] this =', this);
-    console.log('[UIManager] typeof this =', typeof this);
-    console.log('[UIManager] this.constructor =', this.constructor);
-    console.log('[UIManager] this.constructor.name =', this.constructor.name);
+    DebugLogger.log('[UIManager] Starting initialization...');
+    DebugLogger.log('[UIManager] this =', this);
+    DebugLogger.log('[UIManager] typeof this =', typeof this);
+    DebugLogger.log('[UIManager] this.constructor =', this.constructor);
+    DebugLogger.log('[UIManager] this.constructor.name =', this.constructor.name);
 
     try {
       this.initTabNavigation();
@@ -27,7 +27,7 @@ class UIManager {
       this.bindEventListeners();
       this.bindKeyboardEvents();
 
-      console.log('[UIManager] Initialization completed successfully');
+      DebugLogger.log('[UIManager] Initialization completed successfully');
     } catch (error) {
       console.error('[UIManager] Initialization failed:', error);
       throw error;
@@ -86,7 +86,7 @@ class UIManager {
    * 绑定事件监听器
    */
   bindEventListeners() {
-    console.log('[UIManager] Binding event listeners...');
+    DebugLogger.log('[UIManager] Binding event listeners...');
 
     // 安全获取元素的辅助函数
     const getElement = (id) => {
@@ -166,7 +166,7 @@ class UIManager {
     // 表单提交事件委托
     this.bindFormEvents();
 
-    console.log('[UIManager] Event listeners bound successfully');
+    DebugLogger.log('[UIManager] Event listeners bound successfully');
   }
 
   /**
@@ -279,11 +279,11 @@ class UIManager {
 }
 
 // 导出UI管理器
-console.log('[UIManager] Creating UIManager instance...');
+DebugLogger.log('[UIManager] Creating UIManager instance...');
 const uiManagerInstance = new UIManager();
-console.log('[UIManager] UIManager instance created:', uiManagerInstance);
-console.log('[UIManager] UIManager instance init method:', typeof uiManagerInstance.init);
+DebugLogger.log('[UIManager] UIManager instance created:', uiManagerInstance);
+DebugLogger.log('[UIManager] UIManager instance init method:', typeof uiManagerInstance.init);
 
 window.UIManager = uiManagerInstance;
-console.log('[UIManager] UIManager exported to window:', window.UIManager);
-console.log('[UIManager] window.UIManager.init:', typeof window.UIManager.init);
+DebugLogger.log('[UIManager] UIManager exported to window:', window.UIManager);
+DebugLogger.log('[UIManager] window.UIManager.init:', typeof window.UIManager.init);

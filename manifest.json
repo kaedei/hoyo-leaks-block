@@ -25,6 +25,7 @@
         "*://*.bilibili.com/*"
       ],
       "js": [
+        "core/debug-logger.js",
         "core/block-core.js",
         "content-scripts/bilibili.js"
       ],
@@ -38,6 +39,7 @@
         "*://*.youtube.com/*"
       ],
       "js": [
+        "core/debug-logger.js",
         "core/block-core.js",
         "content-scripts/youtube.js"
       ],
@@ -52,6 +54,7 @@
         "*://*.x.com/*"
       ],
       "js": [
+        "core/debug-logger.js",
         "core/block-core.js",
         "content-scripts/twitter.js"
       ],
