@@ -60,14 +60,9 @@ else
     echo "📁 构建目录: $BUILD_DIR"
 fi
 
-# 询问是否清理临时目录
-echo
-read -p "是否删除构建目录 build？[Y/N]: " cleanup
-if [[ "$cleanup" =~ ^[Yy]$ ]]; then
-    rm -rf "$BUILD_DIR"
-    echo "✅ 构建目录已清理"
-else
-    echo "📁 构建目录保留: $BUILD_DIR"
-fi
+# 清理临时目录
+echo "🗑️  清理构建目录..."
+rm -rf "$BUILD_DIR"
+echo "✅ 构建目录已清理"
 
 echo "✨ 构建脚本执行完成"
