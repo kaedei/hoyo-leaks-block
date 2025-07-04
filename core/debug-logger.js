@@ -1,10 +1,10 @@
 /**
  * 调试管理模块
- * 只在本地调试模式下输出日志，打包上商店时禁用调试日志
+ * 只在本地调试模式下输出日志，打包发布时禁用调试日志
  */
 
 // 是否为调试模式
-const IS_DEBUG_MODE = true; // 在打包时可以改为 false 来禁用调试日志
+const IS_DEBUG_MODE = false; // 本地调试时可以改为 true 来启用调试日志
 
 // 创建调试工具对象
 const DebugLogger = {
