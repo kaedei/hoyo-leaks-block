@@ -1,0 +1,146 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Extension",
+      "type": "shell",
+      "command": "build.bat",
+      "windows": {
+        "command": "build.bat"
+      },
+      "linux": {
+        "command": "./build.sh"
+      },
+      "osx": {
+        "command": "./build.sh"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Test Page",
+      "type": "shell",
+      "command": "start",
+      "windows": {
+        "command": "start test/test.html"
+      },
+      "linux": {
+        "command": "xdg-open test/test.html"
+      },
+      "osx": {
+        "command": "open test/test.html"
+      },
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Open Chrome Extensions",
+      "type": "shell",
+      "command": "start",
+      "windows": {
+        "command": "start chrome://extensions/"
+      },
+      "linux": {
+        "command": "google-chrome chrome://extensions/"
+      },
+      "osx": {
+        "command": "open -a 'Google Chrome' chrome://extensions/"
+      },
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Validate Manifest",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "-e",
+        "const fs = require('fs'); const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8')); console.log('✅ Manifest is valid JSON'); console.log('Version:', manifest.version); console.log('Permissions:', manifest.permissions);"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "install"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean Build",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "if (Test-Path 'build') { Remove-Item -Recurse -Force 'build' }; if (Test-Path 'hoyo-leaks-block.zip') { Remove-Item -Force 'hoyo-leaks-block.zip' }; Write-Host '✅ Build artifacts cleaned'"
+      ],
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-Command",
+          "if (Test-Path 'build') { Remove-Item -Recurse -Force 'build' }; if (Test-Path 'hoyo-leaks-block.zip') { Remove-Item -Force 'hoyo-leaks-block.zip' }; Write-Host '✅ Build artifacts cleaned'"
+        ]
+      },
+      "linux": {
+        "command": "rm",
+        "args": [
+          "-rf",
+          "build",
+          "hoyo-leaks-block.zip"
+        ]
+      },
+      "osx": {
+        "command": "rm",
+        "args": [
+          "-rf",
+          "build",
+          "hoyo-leaks-block.zip"
+        ]
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}

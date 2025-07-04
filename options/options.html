@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>米哈游内鬼屏蔽工具 - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>米哈游内鬼屏蔽工具</h1>
+      <p>配置屏蔽规则和管理区域设置</p>
+    </div>
+
+    <div class="content">
+      <div class="sidebar">
+        <nav class="nav-menu">
+          <button class="nav-item active" data-tab="rules">🛡️ 屏蔽规则</button>
+          <button class="nav-item" data-tab="areas">📍 区域管理</button>
+          <button class="nav-item" data-tab="import-export">📦 导入导出</button>
+          <button class="nav-item" data-tab="about">ℹ️ 关于</button>
+        </nav>
+      </div>
+
+      <div class="main-content">
+        <!-- 屏蔽规则标签页 -->
+        <div class="tab-content active" id="rules-tab">
+          <h2>屏蔽规则配置</h2>
+
+          <div class="platform-config">
+            <div class="platform-section">
+              <h3>B站 (Bilibili)</h3>
+              <div class="form-group">
+                <label for="bili-title">屏蔽关键词（用|分隔）</label>
+                <textarea id="bili-title" rows="3" placeholder="例如：内鬼|爆料|泄露|leak|beta"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="bili-users">作者黑名单（用|分隔）</label>
+                <textarea id="bili-users" rows="3" placeholder="例如：用户名1|用户名2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="bili-whitelist">作者白名单（用|分隔）</label>
+                <textarea id="bili-whitelist" rows="3" placeholder="例如：官方账号|可信用户"></textarea>
+              </div>
+            </div>
+
+            <div class="platform-section">
+              <h3>YouTube</h3>
+              <div class="form-group">
+                <label for="ytb-title">屏蔽关键词（用|分隔）</label>
+                <textarea id="ytb-title" rows="3" placeholder="例如：leak|beta|insider|spoiler"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="ytb-users">作者黑名单（用|分隔）</label>
+                <textarea id="ytb-users" rows="3" placeholder="例如：channel1|channel2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="ytb-whitelist">作者白名单（用|分隔）</label>
+                <textarea id="ytb-whitelist" rows="3" placeholder="例如：官方频道|可信频道"></textarea>
+              </div>
+            </div>
+
+            <div class="platform-section">
+              <h3>Twitter</h3>
+              <div class="form-group">
+                <label for="twitter-title">屏蔽关键词（用|分隔）</label>
+                <textarea id="twitter-title" rows="3" placeholder="例如：leak|beta|insider|spoiler"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="twitter-users">作者黑名单（用|分隔）</label>
+                <textarea id="twitter-users" rows="3" placeholder="例如：@user1|@user2"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="twitter-whitelist">作者白名单（用|分隔）</label>
+                <textarea id="twitter-whitelist" rows="3" placeholder="例如：@official|@trusted"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="save-rules" class="btn btn-primary">保存规则</button>
+            <button id="reset-rules" class="btn btn-secondary">重置为默认</button>
+          </div>
+        </div>
+
+        <!-- 区域管理标签页 -->
+        <div class="tab-content" id="areas-tab">
+          <h2>区域管理</h2>
+          <p>管理不同平台的屏蔽区域设置</p>
+
+          <div class="area-list">
+            <div class="area-header">
+              <span>区域名称</span>
+              <span>平台</span>
+              <span>状态</span>
+              <span>操作</span>
+            </div>
+            <div id="area-items">
+              <!-- 区域项目将通过JavaScript动态加载 -->
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="add-area" class="btn btn-primary">添加区域</button>
+            <button id="refresh-areas" class="btn btn-secondary">刷新区域</button>
+          </div>
+        </div>
+
+        <!-- 导入导出标签页 -->
+        <div class="tab-content" id="import-export-tab">
+          <h2>导入导出配置</h2>
+
+          <div class="import-export-section">
+            <h3>导出配置</h3>
+            <p>将当前配置导出为JSON文件</p>
+            <button id="export-config" class="btn btn-primary">导出配置</button>
+          </div>
+
+          <div class="import-export-section">
+            <h3>导入配置</h3>
+            <p>从JSON文件导入配置</p>
+            <input type="file" id="import-file" accept=".json" style="display: none;">
+            <button id="import-config" class="btn btn-primary">选择文件导入</button>
+          </div>
+
+          <div class="import-export-section">
+            <h3>远程更新</h3>
+            <p>从远程服务器更新最新的区域配置</p>
+            <button id="update-remote" class="btn btn-primary">更新区域配置</button>
+          </div>
+
+          <div class="import-export-section">
+            <h3>清除所有数据</h3>
+            <p>⚠️ 此操作将清除所有配置和数据，无法恢复</p>
+            <button id="clear-all" class="btn btn-danger">清除所有数据</button>
+          </div>
+        </div>
+
+        <!-- 关于标签页 -->
+        <div class="tab-content" id="about-tab">
+          <h2>关于</h2>
+
+          <div class="about-section">
+            <h3>米哈游内鬼屏蔽工具</h3>
+            <p>版本：3.0.0</p>
+            <p>这是一个用于屏蔽B站、YouTube、Twitter平台上原神和星穹铁道内鬼爆料内容的Chrome/Edge扩展。</p>
+
+            <h4>功能特点</h4>
+            <ul>
+              <li>支持多平台内容屏蔽</li>
+              <li>自定义关键词和用户屏蔽</li>
+              <li>白名单机制</li>
+              <li>区域管理</li>
+              <li>配置导入导出</li>
+            </ul>
+
+            <h4>使用说明</h4>
+            <ol>
+              <li>在"屏蔽规则"中配置要屏蔽的关键词和用户</li>
+              <li>在"区域管理"中管理不同平台的屏蔽区域</li>
+              <li>支持导入导出配置文件</li>
+              <li>可以远程更新区域配置</li>
+            </ol>
+
+            <h4>联系方式</h4>
+            <p>如有问题或建议，请访问：</p>
+            <p><a href="https://github.com/your-username/hoyo-leaks-block" target="_blank">GitHub项目地址</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 米哈游内鬼屏蔽工具. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- 消息提示 -->
+  <div id="message" class="message"></div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>

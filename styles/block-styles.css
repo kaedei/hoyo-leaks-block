@@ -1,0 +1,117 @@
+/* 主要的屏蔽样式 */
+.hoyo-blur-block {
+  filter: blur(30px) !important;
+  transition: filter 0.3s ease !important;
+}
+
+.hoyo-blur-block:hover {
+  filter: blur(5px) !important;
+}
+
+/* 设置按钮样式 */
+.hoyo-block-open-button {
+  position: fixed !important;
+  z-index: 99997 !important;
+  right: 0 !important;
+  top: 40% !important;
+  width: 30px !important;
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  background-color: #00b2ff !important;
+  font-size: 12px !important;
+  color: #fff !important;
+  padding: 8px 9px !important;
+  line-height: 14px !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyUzYuNDggMjIgMTIgMjIgMjIgMTcuNTIgMjIgMTJTMTcuNTIgMiAxMiAyWk0xNy41NiAxN0wxNiAxNS40NEwxMC40NCAxMEwxMiA4LjQ0TDE3LjU2IDEzLjU2TDE3LjU2IDE3WiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K') !important;
+  background-position: center 5px !important;
+  background-size: 20px !important;
+  background-repeat: no-repeat !important;
+  padding-top: 30px !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
+  user-select: none !important;
+  box-shadow: 0 2px 8px rgba(0, 178, 255, 0.3) !important;
+}
+
+.hoyo-block-open-button:hover {
+  box-shadow: 0 4px 12px rgba(0, 178, 255, 0.5) !important;
+  transform: translateX(-2px) !important;
+}
+
+/* 消息提示样式 */
+.hoyo-message {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  min-width: 100px !important;
+  border-radius: 4px !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #fff !important;
+  padding: 12px 24px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  z-index: 99999 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.hoyo-message.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 特定平台的样式调整 */
+/* B站 */
+.bilibili .hoyo-blur-block .bili-video-card__info--tit {
+  color: transparent !important;
+  background-color: #f0f0f0 !important;
+  border-radius: 4px !important;
+}
+
+/* YouTube */
+.youtube .hoyo-blur-block #video-title {
+  color: transparent !important;
+  background-color: #f0f0f0 !important;
+  border-radius: 4px !important;
+}
+
+/* Twitter */
+.twitter .hoyo-blur-block [data-testid="tweetText"] {
+  color: transparent !important;
+  background-color: #f0f0f0 !important;
+  border-radius: 4px !important;
+}
+
+/* 防止样式冲突 */
+[data-hoyo-blocked="true"] {
+  position: relative !important;
+}
+
+[data-hoyo-blocked="true"]::before {
+  content: "🚫 已屏蔽内容" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  z-index: 10 !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  pointer-events: none !important;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+[data-hoyo-blocked="true"]:hover::before {
+  opacity: 1 !important;
+}

@@ -1,0 +1,31 @@
+{
+  "name": "hoyo-leaks-block",
+  "version": "3.0.0",
+  "description": "Chrome/Edge extension to block Genshin Impact and Star Rail leak content on Bilibili, YouTube, and Twitter",
+  "main": "background.js",
+  "scripts": {
+    "build": "echo 'Building Chrome extension...' && npm run zip",
+    "zip": "zip -r hoyo-leaks-block.zip . -x '*.git*' 'node_modules/*' 'package*.json' '.gitignore' '.vscode/*'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'Linting not configured'"
+  },
+  "keywords": [
+    "chrome-extension",
+    "content-blocker",
+    "genshin-impact",
+    "star-rail",
+    "bilibili",
+    "youtube",
+    "twitter",
+    "leak-blocker"
+  ],
+  "author": "kaedei",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaedei/hoyo-leaks-block"
+  },
+  "devDependencies": {
+    "zip-cli": "^1.0.0"
+  }
+}

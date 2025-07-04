@@ -1,0 +1,118 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate manifest.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+          console.log('✅ Manifest is valid JSON');
+          console.log('Version:', manifest.version);
+          console.log('Name:', manifest.name);
+          if (manifest.manifest_version !== 3) {
+            throw new Error('Manifest version must be 3');
+          }
+          console.log('✅ Manifest validation passed');
+          "
+
+      - name: Build extension
+        run: |
+          mkdir -p build
+          cp -r manifest.json build/
+          cp -r background.js build/
+          cp -r core/ build/
+          cp -r content-scripts/ build/
+          cp -r popup/ build/
+          cp -r options/ build/
+          cp -r styles/ build/
+          cp -r icons/ build/
+          echo "✅ Build completed"
+
+      - name: Create ZIP package
+        run: |
+          cd build
+          zip -r ../hoyo-leaks-block.zip .
+          cd ..
+          echo "✅ ZIP package created"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: hoyo-leaks-block
+          path: hoyo-leaks-block.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: hoyo-leaks-block
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## 🎉 新版本发布
+
+            ### 安装方法
+            1. 下载 `hoyo-leaks-block.zip`
+            2. 解压到任意文件夹
+            3. 在Chrome中加载已解压的扩展程序
+
+            ### 更新内容
+            请查看 [CHANGELOG.md](https://github.com/your-username/hoyo-leaks-block/blob/main/CHANGELOG.md) 了解详细更新内容。
+
+            ### 支持的平台
+            - B站 (bilibili.com)
+            - YouTube (youtube.com)
+            - Twitter (twitter.com, x.com)
+
+            ### 注意事项
+            - 需要Chrome 88+或Edge 88+
+            - 请启用开发者模式加载扩展
+            - 如有问题请提交Issue
+
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./hoyo-leaks-block.zip
+          asset_name: hoyo-leaks-block.zip
+          asset_content_type: application/zip

@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "米哈游内鬼屏蔽工具",
+  "version": "3.0.0",
+  "description": "屏蔽B站、YouTube、Twitter三大平台的原神、星穹铁道内鬼爆料视频和消息",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.bilibili.com/*",
+    "*://*.youtube.com/*",
+    "*://*.twitter.com/*",
+    "*://*.x.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.bilibili.com/*"
+      ],
+      "js": [
+        "core/block-core.js",
+        "content-scripts/bilibili.js"
+      ],
+      "css": [
+        "styles/block-styles.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "core/block-core.js",
+        "content-scripts/youtube.js"
+      ],
+      "css": [
+        "styles/block-styles.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://*.x.com/*"
+      ],
+      "js": [
+        "core/block-core.js",
+        "content-scripts/twitter.js"
+      ],
+      "css": [
+        "styles/block-styles.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "米哈游内鬼屏蔽工具"
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "512": "icons/icon512.png"
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>米哈游内鬼屏蔽工具</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+    <div class="header">
+      <h1>米哈游内鬼屏蔽工具</h1>
+      <p>屏蔽原神、星铁内鬼爆料内容</p>
+    </div>
+
+    <div class="content">
+      <div class="platform-status">
+        <div class="platform-item">
+          <span class="platform-name">B站</span>
+          <div class="toggle-switch" id="bili-toggle">
+            <input type="checkbox" id="bili-enabled">
+            <label for="bili-enabled"></label>
+          </div>
+        </div>
+
+        <div class="platform-item">
+          <span class="platform-name">YouTube</span>
+          <div class="toggle-switch" id="ytb-toggle">
+            <input type="checkbox" id="ytb-enabled">
+            <label for="ytb-enabled"></label>
+          </div>
+        </div>
+
+        <div class="platform-item">
+          <span class="platform-name">Twitter</span>
+          <div class="toggle-switch" id="twitter-toggle">
+            <input type="checkbox" id="twitter-enabled">
+            <label for="twitter-enabled"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <button id="open-settings" class="action-button primary">
+          <span>⚙️</span>
+          设置选项
+        </button>
+
+        <button id="refresh-page" class="action-button">
+          <span>🔄</span>
+          刷新页面
+        </button>
+
+        <button id="clear-cache" class="action-button">
+          <span>🗑️</span>
+          清除缓存
+        </button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-label">今日屏蔽</span>
+          <span class="stat-value" id="today-blocked">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">总计屏蔽</span>
+          <span class="stat-value" id="total-blocked">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>版本 3.0.0 | <a href="#" id="help-link">帮助文档</a></p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
