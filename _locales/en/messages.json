@@ -144,40 +144,61 @@
     "message": "Version: 103.0"
   },
   "about_description": {
-    "message": "This is a browser extension for blocking leaks and spoilers about HoYoverse games on Bilibili, YouTube, Twitter, etc."
+    "message": "This is a browser extension designed for players of miHoYo (Hoyoverse) games (such as Genshin Impact, Honkai: Star Rail, Zenless Zone Zero, etc.) that automatically blocks \"insider leaks and malicious content\" on major social platforms like Bilibili, YouTube, and Twitter (x.com)."
+  },
+  "about_thanks": {
+    "message": "Thanks: This project is refactored from the original Tampermonkey script developed by @凡云 on Bilibili. Thanks to the original author for the open source contribution!"
   },
   "features_title": {
     "message": "Features"
   },
   "feature_1": {
-    "message": "Multi-platform content blocking"
+    "message": "🛡️ Multi-platform support: Bilibili, YouTube, Twitter (x.com)"
   },
   "feature_2": {
-    "message": "Custom keyword and user blocking"
+    "message": "🔍 Smart recognition: Automatic identification of leak content through keywords and usernames"
   },
   "feature_3": {
-    "message": "Whitelist mechanism"
+    "message": "⚡ Real-time blocking: Real-time monitoring and automatic blocking of page content"
   },
   "feature_4": {
-    "message": "Area management"
+    "message": "📝 Custom rules: Support for custom keywords and blacklist/whitelist"
   },
   "feature_5": {
-    "message": "Configuration import/export"
+    "message": "🎯 Area management: Visual management of blocking areas with precise control"
+  },
+  "feature_6": {
+    "message": "💾 Configuration management: Support for import/export, remote updates, and cloud sync"
+  },
+  "feature_7": {
+    "message": "🎨 Modern UI: Clean and intuitive settings and popup interface"
+  },
+  "feature_8": {
+    "message": "📊 Statistics: Track blocked content count"
+  },
+  "feature_9": {
+    "message": "🛠️ Performance optimization: Debounce/throttle with low resource usage"
+  },
+  "feature_10": {
+    "message": "🔐 Data security: Local storage, no user data uploaded"
+  },
+  "feature_11": {
+    "message": "🌐 Internationalization: Multi-language interface (Simplified Chinese, Traditional Chinese, English, Japanese, etc.)"
   },
   "usage_title": {
     "message": "Usage Instructions"
   },
   "usage_1": {
-    "message": "Configure keywords and users to block in \"Blocking Rules\""
+    "message": "After installing the extension, a blue floating button will appear on the right side of the page"
   },
   "usage_2": {
-    "message": "Manage blocking areas for different platforms in \"Area Management\""
+    "message": "Click the browser toolbar icon to quickly toggle the blocking function"
   },
   "usage_3": {
-    "message": "Support configuration file import/export"
+    "message": "Click the floating button or right-click menu to enter the \"Options\" page"
   },
   "usage_4": {
-    "message": "Can remotely update area configurations"
+    "message": "Customize keywords, blacklist/whitelist, areas, etc. in the settings page"
   },
   "contact_title": {
     "message": "Contact"
