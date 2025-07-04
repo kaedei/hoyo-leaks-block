@@ -27,14 +27,21 @@ mkdir -p "$BUILD_DIR"
 
 # 复制必要文件
 echo "📋 复制文件..."
-cp -r manifest.json "$BUILD_DIR/"
-cp -r background.js "$BUILD_DIR/"
+cp manifest.json "$BUILD_DIR/"
+cp background.js "$BUILD_DIR/"
 cp -r core/ "$BUILD_DIR/"
 cp -r content-scripts/ "$BUILD_DIR/"
 cp -r popup/ "$BUILD_DIR/"
 cp -r options/ "$BUILD_DIR/"
 cp -r styles/ "$BUILD_DIR/"
 cp -r icons/ "$BUILD_DIR/"
+cp -r _locales/ "$BUILD_DIR/"
+
+# 删除旧的ZIP文件（如果存在）
+if [ -f "hoyo-leaks-block.zip" ]; then
+    echo "🗑️  删除旧的ZIP文件..."
+    rm "hoyo-leaks-block.zip"
+fi
 
 # 创建ZIP文件
 echo "📦 创建ZIP包..."
@@ -42,11 +49,25 @@ cd "$BUILD_DIR"
 zip -r "../hoyo-leaks-block.zip" .
 cd ..
 
-echo "🎉 构建完成！"
-echo "📄 输出文件: hoyo-leaks-block.zip"
-echo "📍 可以在Chrome扩展页面加载此ZIP文件或解压后的文件夹"
+if [ -f "hoyo-leaks-block.zip" ]; then
+    echo "🎉 构建完成！"
+    echo "📄 输出文件: hoyo-leaks-block.zip"
+    echo "📍 可以在Chrome扩展页面加载此ZIP文件或解压后的文件夹"
+    echo "📁 构建目录: $BUILD_DIR"
+else
+    echo "⚠️  ZIP创建失败，但构建文件夹已准备就绪"
+    echo "📍 请手动压缩 build 文件夹或直接加载 build 文件夹到Chrome扩展"
+    echo "📁 构建目录: $BUILD_DIR"
+fi
 
-# 清理临时目录
-rm -rf "$BUILD_DIR"
+# 询问是否清理临时目录
+echo
+read -p "是否删除构建目录 build？[Y/N]: " cleanup
+if [[ "$cleanup" =~ ^[Yy]$ ]]; then
+    rm -rf "$BUILD_DIR"
+    echo "✅ 构建目录已清理"
+else
+    echo "📁 构建目录保留: $BUILD_DIR"
+fi
 
 echo "✨ 构建脚本执行完成"

@@ -34,6 +34,7 @@ xcopy popup "%BUILD_DIR%\popup\" /e /i /q >nul
 xcopy options "%BUILD_DIR%\options\" /e /i /q >nul
 xcopy styles "%BUILD_DIR%\styles\" /e /i /q >nul
 xcopy icons "%BUILD_DIR%\icons\" /e /i /q >nul
+xcopy _locales "%BUILD_DIR%\_locales\" /e /i /q >nul
 
 :: 删除旧的ZIP文件（如果存在）
 if exist "hoyo-leaks-block.zip" (
@@ -43,19 +44,28 @@ if exist "hoyo-leaks-block.zip" (
 
 :: 创建ZIP文件（如果有PowerShell）
 echo 📦 创建ZIP包...
-powershell -Command "& {Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('%BUILD_DIR%', 'hoyo-leaks-block.zip', 'Optimal', $false);}"
+powershell -Command "Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('%~dp0%BUILD_DIR%', '%~dp0hoyo-leaks-block.zip', 'Optimal', $false);" 2>nul
 
 if exist "hoyo-leaks-block.zip" (
     echo 🎉 构建完成！
     echo 📄 输出文件: hoyo-leaks-block.zip
     echo 📍 可以在Chrome扩展页面加载此ZIP文件或解压后的文件夹
+    echo 📁 构建目录: %BUILD_DIR%
 ) else (
     echo ⚠️  ZIP创建失败，但构建文件夹已准备就绪
     echo 📍 请手动压缩 build 文件夹或直接加载 build 文件夹到Chrome扩展
+    echo 📁 构建目录: %BUILD_DIR%
 )
 
-:: 清理临时目录
-rmdir /s /q "%BUILD_DIR%"
+:: 询问是否清理临时目录
+echo.
+set /p "cleanup=是否删除构建目录 build？[Y/N]: "
+if /i "%cleanup%"=="Y" (
+    rmdir /s /q "%BUILD_DIR%"
+    echo ✅ 构建目录已清理
+) else (
+    echo 📁 构建目录保留: %BUILD_DIR%
+)
 
 echo ✨ 构建脚本执行完成
 pause
