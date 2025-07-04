@@ -407,7 +407,7 @@ class HoyoLeaksBlockCore {
     // 创建设置按钮
     const button = document.createElement('div');
     button.id = 'hoyo-block-button';
-    button.innerHTML = '米哈游内鬼信息屏蔽';
+    button.innerHTML = '米游内鬼信息屏蔽';
     button.className = 'hoyo-block-open-button';
 
     button.addEventListener('click', () => {

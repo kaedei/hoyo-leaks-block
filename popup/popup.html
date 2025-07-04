@@ -3,21 +3,21 @@
 
 <head>
   <meta charset="utf-8">
-  <title>米哈游内鬼信息屏蔽</title>
+  <title>__MSG_name__</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 
 <body>
   <div class="popup-container">
     <div class="header">
-      <h1>米哈游内鬼信息屏蔽</h1>
-      <p>屏蔽原神、星铁内鬼爆料内容</p>
+      <h1>__MSG_name__</h1>
+      <p>__MSG_popup_subtitle__</p>
     </div>
 
     <div class="content">
       <div class="platform-status">
         <div class="platform-item">
-          <span class="platform-name">B站</span>
+          <span class="platform-name">__MSG_platform_bilibili_short__</span>
           <div class="toggle-switch" id="bili-toggle">
             <input type="checkbox" id="bili-enabled">
             <label for="bili-enabled"></label>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="platform-item">
-          <span class="platform-name">YouTube</span>
+          <span class="platform-name">__MSG_platform_youtube__</span>
           <div class="toggle-switch" id="ytb-toggle">
             <input type="checkbox" id="ytb-enabled">
             <label for="ytb-enabled"></label>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="platform-item">
-          <span class="platform-name">Twitter</span>
+          <span class="platform-name">__MSG_platform_twitter__</span>
           <div class="toggle-switch" id="twitter-toggle">
             <input type="checkbox" id="twitter-enabled">
             <label for="twitter-enabled"></label>
@@ -44,34 +44,34 @@
       <div class="quick-actions">
         <button id="open-settings" class="action-button primary">
           <span>⚙️</span>
-          设置选项
+          __MSG_btn_settings__
         </button>
 
         <button id="refresh-page" class="action-button">
           <span>🔄</span>
-          刷新页面
+          __MSG_btn_refresh__
         </button>
 
         <button id="clear-cache" class="action-button">
           <span>🗑️</span>
-          清除缓存
+          __MSG_btn_clear_cache__
         </button>
       </div>
 
       <div class="stats">
         <div class="stat-item">
-          <span class="stat-label">今日屏蔽</span>
+          <span class="stat-label">__MSG_stat_today__</span>
           <span class="stat-value" id="today-blocked">0</span>
         </div>
         <div class="stat-item">
-          <span class="stat-label">总计屏蔽</span>
+          <span class="stat-label">__MSG_stat_total__</span>
           <span class="stat-value" id="total-blocked">0</span>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <p>版本 103.0 | <a href="#" id="help-link">帮助文档</a></p>
+      <p>__MSG_version__ | <a href="#" id="help-link">__MSG_help_link__</a></p>
     </div>
   </div>
 

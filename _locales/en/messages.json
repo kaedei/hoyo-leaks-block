@@ -1,0 +1,221 @@
+{
+  "name": {
+    "message": "HoYo Leaks Blocker"
+  },
+  "description": {
+    "message": "Block leaks and spoilers about HoYoverse games on Bilibili, YouTube, Twitter, etc."
+  },
+  "options_title": {
+    "message": "HoYo Leaks Blocker - Settings"
+  },
+  "options_subtitle": {
+    "message": "Configure blocking rules and manage area settings"
+  },
+  "nav_rules": {
+    "message": "🛡️ Blocking Rules"
+  },
+  "nav_areas": {
+    "message": "📍 Area Management"
+  },
+  "nav_import_export": {
+    "message": "📦 Import/Export"
+  },
+  "nav_about": {
+    "message": "ℹ️ About"
+  },
+  "rules_title": {
+    "message": "Blocking Rules Configuration"
+  },
+  "platform_bilibili": {
+    "message": "Bilibili"
+  },
+  "platform_youtube": {
+    "message": "YouTube"
+  },
+  "platform_twitter": {
+    "message": "Twitter"
+  },
+  "keywords_label": {
+    "message": "Block Keywords (separated by |)"
+  },
+  "keywords_placeholder_bili": {
+    "message": "e.g.: leak|spoiler|beta|insider"
+  },
+  "keywords_placeholder_ytb": {
+    "message": "e.g.: leak|beta|insider|spoiler"
+  },
+  "keywords_placeholder_twitter": {
+    "message": "e.g.: leak|beta|insider|spoiler"
+  },
+  "blacklist_label": {
+    "message": "Author Blacklist (separated by |)"
+  },
+  "blacklist_placeholder_bili": {
+    "message": "e.g.: user1|user2"
+  },
+  "blacklist_placeholder_ytb": {
+    "message": "e.g.: channel1|channel2"
+  },
+  "blacklist_placeholder_twitter": {
+    "message": "e.g.: @user1|@user2"
+  },
+  "whitelist_label": {
+    "message": "Author Whitelist (separated by |)"
+  },
+  "whitelist_placeholder_bili": {
+    "message": "e.g.: official|trusted"
+  },
+  "whitelist_placeholder_ytb": {
+    "message": "e.g.: official|trusted"
+  },
+  "whitelist_placeholder_twitter": {
+    "message": "e.g.: @official|@trusted"
+  },
+  "btn_save_rules": {
+    "message": "Save Rules"
+  },
+  "btn_reset_rules": {
+    "message": "Reset to Default"
+  },
+  "areas_title": {
+    "message": "Area Management"
+  },
+  "areas_subtitle": {
+    "message": "Manage blocking area settings for different platforms"
+  },
+  "area_name": {
+    "message": "Area Name"
+  },
+  "area_platform": {
+    "message": "Platform"
+  },
+  "area_status": {
+    "message": "Status"
+  },
+  "area_actions": {
+    "message": "Actions"
+  },
+  "btn_add_area": {
+    "message": "Add Area"
+  },
+  "btn_refresh_areas": {
+    "message": "Refresh Areas"
+  },
+  "btn_update_remote": {
+    "message": "Load Latest Area Config Online"
+  },
+  "import_export_title": {
+    "message": "Import/Export Configuration"
+  },
+  "export_section_title": {
+    "message": "Export Configuration"
+  },
+  "export_description": {
+    "message": "Export current configuration to JSON file"
+  },
+  "btn_export": {
+    "message": "Export Configuration"
+  },
+  "import_section_title": {
+    "message": "Import Configuration"
+  },
+  "import_description": {
+    "message": "Import configuration from JSON file"
+  },
+  "btn_import": {
+    "message": "Select File to Import"
+  },
+  "clear_section_title": {
+    "message": "Clear All Data"
+  },
+  "clear_warning": {
+    "message": "⚠️ This operation will clear all configuration and data, cannot be undone"
+  },
+  "btn_clear_all": {
+    "message": "Clear All Data"
+  },
+  "about_title": {
+    "message": "About"
+  },
+  "about_author": {
+    "message": "Author: kaedei"
+  },
+  "about_version": {
+    "message": "Version: 103.0"
+  },
+  "about_description": {
+    "message": "This is a browser extension for blocking leaks and spoilers about HoYoverse games on Bilibili, YouTube, Twitter, etc."
+  },
+  "features_title": {
+    "message": "Features"
+  },
+  "feature_1": {
+    "message": "Multi-platform content blocking"
+  },
+  "feature_2": {
+    "message": "Custom keyword and user blocking"
+  },
+  "feature_3": {
+    "message": "Whitelist mechanism"
+  },
+  "feature_4": {
+    "message": "Area management"
+  },
+  "feature_5": {
+    "message": "Configuration import/export"
+  },
+  "usage_title": {
+    "message": "Usage Instructions"
+  },
+  "usage_1": {
+    "message": "Configure keywords and users to block in \"Blocking Rules\""
+  },
+  "usage_2": {
+    "message": "Manage blocking areas for different platforms in \"Area Management\""
+  },
+  "usage_3": {
+    "message": "Support configuration file import/export"
+  },
+  "usage_4": {
+    "message": "Can remotely update area configurations"
+  },
+  "contact_title": {
+    "message": "Contact"
+  },
+  "contact_description": {
+    "message": "For questions or suggestions, please visit:"
+  },
+  "github_link": {
+    "message": "GitHub Repository"
+  },
+  "footer_text": {
+    "message": "2025 (c) HoYo Leaks Blocker"
+  },
+  "popup_subtitle": {
+    "message": "Block Genshin Impact and Star Rail leaks"
+  },
+  "platform_bilibili_short": {
+    "message": "Bilibili"
+  },
+  "btn_settings": {
+    "message": "Settings"
+  },
+  "btn_refresh": {
+    "message": "Refresh Page"
+  },
+  "btn_clear_cache": {
+    "message": "Clear Cache"
+  },
+  "stat_today": {
+    "message": "Today Blocked"
+  },
+  "stat_total": {
+    "message": "Total Blocked"
+  },
+  "version": {
+    "message": "Version 103.0"
+  },
+  "help_link": {
+    "message": "Help"
+  }
+}

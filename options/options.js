@@ -1,5 +1,5 @@
 /**
- * 米哈游内鬼信息屏蔽 - 设置页面主入口
+ * 米游内鬼信息屏蔽 - 设置页面主入口
  *
  * 模块说明：
  * - chrome-api-mock.js: Chrome API 模拟（用于测试）
@@ -69,7 +69,7 @@ class OptionsController {
    */
   getAppInfo() {
     return {
-      name: '米哈游内鬼信息屏蔽',
+      name: '米游内鬼信息屏蔽',
       version: this.getVersion(),
       author: 'kaedei',
       description: '用于屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏内鬼爆料内容的浏览器扩展',

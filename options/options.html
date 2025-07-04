@@ -3,46 +3,46 @@
 
 <head>
   <meta charset="utf-8">
-  <title>米哈游内鬼信息屏蔽 - 设置</title>
+  <title>__MSG_options_title__</title>
   <link rel="stylesheet" href="options.css">
 </head>
 
 <body>
   <div class="container">
     <div class="header">
-      <h1>米哈游内鬼信息屏蔽</h1>
-      <p>配置屏蔽规则和管理区域设置</p>
+      <h1>__MSG_name__</h1>
+      <p>__MSG_options_subtitle__</p>
     </div>
 
     <div class="content">
       <div class="sidebar">
         <nav class="nav-menu">
-          <button class="nav-item active" data-tab="rules">🛡️ 屏蔽规则</button>
-          <button class="nav-item" data-tab="areas">📍 区域管理</button>
-          <button class="nav-item" data-tab="import-export">📦 导入导出</button>
-          <button class="nav-item" data-tab="about">ℹ️ 关于</button>
+          <button class="nav-item active" data-tab="rules">__MSG_nav_rules__</button>
+          <button class="nav-item" data-tab="areas">__MSG_nav_areas__</button>
+          <button class="nav-item" data-tab="import-export">__MSG_nav_import_export__</button>
+          <button class="nav-item" data-tab="about">__MSG_nav_about__</button>
         </nav>
       </div>
 
       <div class="main-content">
         <!-- 屏蔽规则标签页 -->
         <div class="tab-content active" id="rules-tab">
-          <h2>屏蔽规则配置</h2>
+          <h2>__MSG_rules_title__</h2>
 
           <!-- 平台选择标签页 -->
           <div class="platform-tabs">
             <div class="platform-tab-nav">
               <button class="platform-tab-btn active" data-platform="bilibili">
                 <span class="platform-icon">📺</span>
-                B站 (Bilibili)
+                __MSG_platform_bilibili__
               </button>
               <button class="platform-tab-btn" data-platform="youtube">
                 <span class="platform-icon">🎬</span>
-                YouTube
+                __MSG_platform_youtube__
               </button>
               <button class="platform-tab-btn" data-platform="twitter">
                 <span class="platform-icon">🐦</span>
-                Twitter
+                __MSG_platform_twitter__
               </button>
             </div>
 
@@ -51,16 +51,16 @@
               <div class="platform-config-panel active" id="bilibili-config">
                 <div class="platform-section">
                   <div class="form-group">
-                    <label for="bili-title">屏蔽关键词（用|分隔）</label>
-                    <textarea id="bili-title" rows="3" placeholder="例如：内鬼|爆料|泄露|leak|beta"></textarea>
+                    <label for="bili-title">__MSG_keywords_label__</label>
+                    <textarea id="bili-title" rows="3" placeholder="__MSG_keywords_placeholder_bili__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="bili-users">作者黑名单（用|分隔）</label>
-                    <textarea id="bili-users" rows="3" placeholder="例如：用户名1|用户名2"></textarea>
+                    <label for="bili-users">__MSG_blacklist_label__</label>
+                    <textarea id="bili-users" rows="3" placeholder="__MSG_blacklist_placeholder_bili__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="bili-whitelist">作者白名单（用|分隔）</label>
-                    <textarea id="bili-whitelist" rows="3" placeholder="例如：官方账号|可信用户"></textarea>
+                    <label for="bili-whitelist">__MSG_whitelist_label__</label>
+                    <textarea id="bili-whitelist" rows="3" placeholder="__MSG_whitelist_placeholder_bili__"></textarea>
                   </div>
                 </div>
               </div>
@@ -69,16 +69,16 @@
               <div class="platform-config-panel" id="youtube-config">
                 <div class="platform-section">
                   <div class="form-group">
-                    <label for="ytb-title">屏蔽关键词（用|分隔）</label>
-                    <textarea id="ytb-title" rows="3" placeholder="例如：leak|beta|insider|spoiler"></textarea>
+                    <label for="ytb-title">__MSG_keywords_label__</label>
+                    <textarea id="ytb-title" rows="3" placeholder="__MSG_keywords_placeholder_ytb__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="ytb-users">作者黑名单（用|分隔）</label>
-                    <textarea id="ytb-users" rows="3" placeholder="例如：channel1|channel2"></textarea>
+                    <label for="ytb-users">__MSG_blacklist_label__</label>
+                    <textarea id="ytb-users" rows="3" placeholder="__MSG_blacklist_placeholder_ytb__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="ytb-whitelist">作者白名单（用|分隔）</label>
-                    <textarea id="ytb-whitelist" rows="3" placeholder="例如：官方频道|可信频道"></textarea>
+                    <label for="ytb-whitelist">__MSG_whitelist_label__</label>
+                    <textarea id="ytb-whitelist" rows="3" placeholder="__MSG_whitelist_placeholder_ytb__"></textarea>
                   </div>
                 </div>
               </div>
@@ -87,16 +87,18 @@
               <div class="platform-config-panel" id="twitter-config">
                 <div class="platform-section">
                   <div class="form-group">
-                    <label for="twitter-title">屏蔽关键词（用|分隔）</label>
-                    <textarea id="twitter-title" rows="3" placeholder="例如：leak|beta|insider|spoiler"></textarea>
+                    <label for="twitter-title">__MSG_keywords_label__</label>
+                    <textarea id="twitter-title" rows="3" placeholder="__MSG_keywords_placeholder_twitter__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="twitter-users">作者黑名单（用|分隔）</label>
-                    <textarea id="twitter-users" rows="3" placeholder="例如：@user1|@user2"></textarea>
+                    <label for="twitter-users">__MSG_blacklist_label__</label>
+                    <textarea id="twitter-users" rows="3"
+                      placeholder="__MSG_blacklist_placeholder_twitter__"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="twitter-whitelist">作者白名单（用|分隔）</label>
-                    <textarea id="twitter-whitelist" rows="3" placeholder="例如：@official|@trusted"></textarea>
+                    <label for="twitter-whitelist">__MSG_whitelist_label__</label>
+                    <textarea id="twitter-whitelist" rows="3"
+                      placeholder="__MSG_whitelist_placeholder_twitter__"></textarea>
                   </div>
                 </div>
               </div>
@@ -104,22 +106,22 @@
           </div>
 
           <div class="actions">
-            <button id="save-rules" class="btn btn-primary">保存规则</button>
-            <button id="reset-rules" class="btn btn-secondary">重置为默认</button>
+            <button id="save-rules" class="btn btn-primary">__MSG_btn_save_rules__</button>
+            <button id="reset-rules" class="btn btn-secondary">__MSG_btn_reset_rules__</button>
           </div>
         </div>
 
         <!-- 区域管理标签页 -->
         <div class="tab-content" id="areas-tab">
-          <h2>区域管理</h2>
-          <p>管理不同平台的屏蔽区域设置</p>
+          <h2>__MSG_areas_title__</h2>
+          <p>__MSG_areas_subtitle__</p>
 
           <div class="area-list">
             <div class="area-header">
-              <span>区域名称</span>
-              <span>平台</span>
-              <span>状态</span>
-              <span>操作</span>
+              <span>__MSG_area_name__</span>
+              <span>__MSG_area_platform__</span>
+              <span>__MSG_area_status__</span>
+              <span>__MSG_area_actions__</span>
             </div>
             <div id="area-items">
               <!-- 区域项目将通过JavaScript动态加载 -->
@@ -127,73 +129,73 @@
           </div>
 
           <div class="actions">
-            <button id="add-area" class="btn btn-primary">添加区域</button>
-            <button id="refresh-areas" class="btn btn-secondary">刷新区域</button>
-            <button id="update-remote-areas" class="btn btn-primary">在线加载最新区域配置</button>
+            <button id="add-area" class="btn btn-primary">__MSG_btn_add_area__</button>
+            <button id="refresh-areas" class="btn btn-secondary">__MSG_btn_refresh_areas__</button>
+            <button id="update-remote-areas" class="btn btn-primary">__MSG_btn_update_remote__</button>
           </div>
         </div>
 
         <!-- 导入导出标签页 -->
         <div class="tab-content" id="import-export-tab">
-          <h2>导入导出配置</h2>
+          <h2>__MSG_import_export_title__</h2>
 
           <div class="import-export-section">
-            <h3>导出配置</h3>
-            <p>将当前配置导出为JSON文件</p>
-            <button id="export-config" class="btn btn-primary">导出配置</button>
+            <h3>__MSG_export_section_title__</h3>
+            <p>__MSG_export_description__</p>
+            <button id="export-config" class="btn btn-primary">__MSG_btn_export__</button>
           </div>
 
           <div class="import-export-section">
-            <h3>导入配置</h3>
-            <p>从JSON文件导入配置</p>
+            <h3>__MSG_import_section_title__</h3>
+            <p>__MSG_import_description__</p>
             <input type="file" id="import-file" accept=".json" style="display: none;">
-            <button id="import-config" class="btn btn-primary">选择文件导入</button>
+            <button id="import-config" class="btn btn-primary">__MSG_btn_import__</button>
           </div>
 
           <div class="import-export-section">
-            <h3>清除所有数据</h3>
-            <p>⚠️ 此操作将清除所有配置和数据，无法恢复</p>
-            <button id="clear-all" class="btn btn-danger">清除所有数据</button>
+            <h3>__MSG_clear_section_title__</h3>
+            <p>__MSG_clear_warning__</p>
+            <button id="clear-all" class="btn btn-danger">__MSG_btn_clear_all__</button>
           </div>
         </div>
 
         <!-- 关于标签页 -->
         <div class="tab-content" id="about-tab">
-          <h2>关于</h2>
+          <h2>__MSG_about_title__</h2>
 
           <div class="about-section">
-            <h3>米哈游内鬼信息屏蔽</h3>
-            <p>作者：kaedei</p>
-            <p>版本：103.0</p>
-            <p>这是一个用于屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏内鬼爆料内容的浏览器扩展。</p>
+            <h3>__MSG_name__</h3>
+            <p>__MSG_about_author__</p>
+            <p>__MSG_about_version__</p>
+            <p>__MSG_about_description__</p>
 
-            <h4>功能特点</h4>
+            <h4>__MSG_features_title__</h4>
             <ul>
-              <li>支持多平台内容屏蔽</li>
-              <li>自定义关键词和用户屏蔽</li>
-              <li>白名单机制</li>
-              <li>区域管理</li>
-              <li>配置导入导出</li>
+              <li>__MSG_feature_1__</li>
+              <li>__MSG_feature_2__</li>
+              <li>__MSG_feature_3__</li>
+              <li>__MSG_feature_4__</li>
+              <li>__MSG_feature_5__</li>
             </ul>
 
-            <h4>使用说明</h4>
+            <h4>__MSG_usage_title__</h4>
             <ol>
-              <li>在"屏蔽规则"中配置要屏蔽的关键词和用户</li>
-              <li>在"区域管理"中管理不同平台的屏蔽区域</li>
-              <li>支持导入导出配置文件</li>
-              <li>可以远程更新区域配置</li>
+              <li>__MSG_usage_1__</li>
+              <li>__MSG_usage_2__</li>
+              <li>__MSG_usage_3__</li>
+              <li>__MSG_usage_4__</li>
             </ol>
 
-            <h4>联系方式</h4>
-            <p>如有问题或建议，请访问：</p>
-            <p><a href="https://github.com/kaedei/hoyo-leaks-block" target="_blank">GitHub项目地址</a></p>
+            <h4>__MSG_contact_title__</h4>
+            <p>__MSG_contact_description__</p>
+            <p><a href="https://github.com/kaedei/hoyo-leaks-block" target="_blank">__MSG_github_link__</a></p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <p>2025 (c) 米哈游内鬼信息屏蔽 | <a href="https://github.com/kaedei/hoyo-leaks-block"
+      <p>__MSG_footer_text__ | <a href="https://github.com/kaedei/hoyo-leaks-block"
           target="_blank">kaedei/hoyo-leaks-block</a>
       </p>
     </div>

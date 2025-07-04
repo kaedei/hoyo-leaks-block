@@ -1,0 +1,221 @@
+{
+  "name": {
+    "message": "米游内鬼信息屏蔽"
+  },
+  "description": {
+    "message": "屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏的内鬼爆料内容"
+  },
+  "options_title": {
+    "message": "米游内鬼信息屏蔽 - 设置"
+  },
+  "options_subtitle": {
+    "message": "配置屏蔽规则和管理区域设置"
+  },
+  "nav_rules": {
+    "message": "🛡️ 屏蔽规则"
+  },
+  "nav_areas": {
+    "message": "📍 区域管理"
+  },
+  "nav_import_export": {
+    "message": "📦 导入导出"
+  },
+  "nav_about": {
+    "message": "ℹ️ 关于"
+  },
+  "rules_title": {
+    "message": "屏蔽规则配置"
+  },
+  "platform_bilibili": {
+    "message": "B站 (Bilibili)"
+  },
+  "platform_youtube": {
+    "message": "YouTube"
+  },
+  "platform_twitter": {
+    "message": "Twitter"
+  },
+  "keywords_label": {
+    "message": "屏蔽关键词（用|分隔）"
+  },
+  "keywords_placeholder_bili": {
+    "message": "例如：内鬼|爆料|泄露|leak|beta"
+  },
+  "keywords_placeholder_ytb": {
+    "message": "例如：leak|beta|insider|spoiler"
+  },
+  "keywords_placeholder_twitter": {
+    "message": "例如：leak|beta|insider|spoiler"
+  },
+  "blacklist_label": {
+    "message": "作者黑名单（用|分隔）"
+  },
+  "blacklist_placeholder_bili": {
+    "message": "例如：用户名1|用户名2"
+  },
+  "blacklist_placeholder_ytb": {
+    "message": "例如：channel1|channel2"
+  },
+  "blacklist_placeholder_twitter": {
+    "message": "例如：@user1|@user2"
+  },
+  "whitelist_label": {
+    "message": "作者白名单（用|分隔）"
+  },
+  "whitelist_placeholder_bili": {
+    "message": "例如：官方账号|可信用户"
+  },
+  "whitelist_placeholder_ytb": {
+    "message": "例如：官方频道|可信频道"
+  },
+  "whitelist_placeholder_twitter": {
+    "message": "例如：@official|@trusted"
+  },
+  "btn_save_rules": {
+    "message": "保存规则"
+  },
+  "btn_reset_rules": {
+    "message": "重置为默认"
+  },
+  "areas_title": {
+    "message": "区域管理"
+  },
+  "areas_subtitle": {
+    "message": "管理不同平台的屏蔽区域设置"
+  },
+  "area_name": {
+    "message": "区域名称"
+  },
+  "area_platform": {
+    "message": "平台"
+  },
+  "area_status": {
+    "message": "状态"
+  },
+  "area_actions": {
+    "message": "操作"
+  },
+  "btn_add_area": {
+    "message": "添加区域"
+  },
+  "btn_refresh_areas": {
+    "message": "刷新区域"
+  },
+  "btn_update_remote": {
+    "message": "在线加载最新区域配置"
+  },
+  "import_export_title": {
+    "message": "导入导出配置"
+  },
+  "export_section_title": {
+    "message": "导出配置"
+  },
+  "export_description": {
+    "message": "将当前配置导出为JSON文件"
+  },
+  "btn_export": {
+    "message": "导出配置"
+  },
+  "import_section_title": {
+    "message": "导入配置"
+  },
+  "import_description": {
+    "message": "从JSON文件导入配置"
+  },
+  "btn_import": {
+    "message": "选择文件导入"
+  },
+  "clear_section_title": {
+    "message": "清除所有数据"
+  },
+  "clear_warning": {
+    "message": "⚠️ 此操作将清除所有配置和数据，无法恢复"
+  },
+  "btn_clear_all": {
+    "message": "清除所有数据"
+  },
+  "about_title": {
+    "message": "关于"
+  },
+  "about_author": {
+    "message": "作者：kaedei"
+  },
+  "about_version": {
+    "message": "版本：103.0"
+  },
+  "about_description": {
+    "message": "这是一个用于屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏内鬼爆料内容的浏览器扩展。"
+  },
+  "features_title": {
+    "message": "功能特点"
+  },
+  "feature_1": {
+    "message": "支持多平台内容屏蔽"
+  },
+  "feature_2": {
+    "message": "自定义关键词和用户屏蔽"
+  },
+  "feature_3": {
+    "message": "白名单机制"
+  },
+  "feature_4": {
+    "message": "区域管理"
+  },
+  "feature_5": {
+    "message": "配置导入导出"
+  },
+  "usage_title": {
+    "message": "使用说明"
+  },
+  "usage_1": {
+    "message": "在\"屏蔽规则\"中配置要屏蔽的关键词和用户"
+  },
+  "usage_2": {
+    "message": "在\"区域管理\"中管理不同平台的屏蔽区域"
+  },
+  "usage_3": {
+    "message": "支持导入导出配置文件"
+  },
+  "usage_4": {
+    "message": "可以远程更新区域配置"
+  },
+  "contact_title": {
+    "message": "联系方式"
+  },
+  "contact_description": {
+    "message": "如有问题或建议，请访问："
+  },
+  "github_link": {
+    "message": "GitHub项目地址"
+  },
+  "footer_text": {
+    "message": "2025 (c) 米游内鬼信息屏蔽"
+  },
+  "popup_subtitle": {
+    "message": "屏蔽原神、星铁内鬼爆料内容"
+  },
+  "platform_bilibili_short": {
+    "message": "B站"
+  },
+  "btn_settings": {
+    "message": "设置选项"
+  },
+  "btn_refresh": {
+    "message": "刷新页面"
+  },
+  "btn_clear_cache": {
+    "message": "清除缓存"
+  },
+  "stat_today": {
+    "message": "今日屏蔽"
+  },
+  "stat_total": {
+    "message": "总计屏蔽"
+  },
+  "version": {
+    "message": "版本 103.0"
+  },
+  "help_link": {
+    "message": "帮助文档"
+  }
+}

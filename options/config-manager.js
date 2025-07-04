@@ -103,7 +103,7 @@ class ConfigManager {
    */
   exportConfig() {
     chrome.storage.sync.get(null, (result) => {
-      window.Utils.downloadJSON(result, '米哈游内鬼信息屏蔽插件配置.json');
+      window.Utils.downloadJSON(result, '米游内鬼信息屏蔽插件配置.json');
       window.Utils.showMessage('配置导出成功！', 'success');
     });
   }

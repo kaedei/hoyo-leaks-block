@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>多语言化测试</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    .info-box {
+      background: #e8f5e8;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      border-left: 4px solid #4caf50;
+    }
+
+    .warning-box {
+      background: #fff3e0;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      border-left: 4px solid #ff9800;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    .file-tree {
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      font-family: monospace;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🌍 Chrome 扩展多语言化完成</h1>
+
+    <div class="info-box">
+      <h2>✅ 已完成的工作</h2>
+      <ul>
+        <li>修改了 <code>manifest.json</code> 使用 <code>__MSG_name__</code> 和 <code>__MSG_description__</code></li>
+        <li>创建了简体中文本地化文件：<code>_locales/zh_CN/messages.json</code></li>
+        <li>创建了英文本地化文件：<code>_locales/en/messages.json</code></li>
+        <li>将 <code>options.html</code> 的所有硬编码文本改为本地化占位符</li>
+        <li>将 <code>popup.html</code> 的所有硬编码文本改为本地化占位符</li>
+      </ul>
+    </div>
+
+    <div class="warning-box">
+      <h2>📁 文件结构</h2>
+      <div class="file-tree">hoyo-leaks-block/
+        ├── _locales/
+        │ ├── zh_CN/
+        │ │ └── messages.json (简体中文)
+        │ └── en/
+        │ └── messages.json (英文)
+        ├── manifest.json (已修改)
+        ├── popup/
+        │ └── popup.html (已本地化)
+        └── options/
+        └── options.html (已本地化)</div>
+    </div>
+
+    <div class="info-box">
+      <h2>🔧 工作原理</h2>
+      <p>Chrome 扩展会根据用户的浏览器语言设置自动选择对应的本地化文件：</p>
+      <ul>
+        <li>如果浏览器语言是中文，将使用 <code>zh_CN/messages.json</code></li>
+        <li>如果浏览器语言是英文，将使用 <code>en/messages.json</code></li>
+        <li>如果浏览器语言不匹配，默认使用 <code>zh_CN</code>（因为按字母顺序排序）</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <h2>🎯 本地化文件包含内容</h2>
+      <p>每个本地化文件包含 73 个键值对，涵盖了：</p>
+      <ul>
+        <li>扩展名称和描述</li>
+        <li>选项页面的所有文本（标题、标签、按钮、提示等）</li>
+        <li>弹出窗口的所有文本</li>
+        <li>平台名称、功能描述、使用说明等</li>
+      </ul>
+    </div>
+
+    <div class="warning-box">
+      <h2>📋 下一步操作</h2>
+      <ol>
+        <li>重新打包扩展程序</li>
+        <li>在 Chrome 中重新加载扩展</li>
+        <li>修改浏览器语言设置测试多语言效果</li>
+        <li>如需要支持更多语言，按相同模式添加对应的 <code>_locales</code> 文件夹</li>
+      </ol>
+    </div>
+  </div>
+</body>
+
+</html>
