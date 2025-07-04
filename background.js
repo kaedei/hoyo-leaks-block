@@ -29,6 +29,16 @@ chrome.runtime.onInstalled.addListener(() => {
   // 设置默认配置
   chrome.storage.sync.set(defaultConfig);
 
+  // 初始化统计数据
+  const today = new Date().toDateString();
+  chrome.storage.local.get(['todayBlocked', 'totalBlocked', 'lastUpdateDate'], (result) => {
+    chrome.storage.local.set({
+      todayBlocked: result.todayBlocked || 0,
+      totalBlocked: result.totalBlocked || 0,
+      lastUpdateDate: result.lastUpdateDate || today
+    });
+  });
+
   // 获取并设置默认区域列表
   fetchDefaultAreaList();
 });

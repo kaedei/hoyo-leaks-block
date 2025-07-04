@@ -8,6 +8,9 @@ class HoyoLeaksBlockCore {
     this.intervalId = null;
     this.isInitialized = false;
     this.processedElements = new WeakSet(); // 缓存已处理的元素
+    this.dailyBlockCount = 0; // 当日屏蔽计数
+    this.totalBlockCount = 0; // 总屏蔽计数
+    this.lastUpdateDate = null; // 上次更新日期
 
     // 平台名称映射
     this.platformMapping = {
@@ -33,6 +36,7 @@ class HoyoLeaksBlockCore {
       DebugLogger.log(`[HoyoBlock-${this.platform}] Chrome runtime ready`);
 
       await this.loadConfig();
+      await this.loadStats(); // 加载统计数据
       DebugLogger.log(`[HoyoBlock-${this.platform}] Config loaded:`, this.config);
       DebugLogger.log(`[HoyoBlock-${this.platform}] Area list loaded:`, this.areaList);
 
@@ -300,6 +304,50 @@ class HoyoLeaksBlockCore {
     }
   }
 
+  // 加载统计数据
+  async loadStats() {
+    return new Promise((resolve) => {
+      chrome.storage.local.get(['todayBlocked', 'totalBlocked', 'lastUpdateDate'], (result) => {
+        const today = new Date().toDateString();
+
+        // 如果是新的一天，重置今日统计
+        if (result.lastUpdateDate !== today) {
+          this.dailyBlockCount = 0;
+          this.totalBlockCount = result.totalBlocked || 0;
+          this.lastUpdateDate = today;
+          this.saveStats();
+        } else {
+          this.dailyBlockCount = result.todayBlocked || 0;
+          this.totalBlockCount = result.totalBlocked || 0;
+          this.lastUpdateDate = result.lastUpdateDate;
+        }
+
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Stats loaded - Today: ${this.dailyBlockCount}, Total: ${this.totalBlockCount}`);
+        resolve();
+      });
+    });
+  }
+
+  // 保存统计数据
+  saveStats() {
+    chrome.storage.local.set({
+      todayBlocked: this.dailyBlockCount,
+      totalBlocked: this.totalBlockCount,
+      lastUpdateDate: this.lastUpdateDate
+    }, () => {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Stats saved - Today: ${this.dailyBlockCount}, Total: ${this.totalBlockCount}`);
+    });
+  }
+
+  // 更新统计数据
+  updateStats(blockedCount) {
+    if (blockedCount > 0) {
+      this.dailyBlockCount += blockedCount;
+      this.totalBlockCount += blockedCount;
+      this.saveStats();
+    }
+  }
+
   blockContent() {
     const areaPlatformName = this.getAreaPlatformName();
     const activeAreas = this.areaList.filter(area =>
@@ -351,12 +399,15 @@ class HoyoLeaksBlockCore {
           DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text.substring(0, 100)}...", User: "${user}"`);
         }
 
-        if (this.shouldBlock(text, user)) {
+        const shouldBlockThis = this.shouldBlock(text, user);
+
+        if (shouldBlockThis) {
           this.applyBlur(item, true);
           // 也模糊媒体元素
           const mediaElements = item.querySelectorAll(area.media);
           mediaElements.forEach(media => this.applyBlur(media, true));
           totalBlocked++;
+          DebugLogger.log(`[HoyoBlock-${this.platform}] Blocked item: "${text.substring(0, 50)}..." from user: "${user}"`);
         } else {
           this.applyBlur(item, false);
           const mediaElements = item.querySelectorAll(area.media);
@@ -369,6 +420,9 @@ class HoyoLeaksBlockCore {
     });
 
     DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking completed - Processed: ${totalProcessed}, Blocked: ${totalBlocked}`);
+
+    // 更新统计数据
+    this.updateStats(totalBlocked);
   }
 
   startBlocking() {
