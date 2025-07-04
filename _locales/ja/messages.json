@@ -3,7 +3,7 @@
     "message": "HoYoリーク情報ブロック"
   },
   "description": {
-    "message": "B站、YouTube、TwitterなどのプラットフォームでmiHoYoゲームのリーク情報をブロック"
+    "message": "B站、YouTube、TwitterなどのプラットフォームでHoyoverseゲームのリーク情報をブロック"
   },
   "options_title": {
     "message": "HoYoリーク情報ブロック - 設定"
@@ -144,7 +144,7 @@
     "message": "バージョン：103.0"
   },
   "about_description": {
-    "message": "これはmiHoYo（Hoyoverse）のゲーム（原神、崩壊：スターレイル、ゼンレスゾーンゼロなど）のプレイヤー向けに設計されたブラウザ拡張機能で、B站、YouTube、Twitter（x.com）などの主要ソーシャルプラットフォームで「内部リーク・悪意のあるコンテンツ」を自動的にブロックします。"
+    "message": "これはHoyoverseのゲーム（原神、崩壊：スターレイル、ゼンレスゾーンゼロなど）のプレイヤー向けに設計されたブラウザ拡張機能で、B站、YouTube、Twitter（x.com）などの主要ソーシャルプラットフォームで「内部リーク・悪意のあるコンテンツ」を自動的にブロックします。"
   },
   "about_thanks": {
     "message": "謝辞：本プロジェクトはB站の @凡雲 氏が開発したオリジナルのTampermonkeyスクリプトをリファクタリングしたものです。オープンソースへの貢献に感謝いたします！"
