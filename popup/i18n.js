@@ -6,9 +6,9 @@
  * 简化的国际化处理函数
  */
 function localizeHTML() {
-  // 获取所有包含 __MSG_*__ 的文本节点和属性
+  // 获取所有包含 __MSG_*__ 的文本节点和属性（包括head和body）
   const walker = document.createTreeWalker(
-    document.body,
+    document.documentElement, // 从根元素开始，包括head和body
     NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
     null,
     false
@@ -45,6 +45,9 @@ function localizeHTML() {
     const newValue = processText(attribute.value);
     element.setAttribute(attribute.name, newValue);
   });
+
+  // 特别处理title标签
+  localizeTitle();
 }
 
 /**
@@ -76,6 +79,17 @@ function getMessage(key, substitutions = null) {
   } catch (error) {
     console.warn(`Failed to get message for key: ${key}`, error);
     return key;
+  }
+}
+
+/**
+ * 特别处理title标签的本地化
+ */
+function localizeTitle() {
+  const titleElement = document.querySelector('title');
+  if (titleElement && titleElement.textContent.includes('__MSG_')) {
+    titleElement.textContent = processText(titleElement.textContent);
+    console.log('Title localized:', titleElement.textContent);
   }
 }
 

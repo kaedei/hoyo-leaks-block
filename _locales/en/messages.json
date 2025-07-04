@@ -217,5 +217,8 @@
   },
   "help_link": {
     "message": "Help"
+  },
+  "block_button": {
+    "message": "HoYo Leaks Block"
   }
 }

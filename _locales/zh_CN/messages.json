@@ -217,5 +217,8 @@
   },
   "help_link": {
     "message": "帮助文档"
+  },
+  "block_button": {
+    "message": "米游内鬼信息屏蔽"
   }
 }

@@ -35,9 +35,9 @@ class I18nManager {
    * 本地化HTML内容
    */
   localizeHTML() {
-    // 获取所有包含 __MSG_*__ 的元素
+    // 获取所有包含 __MSG_*__ 的元素（包括head和body）
     const walker = document.createTreeWalker(
-      document.body,
+      document.documentElement, // 从根元素开始，包括head和body
       NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
       null,
       false
@@ -74,6 +74,9 @@ class I18nManager {
       const newValue = this.processText(attribute.value);
       element.setAttribute(attribute.name, newValue);
     });
+
+    // 特别处理title标签
+    this.localizeTitle();
   }
 
   /**
@@ -143,6 +146,17 @@ class I18nManager {
     const element = document.getElementById(elementId);
     if (element) {
       element.setAttribute(attributeName, this.getMessage(messageKey));
+    }
+  }
+
+  /**
+   * 特别处理title标签的本地化
+   */
+  localizeTitle() {
+    const titleElement = document.querySelector('title');
+    if (titleElement && titleElement.textContent.includes('__MSG_')) {
+      titleElement.textContent = this.processText(titleElement.textContent);
+      console.log('[I18nManager] Title localized:', titleElement.textContent);
     }
   }
 }

@@ -407,7 +407,7 @@ class HoyoLeaksBlockCore {
     // 创建设置按钮
     const button = document.createElement('div');
     button.id = 'hoyo-block-button';
-    button.innerHTML = '米游内鬼信息屏蔽';
+    button.innerHTML = this.getLocalizedMessage('block_button');
     button.className = 'hoyo-block-open-button';
 
     button.addEventListener('click', () => {
@@ -463,6 +463,30 @@ class HoyoLeaksBlockCore {
       };
       checkReady();
     });
+  }
+
+  /**
+   * 获取本地化消息
+   * @param {string} key 消息键
+   * @param {string|string[]} substitutions 替换参数
+   * @returns {string} 本地化后的消息
+   */
+  getLocalizedMessage(key, substitutions = null) {
+    try {
+      if (chrome && chrome.i18n && chrome.i18n.getMessage) {
+        const message = chrome.i18n.getMessage(key, substitutions);
+        return message || key;
+      }
+    } catch (error) {
+      console.warn(`[HoyoBlock-${this.platform}] Failed to get localized message for key: ${key}`, error);
+    }
+
+    // 备用方案：返回默认文本
+    const fallbackMessages = {
+      'block_button': 'HoYo Leaks Block'
+    };
+
+    return fallbackMessages[key] || key;
   }
 }
 

@@ -147,7 +147,8 @@ if (!window.chrome || !window.chrome.storage) {
           'stat_today': 'Today Blocked',
           'stat_total': 'Total Blocked',
           'version': 'Version 103.0',
-          'help_link': 'Help Documentation'
+          'help_link': 'Help Documentation',
+          'block_button': 'HoYo Leaks Block'
         };
 
         const message = messages[key];

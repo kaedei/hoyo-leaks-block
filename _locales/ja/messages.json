@@ -217,5 +217,8 @@
   },
   "help_link": {
     "message": "ヘルプドキュメント"
+  },
+  "block_button": {
+    "message": "HoYoリーク情報ブロック"
   }
 }
