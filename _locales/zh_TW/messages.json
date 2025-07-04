@@ -1,0 +1,221 @@
+{
+  "name": {
+    "message": "米遊內鬼資訊屏蔽"
+  },
+  "description": {
+    "message": "屏蔽B站、YouTube、Twitter等平台上有關米哈遊旗下遊戲的內鬼爆料內容"
+  },
+  "options_title": {
+    "message": "米遊內鬼資訊屏蔽 - 設定"
+  },
+  "options_subtitle": {
+    "message": "設定屏蔽規則和管理區域設定"
+  },
+  "nav_rules": {
+    "message": "🛡️ 屏蔽規則"
+  },
+  "nav_areas": {
+    "message": "📍 區域管理"
+  },
+  "nav_import_export": {
+    "message": "📦 匯入匯出"
+  },
+  "nav_about": {
+    "message": "ℹ️ 關於"
+  },
+  "rules_title": {
+    "message": "屏蔽規則設定"
+  },
+  "platform_bilibili": {
+    "message": "B站 (Bilibili)"
+  },
+  "platform_youtube": {
+    "message": "YouTube"
+  },
+  "platform_twitter": {
+    "message": "Twitter"
+  },
+  "keywords_label": {
+    "message": "屏蔽關鍵詞（用|分隔）"
+  },
+  "keywords_placeholder_bili": {
+    "message": "例如：內鬼|爆料|洩露|leak|beta"
+  },
+  "keywords_placeholder_ytb": {
+    "message": "例如：leak|beta|insider|spoiler"
+  },
+  "keywords_placeholder_twitter": {
+    "message": "例如：leak|beta|insider|spoiler"
+  },
+  "blacklist_label": {
+    "message": "作者黑名單（用|分隔）"
+  },
+  "blacklist_placeholder_bili": {
+    "message": "例如：用戶名1|用戶名2"
+  },
+  "blacklist_placeholder_ytb": {
+    "message": "例如：channel1|channel2"
+  },
+  "blacklist_placeholder_twitter": {
+    "message": "例如：@user1|@user2"
+  },
+  "whitelist_label": {
+    "message": "作者白名單（用|分隔）"
+  },
+  "whitelist_placeholder_bili": {
+    "message": "例如：官方帳號|可信用戶"
+  },
+  "whitelist_placeholder_ytb": {
+    "message": "例如：官方頻道|可信頻道"
+  },
+  "whitelist_placeholder_twitter": {
+    "message": "例如：@official|@trusted"
+  },
+  "btn_save_rules": {
+    "message": "儲存規則"
+  },
+  "btn_reset_rules": {
+    "message": "重設為預設"
+  },
+  "areas_title": {
+    "message": "區域管理"
+  },
+  "areas_subtitle": {
+    "message": "管理不同平台的屏蔽區域設定"
+  },
+  "area_name": {
+    "message": "區域名稱"
+  },
+  "area_platform": {
+    "message": "平台"
+  },
+  "area_status": {
+    "message": "狀態"
+  },
+  "area_actions": {
+    "message": "操作"
+  },
+  "btn_add_area": {
+    "message": "新增區域"
+  },
+  "btn_refresh_areas": {
+    "message": "重新整理區域"
+  },
+  "btn_update_remote": {
+    "message": "線上載入最新區域設定"
+  },
+  "import_export_title": {
+    "message": "匯入匯出設定"
+  },
+  "export_section_title": {
+    "message": "匯出設定"
+  },
+  "export_description": {
+    "message": "將目前設定匯出為JSON檔案"
+  },
+  "btn_export": {
+    "message": "匯出設定"
+  },
+  "import_section_title": {
+    "message": "匯入設定"
+  },
+  "import_description": {
+    "message": "從JSON檔案匯入設定"
+  },
+  "btn_import": {
+    "message": "選擇檔案匯入"
+  },
+  "clear_section_title": {
+    "message": "清除所有資料"
+  },
+  "clear_warning": {
+    "message": "⚠️ 此操作將清除所有設定和資料，無法復原"
+  },
+  "btn_clear_all": {
+    "message": "清除所有資料"
+  },
+  "about_title": {
+    "message": "關於"
+  },
+  "about_author": {
+    "message": "作者：kaedei"
+  },
+  "about_version": {
+    "message": "版本：103.0"
+  },
+  "about_description": {
+    "message": "這是一個用於屏蔽B站、YouTube、Twitter等平台上有關米哈遊旗下遊戲內鬼爆料內容的瀏覽器擴充套件。"
+  },
+  "features_title": {
+    "message": "功能特點"
+  },
+  "feature_1": {
+    "message": "支援多平台內容屏蔽"
+  },
+  "feature_2": {
+    "message": "自訂關鍵詞和使用者屏蔽"
+  },
+  "feature_3": {
+    "message": "白名單機制"
+  },
+  "feature_4": {
+    "message": "區域管理"
+  },
+  "feature_5": {
+    "message": "設定匯入匯出"
+  },
+  "usage_title": {
+    "message": "使用說明"
+  },
+  "usage_1": {
+    "message": "在\"屏蔽規則\"中設定要屏蔽的關鍵詞和使用者"
+  },
+  "usage_2": {
+    "message": "在\"區域管理\"中管理不同平台的屏蔽區域"
+  },
+  "usage_3": {
+    "message": "支援匯入匯出設定檔案"
+  },
+  "usage_4": {
+    "message": "可以遠端更新區域設定"
+  },
+  "contact_title": {
+    "message": "聯絡方式"
+  },
+  "contact_description": {
+    "message": "如有問題或建議，請造訪："
+  },
+  "github_link": {
+    "message": "GitHub專案地址"
+  },
+  "footer_text": {
+    "message": "2025 (c) 米遊內鬼資訊屏蔽"
+  },
+  "popup_subtitle": {
+    "message": "屏蔽原神、星鐵內鬼爆料內容"
+  },
+  "platform_bilibili_short": {
+    "message": "B站"
+  },
+  "btn_settings": {
+    "message": "設定選項"
+  },
+  "btn_refresh": {
+    "message": "重新整理頁面"
+  },
+  "btn_clear_cache": {
+    "message": "清除快取"
+  },
+  "stat_today": {
+    "message": "今日屏蔽"
+  },
+  "stat_total": {
+    "message": "總計屏蔽"
+  },
+  "version": {
+    "message": "版本 103.0"
+  },
+  "help_link": {
+    "message": "說明文件"
+  }
+}

@@ -3,124 +3,169 @@
 
 <head>
   <meta charset="utf-8">
-  <title>多语言化测试</title>
+  <title>本地化测试</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f5f5f5;
+      margin: 20px;
+      line-height: 1.6;
     }
 
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+    .test-section {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
 
-    h1,
-    h2 {
+    .test-title {
+      font-weight: bold;
       color: #333;
     }
 
-    .info-box {
-      background: #e8f5e8;
-      padding: 15px;
-      border-radius: 5px;
+    .test-result {
       margin: 10px 0;
-      border-left: 4px solid #4caf50;
-    }
-
-    .warning-box {
-      background: #fff3e0;
-      padding: 15px;
-      border-radius: 5px;
-      margin: 10px 0;
-      border-left: 4px solid #ff9800;
-    }
-
-    code {
-      background: #f0f0f0;
-      padding: 2px 4px;
+      padding: 10px;
+      background-color: #f0f0f0;
       border-radius: 3px;
-      font-family: monospace;
     }
 
-    .file-tree {
-      background: #f8f8f8;
-      padding: 15px;
-      border-radius: 5px;
-      margin: 10px 0;
-      font-family: monospace;
-      white-space: pre-line;
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <h1>🌍 Chrome 扩展多语言化完成</h1>
+  <h1>HoYo Leaks Block - 本地化测试页面</h1>
 
-    <div class="info-box">
-      <h2>✅ 已完成的工作</h2>
-      <ul>
-        <li>修改了 <code>manifest.json</code> 使用 <code>__MSG_name__</code> 和 <code>__MSG_description__</code></li>
-        <li>创建了简体中文本地化文件：<code>_locales/zh_CN/messages.json</code></li>
-        <li>创建了英文本地化文件：<code>_locales/en/messages.json</code></li>
-        <li>将 <code>options.html</code> 的所有硬编码文本改为本地化占位符</li>
-        <li>将 <code>popup.html</code> 的所有硬编码文本改为本地化占位符</li>
-      </ul>
-    </div>
+  <div class="test-section">
+    <div class="test-title">本地化消息测试</div>
+    <div id="test-messages"></div>
+  </div>
 
-    <div class="warning-box">
-      <h2>📁 文件结构</h2>
-      <div class="file-tree">hoyo-leaks-block/
-        ├── _locales/
-        │ ├── zh_CN/
-        │ │ └── messages.json (简体中文)
-        │ └── en/
-        │ └── messages.json (英文)
-        ├── manifest.json (已修改)
-        ├── popup/
-        │ └── popup.html (已本地化)
-        └── options/
-        └── options.html (已本地化)</div>
-    </div>
-
-    <div class="info-box">
-      <h2>🔧 工作原理</h2>
-      <p>Chrome 扩展会根据用户的浏览器语言设置自动选择对应的本地化文件：</p>
-      <ul>
-        <li>如果浏览器语言是中文，将使用 <code>zh_CN/messages.json</code></li>
-        <li>如果浏览器语言是英文，将使用 <code>en/messages.json</code></li>
-        <li>如果浏览器语言不匹配，默认使用 <code>zh_CN</code>（因为按字母顺序排序）</li>
-      </ul>
-    </div>
-
-    <div class="info-box">
-      <h2>🎯 本地化文件包含内容</h2>
-      <p>每个本地化文件包含 73 个键值对，涵盖了：</p>
-      <ul>
-        <li>扩展名称和描述</li>
-        <li>选项页面的所有文本（标题、标签、按钮、提示等）</li>
-        <li>弹出窗口的所有文本</li>
-        <li>平台名称、功能描述、使用说明等</li>
-      </ul>
-    </div>
-
-    <div class="warning-box">
-      <h2>📋 下一步操作</h2>
-      <ol>
-        <li>重新打包扩展程序</li>
-        <li>在 Chrome 中重新加载扩展</li>
-        <li>修改浏览器语言设置测试多语言效果</li>
-        <li>如需要支持更多语言，按相同模式添加对应的 <code>_locales</code> 文件夹</li>
-      </ol>
+  <div class="test-section">
+    <div class="test-title">HTML标记替换测试</div>
+    <div class="test-result">
+      <p>扩展名称: <span id="name-test">__MSG_name__</span></p>
+      <p>描述: <span id="desc-test">__MSG_description__</span></p>
+      <p>设置按钮: <button id="btn-test">__MSG_btn_settings__</button></p>
     </div>
   </div>
+
+  <div class="test-section">
+    <div class="test-title">当前浏览器语言</div>
+    <div id="language-info"></div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-title">可用语言列表</div>
+    <div id="available-languages"></div>
+  </div>
+
+  <script>
+    // 模拟Chrome API（如果不存在）
+    if (typeof chrome === 'undefined' || !chrome.i18n) {
+      console.warn('Chrome API not available, creating mock');
+      window.chrome = {
+        i18n: {
+          getMessage: function (key) {
+            const messages = {
+              'name': '米游内鬼信息屏蔽',
+              'description': '屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏的内鬼爆料内容',
+              'btn_settings': '设置选项'
+            };
+            return messages[key] || key;
+          },
+          getUILanguage: function () {
+            return navigator.language || 'zh-CN';
+          }
+        }
+      };
+    }
+
+    // 测试消息函数
+    function testMessages() {
+      const testKeys = ['name', 'description', 'btn_settings', 'nav_rules', 'platform_bilibili'];
+      const testResults = document.getElementById('test-messages');
+
+      testKeys.forEach(key => {
+        const message = chrome.i18n.getMessage(key);
+        const resultDiv = document.createElement('div');
+        resultDiv.className = message !== key ? 'test-result success' : 'test-result error';
+        resultDiv.innerHTML = `<strong>${key}:</strong> ${message}`;
+        testResults.appendChild(resultDiv);
+      });
+    }
+
+    // 本地化HTML
+    function localizeHTML() {
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+        null,
+        false
+      );
+
+      const textNodesToProcess = [];
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('__MSG_')) {
+          textNodesToProcess.push(node);
+        }
+      }
+
+      textNodesToProcess.forEach(node => {
+        node.textContent = node.textContent.replace(/__MSG_([a-zA-Z0-9_]+)__/g, (match, key) => {
+          return chrome.i18n.getMessage(key) || match;
+        });
+      });
+    }
+
+    // 显示语言信息
+    function showLanguageInfo() {
+      const languageInfo = document.getElementById('language-info');
+      const currentLang = chrome.i18n.getUILanguage();
+      languageInfo.innerHTML = `
+                <div class="test-result">
+                    <strong>浏览器语言:</strong> ${navigator.language}<br>
+                    <strong>Chrome UI语言:</strong> ${currentLang}
+                </div>
+            `;
+    }
+
+    // 显示可用语言
+    function showAvailableLanguages() {
+      const availableLanguages = document.getElementById('available-languages');
+      const languages = [
+        { code: 'en', name: 'English' },
+        { code: 'zh_CN', name: '简体中文' },
+        { code: 'zh_TW', name: '繁體中文' },
+        { code: 'ja', name: '日本語' }
+      ];
+
+      let html = '<div class="test-result">';
+      languages.forEach(lang => {
+        html += `<div><strong>${lang.code}:</strong> ${lang.name}</div>`;
+      });
+      html += '</div>';
+      availableLanguages.innerHTML = html;
+    }
+
+    // 页面加载完成后执行测试
+    document.addEventListener('DOMContentLoaded', function () {
+      testMessages();
+      localizeHTML();
+      showLanguageInfo();
+      showAvailableLanguages();
+    });
+  </script>
 </body>
 
 </html>

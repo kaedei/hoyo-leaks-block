@@ -1,0 +1,221 @@
+{
+  "name": {
+    "message": "HoYoリーク情報ブロック"
+  },
+  "description": {
+    "message": "B站、YouTube、TwitterなどのプラットフォームでmiHoYoゲームのリーク情報をブロック"
+  },
+  "options_title": {
+    "message": "HoYoリーク情報ブロック - 設定"
+  },
+  "options_subtitle": {
+    "message": "ブロックルールとエリア設定を管理"
+  },
+  "nav_rules": {
+    "message": "🛡️ ブロックルール"
+  },
+  "nav_areas": {
+    "message": "📍 エリア管理"
+  },
+  "nav_import_export": {
+    "message": "📦 インポート・エクスポート"
+  },
+  "nav_about": {
+    "message": "ℹ️ 概要"
+  },
+  "rules_title": {
+    "message": "ブロックルール設定"
+  },
+  "platform_bilibili": {
+    "message": "B站 (Bilibili)"
+  },
+  "platform_youtube": {
+    "message": "YouTube"
+  },
+  "platform_twitter": {
+    "message": "Twitter"
+  },
+  "keywords_label": {
+    "message": "ブロックキーワード（|で区切る）"
+  },
+  "keywords_placeholder_bili": {
+    "message": "例：内鬼|爆料|泄露|leak|beta"
+  },
+  "keywords_placeholder_ytb": {
+    "message": "例：leak|beta|insider|spoiler"
+  },
+  "keywords_placeholder_twitter": {
+    "message": "例：leak|beta|insider|spoiler"
+  },
+  "blacklist_label": {
+    "message": "作者ブラックリスト（|で区切る）"
+  },
+  "blacklist_placeholder_bili": {
+    "message": "例：ユーザー名1|ユーザー名2"
+  },
+  "blacklist_placeholder_ytb": {
+    "message": "例：channel1|channel2"
+  },
+  "blacklist_placeholder_twitter": {
+    "message": "例：@user1|@user2"
+  },
+  "whitelist_label": {
+    "message": "作者ホワイトリスト（|で区切る）"
+  },
+  "whitelist_placeholder_bili": {
+    "message": "例：公式アカウント|信頼できるユーザー"
+  },
+  "whitelist_placeholder_ytb": {
+    "message": "例：公式チャンネル|信頼できるチャンネル"
+  },
+  "whitelist_placeholder_twitter": {
+    "message": "例：@official|@trusted"
+  },
+  "btn_save_rules": {
+    "message": "ルールを保存"
+  },
+  "btn_reset_rules": {
+    "message": "デフォルトにリセット"
+  },
+  "areas_title": {
+    "message": "エリア管理"
+  },
+  "areas_subtitle": {
+    "message": "異なるプラットフォームのブロックエリア設定を管理"
+  },
+  "area_name": {
+    "message": "エリア名"
+  },
+  "area_platform": {
+    "message": "プラットフォーム"
+  },
+  "area_status": {
+    "message": "ステータス"
+  },
+  "area_actions": {
+    "message": "アクション"
+  },
+  "btn_add_area": {
+    "message": "エリアを追加"
+  },
+  "btn_refresh_areas": {
+    "message": "エリアを更新"
+  },
+  "btn_update_remote": {
+    "message": "最新エリア設定をオンライン更新"
+  },
+  "import_export_title": {
+    "message": "設定のインポート・エクスポート"
+  },
+  "export_section_title": {
+    "message": "設定のエクスポート"
+  },
+  "export_description": {
+    "message": "現在の設定をJSONファイルとしてエクスポート"
+  },
+  "btn_export": {
+    "message": "設定をエクスポート"
+  },
+  "import_section_title": {
+    "message": "設定のインポート"
+  },
+  "import_description": {
+    "message": "JSONファイルから設定をインポート"
+  },
+  "btn_import": {
+    "message": "ファイルを選択してインポート"
+  },
+  "clear_section_title": {
+    "message": "全データの削除"
+  },
+  "clear_warning": {
+    "message": "⚠️ この操作はすべての設定とデータを削除します。元に戻すことはできません"
+  },
+  "btn_clear_all": {
+    "message": "全データを削除"
+  },
+  "about_title": {
+    "message": "概要"
+  },
+  "about_author": {
+    "message": "作者：kaedei"
+  },
+  "about_version": {
+    "message": "バージョン：103.0"
+  },
+  "about_description": {
+    "message": "これはB站、YouTube、TwitterなどのプラットフォームでmiHoYoゲームのリーク情報をブロックするブラウザ拡張機能です。"
+  },
+  "features_title": {
+    "message": "機能特徴"
+  },
+  "feature_1": {
+    "message": "マルチプラットフォームコンテンツブロック対応"
+  },
+  "feature_2": {
+    "message": "カスタムキーワードとユーザーブロック"
+  },
+  "feature_3": {
+    "message": "ホワイトリスト機能"
+  },
+  "feature_4": {
+    "message": "エリア管理"
+  },
+  "feature_5": {
+    "message": "設定のインポート・エクスポート"
+  },
+  "usage_title": {
+    "message": "使用方法"
+  },
+  "usage_1": {
+    "message": "「ブロックルール」でブロックするキーワードとユーザーを設定"
+  },
+  "usage_2": {
+    "message": "「エリア管理」で異なるプラットフォームのブロックエリアを管理"
+  },
+  "usage_3": {
+    "message": "設定ファイルのインポート・エクスポートに対応"
+  },
+  "usage_4": {
+    "message": "エリア設定のリモート更新が可能"
+  },
+  "contact_title": {
+    "message": "連絡先"
+  },
+  "contact_description": {
+    "message": "質問や提案がある場合は、こちらをご覧ください："
+  },
+  "github_link": {
+    "message": "GitHubプロジェクトページ"
+  },
+  "footer_text": {
+    "message": "2025 (c) HoYoリーク情報ブロック"
+  },
+  "popup_subtitle": {
+    "message": "原神、スターレイルのリーク情報をブロック"
+  },
+  "platform_bilibili_short": {
+    "message": "B站"
+  },
+  "btn_settings": {
+    "message": "設定オプション"
+  },
+  "btn_refresh": {
+    "message": "ページを更新"
+  },
+  "btn_clear_cache": {
+    "message": "キャッシュを削除"
+  },
+  "stat_today": {
+    "message": "今日のブロック"
+  },
+  "stat_total": {
+    "message": "総ブロック数"
+  },
+  "version": {
+    "message": "バージョン 103.0"
+  },
+  "help_link": {
+    "message": "ヘルプドキュメント"
+  }
+}

@@ -30,6 +30,9 @@ class OptionsController {
     console.log('[HoyoBlock-Options] Initializing options page...');
 
     try {
+      // 初始化国际化
+      window.I18nManager.init();
+
       // 初始化UI管理器
       window.UIManager.init();
 
@@ -91,12 +94,14 @@ function waitForModules() {
       attempts++;
 
       console.log(`[HoyoBlock-Options] Checking modules (attempt ${attempts}/${maxAttempts})...`);
+      console.log(`[HoyoBlock-Options] I18nManager: ${typeof window.I18nManager !== 'undefined' ? 'defined' : 'undefined'}`);
       console.log(`[HoyoBlock-Options] UIManager: ${typeof window.UIManager !== 'undefined' ? 'defined' : 'undefined'}, has init: ${typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' ? 'yes' : 'no'}`);
       console.log(`[HoyoBlock-Options] ConfigManager: ${typeof window.ConfigManager !== 'undefined' ? 'defined' : 'undefined'}`);
       console.log(`[HoyoBlock-Options] AreaManager: ${typeof window.AreaManager !== 'undefined' ? 'defined' : 'undefined'}`);
       console.log(`[HoyoBlock-Options] Utils: ${typeof window.Utils !== 'undefined' ? 'defined' : 'undefined'}`);
 
-      if (typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' &&
+      if (typeof window.I18nManager !== 'undefined' && window.I18nManager &&
+        typeof window.UIManager !== 'undefined' && window.UIManager && typeof window.UIManager.init === 'function' &&
         typeof window.ConfigManager !== 'undefined' && window.ConfigManager &&
         typeof window.AreaManager !== 'undefined' && window.AreaManager &&
         typeof window.Utils !== 'undefined' && window.Utils) {
@@ -105,6 +110,7 @@ function waitForModules() {
         resolve();
       } else if (attempts >= maxAttempts) {
         const missingModules = [];
+        if (typeof window.I18nManager === 'undefined' || !window.I18nManager) missingModules.push('I18nManager');
         if (typeof window.UIManager === 'undefined' || !window.UIManager) missingModules.push('UIManager');
         if (typeof window.ConfigManager === 'undefined' || !window.ConfigManager) missingModules.push('ConfigManager');
         if (typeof window.AreaManager === 'undefined' || !window.AreaManager) missingModules.push('AreaManager');
