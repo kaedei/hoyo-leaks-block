@@ -2,9 +2,9 @@
 
 **Language / 语言**：[中文](README.md) | English
 
-> **Acknowledgment**: This project is a refactored browser extension based on the original Tampermonkey script developed by @凡云 from Bilibili. Thanks to the original author for their open-source contribution! Original project: https://github.com/LCYBFF/genshinLeaksBlock
+This is a browser extension specifically designed for players of games under Hoyoverse, such as Genshin Impact, Honkai: Star Rail, Zenless Zone Zero, etc. It can automatically block content related to "leaks and smear campaigns" on major social platforms like Bilibili, YouTube, and Twitter (x.com).
 
-This is a browser extension designed for players of Hoyoverse games (such as Genshin Impact, Honkai: Star Rail, Zenless Zone Zero, etc.) to automatically block content related to "leaks and negative traffic" on mainstream social platforms like Bilibili, YouTube, and Twitter (x.com).
+> **Acknowledgment**: This project is a refactored browser extension based on the original Tampermonkey script developed by @凡云 from Bilibili. Thanks to the original author for their open-source contribution! Original project: https://github.com/LCYBFF/genshinLeaksBlock
 
 ## Features
 
