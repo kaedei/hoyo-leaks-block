@@ -26,6 +26,11 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/utils.js",
+        "core/config-manager.js",
+        "core/stats-manager.js",
+        "core/content-blocker.js",
+        "core/ui-manager.js",
         "core/block-core.js",
         "content-scripts/bilibili.js"
       ],
@@ -40,6 +45,11 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/utils.js",
+        "core/config-manager.js",
+        "core/stats-manager.js",
+        "core/content-blocker.js",
+        "core/ui-manager.js",
         "core/block-core.js",
         "content-scripts/youtube.js"
       ],
@@ -55,6 +65,11 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/utils.js",
+        "core/config-manager.js",
+        "core/stats-manager.js",
+        "core/content-blocker.js",
+        "core/ui-manager.js",
         "core/block-core.js",
         "content-scripts/twitter.js"
       ],
