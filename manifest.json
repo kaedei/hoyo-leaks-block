@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "米哈游内鬼屏蔽工具",
-  "version": "3.0.0",
-  "description": "屏蔽B站、YouTube、Twitter三大平台的原神、星穹铁道内鬼爆料视频和消息",
+  "name": "米哈游内鬼信息屏蔽",
+  "version": "103.0",
+  "description": "屏蔽B站、YouTube、Twitter等平台上有关米哈游旗下游戏的内鬼爆料内容",
   "permissions": [
     "storage",
     "activeTab",
-    "scripting"
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
     "*://*.bilibili.com/*",
@@ -61,7 +62,7 @@
   ],
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "米哈游内鬼屏蔽工具"
+    "default_title": "米哈游内鬼信息屏蔽"
   },
   "options_page": "options/options.html",
   "icons": {

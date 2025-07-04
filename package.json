@@ -1,6 +1,6 @@
 {
   "name": "hoyo-leaks-block",
-  "version": "3.0.0",
+  "version": "103.0",
   "description": "Chrome/Edge extension to block Genshin Impact and Star Rail leak content on Bilibili, YouTube, and Twitter",
   "main": "background.js",
   "scripts": {

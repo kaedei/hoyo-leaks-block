@@ -1,11 +1,80 @@
-/* 主要的屏蔽样式 */
-.hoyo-blur-block {
-  filter: blur(30px) !important;
-  transition: filter 0.3s ease !important;
+/* 主要的屏蔽样式 - 加强优先级 */
+.hoyo-blur-block,
+[data-hoyo-blocked="true"] {
+  filter: blur(5px) !important;
+  opacity: 0.6 !important;
+  transition: all 0.5s ease !important;
+  position: relative !important;
 }
 
-.hoyo-blur-block:hover {
+.hoyo-blur-block:hover,
+[data-hoyo-blocked="true"]:hover {
+  filter: blur(0.5px) !important;
+  opacity: 0.9 !important;
+}
+
+/* 强制样式 - 确保在所有平台上都生效 */
+body .hoyo-blur-block,
+html .hoyo-blur-block,
+div.hoyo-blur-block,
+section.hoyo-blur-block,
+article.hoyo-blur-block,
+*[data-hoyo-blocked="true"] {
   filter: blur(5px) !important;
+  opacity: 0.6 !important;
+  transition: all 0.5s ease !important;
+  position: relative !important;
+}
+
+body .hoyo-blur-block:hover,
+html .hoyo-blur-block:hover,
+div.hoyo-blur-block:hover,
+section.hoyo-blur-block:hover,
+article.hoyo-blur-block:hover,
+*[data-hoyo-blocked="true"]:hover {
+  filter: blur(0.5px) !important;
+  opacity: 0.9 !important;
+}
+
+/* 针对B站特定元素的强制样式 */
+.bili-video-card.hoyo-blur-block,
+.bili-video-card[data-hoyo-blocked="true"],
+.video-card.hoyo-blur-block,
+.video-card[data-hoyo-blocked="true"] {
+  filter: blur(5px) !important;
+  opacity: 0.6 !important;
+  transition: all 0.5s ease !important;
+}
+
+.bili-video-card.hoyo-blur-block:hover,
+.bili-video-card[data-hoyo-blocked="true"]:hover,
+.video-card.hoyo-blur-block:hover,
+.video-card[data-hoyo-blocked="true"]:hover {
+  filter: blur(0.5px) !important;
+  opacity: 0.9 !important;
+}
+
+/* B站特定的强制样式 */
+.bilibili-com .hoyo-blur-block,
+.bilibili-com [data-hoyo-blocked="true"],
+[class*="bili-"] .hoyo-blur-block,
+[class*="bili-"][data-hoyo-blocked="true"],
+[class*="video-card"] .hoyo-blur-block,
+[class*="video-card"][data-hoyo-blocked="true"] {
+  filter: blur(5px) !important;
+  opacity: 0.6 !important;
+  transition: all 0.5s ease !important;
+  position: relative !important;
+}
+
+.bilibili-com .hoyo-blur-block:hover,
+.bilibili-com [data-hoyo-blocked="true"]:hover,
+[class*="bili-"] .hoyo-blur-block:hover,
+[class*="bili-"][data-hoyo-blocked="true"]:hover,
+[class*="video-card"] .hoyo-blur-block:hover,
+[class*="video-card"][data-hoyo-blocked="true"]:hover {
+  filter: blur(0.5px) !important;
+  opacity: 0.9 !important;
 }
 
 /* 设置按钮样式 */
@@ -94,24 +163,4 @@
   position: relative !important;
 }
 
-[data-hoyo-blocked="true"]::before {
-  content: "🚫 已屏蔽内容" !important;
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  background: rgba(0, 0, 0, 0.8) !important;
-  color: white !important;
-  padding: 8px 16px !important;
-  border-radius: 4px !important;
-  font-size: 12px !important;
-  z-index: 10 !important;
-  opacity: 0 !important;
-  transition: opacity 0.3s ease !important;
-  pointer-events: none !important;
-  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
-}
 
-[data-hoyo-blocked="true"]:hover::before {
-  opacity: 1 !important;
-}

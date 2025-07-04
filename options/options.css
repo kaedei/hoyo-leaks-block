@@ -102,6 +102,65 @@ body {
   gap: 30px;
 }
 
+/* 平台标签页样式 */
+.platform-tabs {
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  overflow: hidden;
+}
+
+.platform-tab-nav {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.platform-tab-btn {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-bottom: 3px solid transparent;
+}
+
+.platform-tab-btn:hover {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.platform-tab-btn.active {
+  background: #667eea;
+  color: white;
+  border-bottom-color: #5a67d8;
+}
+
+.platform-icon {
+  font-size: 18px;
+}
+
+.platform-tab-content {
+  padding: 0;
+}
+
+.platform-config-panel {
+  display: none;
+  padding: 25px;
+}
+
+.platform-config-panel.active {
+  display: block;
+}
+
 .platform-section {
   background: #f8f9fa;
   padding: 25px;
@@ -246,16 +305,22 @@ body {
 
 .area-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  align-items: center;
 }
 
-.area-actions button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.area-actions .btn {
   font-size: 12px;
-  transition: all 0.3s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.area-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .import-export-section {
@@ -361,6 +426,132 @@ body {
   border: 1px solid #bee5eb;
 }
 
+/* 编辑对话框样式 */
+.edit-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.edit-dialog {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.edit-dialog h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 20px;
+}
+
+.edit-dialog .form-group {
+  margin-bottom: 20px;
+}
+
+.edit-dialog label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.edit-dialog input,
+.edit-dialog select,
+.edit-dialog textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.edit-dialog input:focus,
+.edit-dialog select:focus,
+.edit-dialog textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-dialog textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: 'Courier New', monospace;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.dialog-actions .btn {
+  padding: 10px 20px;
+}
+
+/* 区域列表样式 */
+.area-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.area-platform {
+  color: #666;
+  font-size: 14px;
+}
+
+.area-status {
+  display: flex;
+  align-items: center;
+}
+
+.area-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.area-actions .btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.area-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.area-item:hover {
+  background: #f8f9fa;
+}
+
+/* 空状态样式 */
+.area-item[style*="text-align: center"] {
+  padding: 30px;
+  color: #999;
+  font-style: italic;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
@@ -389,4 +580,110 @@ body {
   .actions {
     flex-direction: column;
   }
+
+  /* 平台标签页响应式设计 */
+  .platform-tab-nav {
+    flex-direction: column;
+  }
+
+  .platform-tab-btn {
+    border-bottom: 1px solid #e9ecef;
+    border-right: none;
+  }
+
+  .platform-tab-btn:last-child {
+    border-bottom: none;
+  }
+}
+
+/* 平台标签页动画效果 */
+.platform-config-panel {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 改进表单样式 */
+.platform-section .form-group {
+  margin-bottom: 25px;
+}
+
+.platform-section .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.platform-section textarea {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  line-height: 1.4;
+}
+
+/* 平台标签页特定样式 */
+.platform-tabs {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.platform-tab-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.platform-tab-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.platform-tab-btn:hover::before {
+  left: 100%;
+}
+
+.platform-tab-btn.active::before {
+  display: none;
+}
+
+/* 保存按钮增强 */
+.actions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 20px 0;
+  border-top: 1px solid #e9ecef;
+  margin-top: 30px;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
 }

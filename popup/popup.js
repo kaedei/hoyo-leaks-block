@@ -72,7 +72,7 @@ function bindEventListeners() {
   document.getElementById('help-link').addEventListener('click', function (e) {
     e.preventDefault();
     chrome.tabs.create({
-      url: 'https://github.com/your-username/hoyo-leaks-block'
+      url: 'https://github.com/kaedei/hoyo-leaks-block'
     });
   });
 }
