@@ -104,6 +104,39 @@
   "btn_update_remote": {
     "message": "Load Latest Area Config Online"
   },
+  "area_main_selector": {
+    "message": "Main Container Selector"
+  },
+  "area_item_selector": {
+    "message": "Item Selector"
+  },
+  "area_text_selector": {
+    "message": "Text Selector"
+  },
+  "area_media_selector": {
+    "message": "Media Selector"
+  },
+  "area_user_selector": {
+    "message": "User Selector"
+  },
+  "area_home_enable": {
+    "message": "Enable on Home"
+  },
+  "area_main_selector_placeholder": {
+    "message": "e.g.: .video-container"
+  },
+  "area_item_selector_placeholder": {
+    "message": "e.g.: .video-item"
+  },
+  "area_text_selector_placeholder": {
+    "message": "e.g.: .title, .description"
+  },
+  "area_media_selector_placeholder": {
+    "message": "e.g.: .thumbnail, .cover"
+  },
+  "area_user_selector_placeholder": {
+    "message": "e.g.: .author, .username"
+  },
   "import_export_title": {
     "message": "Import/Export Configuration"
   },

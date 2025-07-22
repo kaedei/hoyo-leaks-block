@@ -9,22 +9,37 @@ class AreaManager {
   constructor() {
     this.sampleAreas = [
       {
-        name: "B站视频卡片",
-        area: "bilibili",
-        selector: ".video-item",
-        on: true
+        "name": "B站首页列表",
+        "area": "bilibili",
+        "main": ".recommended-container_floor-aside",
+        "item": ".bili-video-card",
+        "text": ".bili-video-card__info--tit a",
+        "media": ".bili-video-card__image",
+        "user": ".bili-video-card__info--author",
+        "on": true,
+        "home": false
       },
       {
-        name: "YouTube视频缩略图",
-        area: "youtube",
-        selector: "ytd-video-renderer",
-        on: true
+        "name": "YouTube视频缩略图",
+        "area": "youtube",
+        "main": "ytd-rich-grid-renderer",
+        "item": "ytd-rich-item-renderer",
+        "text": "#video-title",
+        "media": "ytd-thumbnail",
+        "user": "ytd-channel-name",
+        "on": true,
+        "home": false
       },
       {
-        name: "Twitter推文",
-        area: "twitter",
-        selector: "[data-testid='tweet']",
-        on: false
+        "name": "Twitter推文",
+        "area": "twitter",
+        "main": "[aria-labelledby='accessible-list-1']",
+        "item": "[data-testid=tweet]",
+        "text": "[data-testid=tweetText]",
+        "media": "[data-testid=tweetPhoto], video",
+        "user": "[data-testid=User-Name]",
+        "on": false,
+        "home": false
       }
     ];
   }
@@ -114,11 +129,11 @@ class AreaManager {
         const editDialog = window.Utils.createDialog('编辑区域', `
           <form id="edit-area-form" data-index="${index}">
             <div class="form-group">
-              <label for="edit-name">区域名称:</label>
+              <label for="edit-name">__MSG_area_name__:</label>
               <input type="text" id="edit-name" value="${area.name}" required>
             </div>
             <div class="form-group">
-              <label for="edit-platform">平台:</label>
+              <label for="edit-platform">__MSG_area_platform__:</label>
               <select id="edit-platform">
                 <option value="bilibili" ${area.area === 'bilibili' ? 'selected' : ''}>B站</option>
                 <option value="youtube" ${area.area === 'youtube' ? 'selected' : ''}>YouTube</option>
@@ -126,8 +141,30 @@ class AreaManager {
               </select>
             </div>
             <div class="form-group">
-              <label for="edit-selector">CSS选择器:</label>
-              <textarea id="edit-selector" rows="3" required>${area.selector}</textarea>
+              <label for="edit-main">__MSG_area_main_selector__:</label>
+              <textarea id="edit-main" rows="2" placeholder="__MSG_area_main_selector_placeholder__" required>${area.main || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="edit-item">__MSG_area_item_selector__:</label>
+              <textarea id="edit-item" rows="2" placeholder="__MSG_area_item_selector_placeholder__" required>${area.item || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="edit-text">__MSG_area_text_selector__:</label>
+              <textarea id="edit-text" rows="2" placeholder="__MSG_area_text_selector_placeholder__" required>${area.text || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="edit-media">__MSG_area_media_selector__:</label>
+              <textarea id="edit-media" rows="2" placeholder="__MSG_area_media_selector_placeholder__">${area.media || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="edit-user">__MSG_area_user_selector__:</label>
+              <textarea id="edit-user" rows="2" placeholder="__MSG_area_user_selector_placeholder__">${area.user || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="edit-home" ${area.home ? 'checked' : ''}>
+                __MSG_area_home_enable__
+              </label>
             </div>
             <div class="dialog-actions">
               <button type="submit" class="btn btn-primary">保存</button>
@@ -168,11 +205,11 @@ class AreaManager {
     const addDialog = window.Utils.createDialog('添加新区域', `
       <form id="add-area-form">
         <div class="form-group">
-          <label for="add-name">区域名称:</label>
+          <label for="add-name">__MSG_area_name__:</label>
           <input type="text" id="add-name" placeholder="请输入区域名称" required>
         </div>
         <div class="form-group">
-          <label for="add-platform">平台:</label>
+          <label for="add-platform">__MSG_area_platform__:</label>
           <select id="add-platform">
             <option value="bilibili">B站</option>
             <option value="youtube">YouTube</option>
@@ -180,8 +217,30 @@ class AreaManager {
           </select>
         </div>
         <div class="form-group">
-          <label for="add-selector">CSS选择器:</label>
-          <textarea id="add-selector" rows="3" placeholder="请输入CSS选择器，例如：.video-item" required></textarea>
+          <label for="add-main">__MSG_area_main_selector__:</label>
+          <textarea id="add-main" rows="2" placeholder="__MSG_area_main_selector_placeholder__" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-item">__MSG_area_item_selector__:</label>
+          <textarea id="add-item" rows="2" placeholder="__MSG_area_item_selector_placeholder__" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-text">__MSG_area_text_selector__:</label>
+          <textarea id="add-text" rows="2" placeholder="__MSG_area_text_selector_placeholder__" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-media">__MSG_area_media_selector__:</label>
+          <textarea id="add-media" rows="2" placeholder="__MSG_area_media_selector_placeholder__"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-user">__MSG_area_user_selector__:</label>
+          <textarea id="add-user" rows="2" placeholder="__MSG_area_user_selector_placeholder__"></textarea>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="add-home">
+            __MSG_area_home_enable__
+          </label>
         </div>
         <div class="dialog-actions">
           <button type="submit" class="btn btn-primary">添加</button>
@@ -200,10 +259,15 @@ class AreaManager {
   saveEditedArea(form) {
     const newName = document.getElementById('edit-name').value.trim();
     const newPlatform = document.getElementById('edit-platform').value;
-    const newSelector = document.getElementById('edit-selector').value.trim();
+    const newMain = document.getElementById('edit-main').value.trim();
+    const newItem = document.getElementById('edit-item').value.trim();
+    const newText = document.getElementById('edit-text').value.trim();
+    const newMedia = document.getElementById('edit-media').value.trim();
+    const newUser = document.getElementById('edit-user').value.trim();
+    const newHome = document.getElementById('edit-home').checked;
 
-    if (!newName || !newSelector) {
-      window.Utils.showMessage('请填写完整的区域信息！', 'error');
+    if (!newName || !newMain || !newItem || !newText) {
+      window.Utils.showMessage('请填写完整的区域信息（名称、主容器、项目选择器、文本选择器为必填项）！', 'error');
       return;
     }
 
@@ -214,7 +278,12 @@ class AreaManager {
       if (areaList[index]) {
         areaList[index].name = newName;
         areaList[index].area = newPlatform;
-        areaList[index].selector = newSelector;
+        areaList[index].main = newMain;
+        areaList[index].item = newItem;
+        areaList[index].text = newText;
+        areaList[index].media = newMedia;
+        areaList[index].user = newUser;
+        areaList[index].home = newHome;
 
         chrome.storage.sync.set({ areaList }, () => {
           window.Utils.closeDialog();
@@ -231,17 +300,27 @@ class AreaManager {
   saveNewArea() {
     const name = document.getElementById('add-name').value.trim();
     const platform = document.getElementById('add-platform').value;
-    const selector = document.getElementById('add-selector').value.trim();
+    const main = document.getElementById('add-main').value.trim();
+    const item = document.getElementById('add-item').value.trim();
+    const text = document.getElementById('add-text').value.trim();
+    const media = document.getElementById('add-media').value.trim();
+    const user = document.getElementById('add-user').value.trim();
+    const home = document.getElementById('add-home').checked;
 
-    if (!name || !selector) {
-      window.Utils.showMessage('请填写完整的区域信息！', 'error');
+    if (!name || !main || !item || !text) {
+      window.Utils.showMessage('请填写完整的区域信息（名称、主容器、项目选择器、文本选择器为必填项）！', 'error');
       return;
     }
 
     const newArea = {
       name: name,
       area: platform,
-      selector: selector,
+      main: main,
+      item: item,
+      text: text,
+      media: media,
+      user: user,
+      home: home,
       on: true
     };
 
@@ -287,6 +366,36 @@ class AreaManager {
         this.loadSampleAreaData();
       }
     });
+  }
+
+  /**
+   * 从远程更新区域列表
+   */
+  async updateRemoteAreas() {
+    try {
+      window.Utils.showMessage('正在从服务器获取最新区域配置...', 'info');
+
+      const response = await fetch('https://lcybff.github.io/helper/mihoyoLeaksBlock/arealist.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.arealist && Array.isArray(data.arealist)) {
+        // 确认用户是否要覆盖当前配置
+        if (confirm(`从服务器获取到 ${data.arealist.length} 个区域配置。\n\n是否要覆盖当前的区域设置？`)) {
+          chrome.storage.sync.set({ areaList: data.arealist }, () => {
+            this.loadAreaList();
+            window.Utils.showMessage(`区域配置已更新！共加载了 ${data.arealist.length} 个区域。`, 'success');
+          });
+        }
+      } else {
+        throw new Error('服务器返回的数据格式不正确');
+      }
+    } catch (error) {
+      console.warn('Failed to fetch remote area list:', error);
+      window.Utils.showMessage(`更新失败：${error.message}`, 'error');
+    }
   }
 }
 

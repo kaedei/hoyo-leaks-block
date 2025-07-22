@@ -8,7 +8,7 @@ DebugLogger.log('Hoyo Leaks Block Extension background script loaded');
 chrome.runtime.onInstalled.addListener(() => {
   const defaultConfig = {
     // B站配置
-    blockTitleBili: '内鬼|爆料|泄露|leak|beta|测试服|内部|剧透|预告|未公开|v1|v2|v3|v4|v5',
+    blockTitleBili: '内鬼|爆料|泄露|leak|beta|测试服|v2|v3|v4|v5',
     blockUsersBili: '',
     blockUsersWhiteBili: '',
 

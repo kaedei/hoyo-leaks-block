@@ -156,7 +156,7 @@ class UIManager {
     const updateRemoteAreasBtn = getElement('update-remote-areas');
     if (updateRemoteAreasBtn) {
       updateRemoteAreasBtn.addEventListener('click', () => {
-        window.ConfigManager.updateRemoteConfig();
+        window.AreaManager.updateRemoteAreas();
       });
     }
 

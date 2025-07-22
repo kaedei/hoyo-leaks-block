@@ -104,6 +104,39 @@
   "btn_update_remote": {
     "message": "最新エリア設定をオンライン更新"
   },
+  "area_main_selector": {
+    "message": "メインコンテナセレクタ"
+  },
+  "area_item_selector": {
+    "message": "アイテムセレクタ"
+  },
+  "area_text_selector": {
+    "message": "テキストセレクタ"
+  },
+  "area_media_selector": {
+    "message": "メディアセレクタ"
+  },
+  "area_user_selector": {
+    "message": "ユーザーセレクタ"
+  },
+  "area_home_enable": {
+    "message": "ホームで有効"
+  },
+  "area_main_selector_placeholder": {
+    "message": "例：.video-container"
+  },
+  "area_item_selector_placeholder": {
+    "message": "例：.video-item"
+  },
+  "area_text_selector_placeholder": {
+    "message": "例：.title, .description"
+  },
+  "area_media_selector_placeholder": {
+    "message": "例：.thumbnail, .cover"
+  },
+  "area_user_selector_placeholder": {
+    "message": "例：.author, .username"
+  },
   "import_export_title": {
     "message": "設定のインポート・エクスポート"
   },

@@ -104,6 +104,39 @@
   "btn_update_remote": {
     "message": "線上載入最新區域設定"
   },
+  "area_main_selector": {
+    "message": "主容器選擇器"
+  },
+  "area_item_selector": {
+    "message": "項目選擇器"
+  },
+  "area_text_selector": {
+    "message": "文字選擇器"
+  },
+  "area_media_selector": {
+    "message": "媒體選擇器"
+  },
+  "area_user_selector": {
+    "message": "使用者選擇器"
+  },
+  "area_home_enable": {
+    "message": "首頁啟用"
+  },
+  "area_main_selector_placeholder": {
+    "message": "例如：.video-container"
+  },
+  "area_item_selector_placeholder": {
+    "message": "例如：.video-item"
+  },
+  "area_text_selector_placeholder": {
+    "message": "例如：.title, .description"
+  },
+  "area_media_selector_placeholder": {
+    "message": "例如：.thumbnail, .cover"
+  },
+  "area_user_selector_placeholder": {
+    "message": "例如：.author, .username"
+  },
   "import_export_title": {
     "message": "匯入匯出設定"
   },
