@@ -7,17 +7,8 @@
  */
 class ConfigManager {
   constructor() {
-    this.defaultConfig = {
-      blockTitleBili: '内鬼|爆料|泄露|leak|beta|测试服|内部|剧透|预告|未公开',
-      blockUsersBili: '',
-      blockUsersWhiteBili: '',
-      blockTitleYtb: '内鬼|爆料|泄露|leak|beta|测试服|内部|剧透|预告|未公开',
-      blockUsersYtb: '',
-      blockUsersWhiteYtb: '',
-      blockTitleTwitter: '内鬼|爆料|泄露|leak|beta|测试服|内部|剧透|预告|未公开',
-      blockUsersTwitter: '',
-      blockUsersWhiteTwitter: ''
-    };
+    this.remoteManager = new RemoteConfigManager();
+    this.defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
   }
 
   /**
@@ -135,43 +126,31 @@ class ConfigManager {
   /**
    * 更新远程配置
    */
-  updateRemoteConfig() {
+  async updateRemoteConfig() {
     if (!confirm('确认在线加载最新区域配置？\n\n⚠️ 此操作将覆盖当前的区域配置，无法恢复！')) {
       return;
     }
 
     window.Utils.showMessage('正在加载最新区域配置...', 'info');
 
-    const apiUrl = 'https://lcybff.github.io/helper/mihoyoLeaksBlock/arealist.json';
+    try {
+      const areaList = await this.remoteManager.fetchRemoteAreaList();
 
-    fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('网络请求失败');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.arealist && Array.isArray(data.arealist)) {
-          chrome.storage.sync.set({ areaList: data.arealist }, () => {
-            if (chrome.runtime.lastError) {
-              window.Utils.showMessage('保存配置失败: ' + chrome.runtime.lastError.message, 'error');
-            } else {
-              // 如果区域管理器可用，重新加载区域列表
-              if (window.AreaManager) {
-                window.AreaManager.loadAreaList();
-              }
-              window.Utils.showMessage(`远程配置更新成功！加载了 ${data.arealist.length} 个区域配置`, 'success');
-            }
-          });
+      chrome.storage.sync.set({ areaList }, () => {
+        if (chrome.runtime.lastError) {
+          window.Utils.showMessage('保存配置失败: ' + chrome.runtime.lastError.message, 'error');
         } else {
-          window.Utils.showMessage('远程配置数据格式错误！', 'error');
+          // 如果区域管理器可用，重新加载区域列表
+          if (window.AreaManager) {
+            window.AreaManager.loadAreaList();
+          }
+          window.Utils.showMessage(`远程配置更新成功！加载了 ${areaList.length} 个区域配置`, 'success');
         }
-      })
-      .catch(error => {
-        console.error('[HoyoBlock-Options] Remote config update failed:', error);
-        window.Utils.showMessage('远程配置更新失败: ' + error.message, 'error');
       });
+    } catch (error) {
+      console.error('[HoyoBlock-Options] Remote config update failed:', error);
+      window.Utils.showMessage('远程配置更新失败: ' + error.message, 'error');
+    }
   }
 
   /**

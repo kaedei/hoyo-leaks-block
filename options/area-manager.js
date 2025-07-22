@@ -7,41 +7,8 @@
  */
 class AreaManager {
   constructor() {
-    this.sampleAreas = [
-      {
-        "name": "B站首页列表",
-        "area": "bilibili",
-        "main": ".recommended-container_floor-aside",
-        "item": ".bili-video-card",
-        "text": ".bili-video-card__info--tit a",
-        "media": ".bili-video-card__image",
-        "user": ".bili-video-card__info--author",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": "YouTube视频缩略图",
-        "area": "youtube",
-        "main": "ytd-rich-grid-renderer",
-        "item": "ytd-rich-item-renderer",
-        "text": "#video-title",
-        "media": "ytd-thumbnail",
-        "user": "ytd-channel-name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": "Twitter推文",
-        "area": "twitter",
-        "main": "[aria-labelledby='accessible-list-1']",
-        "item": "[data-testid=tweet]",
-        "text": "[data-testid=tweetText]",
-        "media": "[data-testid=tweetPhoto], video",
-        "user": "[data-testid=User-Name]",
-        "on": false,
-        "home": false
-      }
-    ];
+    this.remoteManager = new RemoteConfigManager();
+    this.sampleAreas = this.remoteManager.getDefaultAreaList().slice(0, 3); // 只取前3个作为示例
   }
 
   /**
@@ -375,22 +342,14 @@ class AreaManager {
     try {
       window.Utils.showMessage('正在从服务器获取最新区域配置...', 'info');
 
-      const response = await fetch('https://lcybff.github.io/helper/mihoyoLeaksBlock/arealist.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const areaList = await this.remoteManager.fetchRemoteAreaList();
 
-      const data = await response.json();
-      if (data.arealist && Array.isArray(data.arealist)) {
-        // 确认用户是否要覆盖当前配置
-        if (confirm(`从服务器获取到 ${data.arealist.length} 个区域配置。\n\n是否要覆盖当前的区域设置？`)) {
-          chrome.storage.sync.set({ areaList: data.arealist }, () => {
-            this.loadAreaList();
-            window.Utils.showMessage(`区域配置已更新！共加载了 ${data.arealist.length} 个区域。`, 'success');
-          });
-        }
-      } else {
-        throw new Error('服务器返回的数据格式不正确');
+      // 确认用户是否要覆盖当前配置
+      if (confirm(`从服务器获取到 ${areaList.length} 个区域配置。\n\n是否要覆盖当前的区域设置？`)) {
+        chrome.storage.sync.set({ areaList }, () => {
+          this.loadAreaList();
+          window.Utils.showMessage(`区域配置已更新！共加载了 ${areaList.length} 个区域。`, 'success');
+        });
       }
     } catch (error) {
       console.warn('Failed to fetch remote area list:', error);

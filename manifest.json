@@ -26,6 +26,7 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/constants.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",
@@ -45,6 +46,7 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/constants.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",
@@ -65,6 +67,7 @@
       ],
       "js": [
         "core/debug-logger.js",
+        "core/constants.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",
