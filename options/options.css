@@ -22,31 +22,31 @@ body {
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 30px;
+  padding: 20px;
   text-align: center;
 }
 
 .header h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 
 .header p {
-  font-size: 16px;
+  font-size: 14px;
   opacity: 0.9;
 }
 
 .content {
   display: flex;
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 120px);
 }
 
 .sidebar {
-  width: 250px;
+  width: 200px;
   background: #f8f9fa;
   border-right: 1px solid #e9ecef;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 
 .nav-menu {
@@ -56,12 +56,12 @@ body {
 .nav-item {
   display: block;
   width: 100%;
-  padding: 15px 25px;
+  padding: 12px 20px;
   border: none;
   background: none;
   text-align: left;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
@@ -80,7 +80,7 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 30px;
+  padding: 20px;
 }
 
 .tab-content {
@@ -92,14 +92,14 @@ body {
 }
 
 .tab-content h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 15px;
   color: #333;
 }
 
 .platform-config {
   display: grid;
-  gap: 30px;
+  gap: 20px;
 }
 
 /* 平台标签页样式 */
@@ -118,18 +118,18 @@ body {
 
 .platform-tab-btn {
   flex: 1;
-  padding: 16px 20px;
+  padding: 12px 16px;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #666;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   border-bottom: 3px solid transparent;
 }
 
@@ -145,7 +145,7 @@ body {
 }
 
 .platform-icon {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .platform-tab-content {
@@ -154,7 +154,7 @@ body {
 
 .platform-config-panel {
   display: none;
-  padding: 25px;
+  padding: 20px;
 }
 
 .platform-config-panel.active {
@@ -163,36 +163,36 @@ body {
 
 .platform-section {
   background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 8px;
   border: 1px solid #e9ecef;
 }
 
 .platform-section h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 15px;
   color: #667eea;
   border-bottom: 2px solid #667eea;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: 500;
   color: #333;
 }
 
 .form-group textarea {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   resize: vertical;
   transition: border-color 0.3s ease;
 }
@@ -204,17 +204,17 @@ body {
 }
 
 .actions {
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
-  gap: 15px;
+  gap: 12px;
 }
 
 .btn {
-  padding: 12px 24px;
+  padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -286,8 +286,8 @@ body {
 .area-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 20px;
-  padding: 15px 20px;
+  gap: 15px;
+  padding: 12px 16px;
   background: #667eea;
   color: white;
   font-weight: 600;
@@ -296,8 +296,8 @@ body {
 .area-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 20px;
-  padding: 15px 20px;
+  gap: 15px;
+  padding: 12px 16px;
   border-bottom: 1px solid #e9ecef;
   align-items: center;
 }
@@ -350,51 +350,51 @@ body {
 
 .import-export-section {
   background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 8px;
   border: 1px solid #e9ecef;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .import-export-section h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  margin-bottom: 12px;
   color: #333;
 }
 
 .import-export-section p {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   color: #666;
 }
 
 .about-section {
   background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 8px;
   border: 1px solid #e9ecef;
 }
 
 .about-section h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 12px;
   color: #667eea;
 }
 
 .about-section h4 {
-  font-size: 18px;
-  margin-top: 25px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
   color: #333;
 }
 
 .about-section ul,
 .about-section ol {
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .about-section li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .about-section a {
@@ -408,7 +408,7 @@ body {
 
 .footer {
   background: #f8f9fa;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   color: #666;
   border-top: 1px solid #e9ecef;
@@ -592,62 +592,62 @@ body {
 /* 规则列表样式 */
 .rules-list {
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #f9f9f9;
-  padding: 15px;
-  min-height: 120px;
-  max-height: 300px;
+  padding: 12px;
+  min-height: 100px;
+  max-height: 250px;
   overflow-y: auto;
 }
 
 .rule-section {
   background: #f8f9fa;
-  padding: 25px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 8px;
   border: 1px solid #e9ecef;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .rule-section h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 8px;
   color: #333;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .rule-description {
   color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  font-size: 13px;
+  margin-bottom: 15px;
+  line-height: 1.4;
 }
 
 .rule-list-container {
   background: white;
   border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 15px;
-  min-height: 200px;
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 150px;
 }
 
 .rules-container {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .rule-list {
   background: white;
   border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 15px;
-  min-height: 150px;
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 120px;
 }
 
 .rule-item {
   border: 1px solid #e9ecef;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
   background: white;
   transition: all 0.2s ease;
 }
@@ -660,8 +660,8 @@ body {
 .rule-content {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: 10px;
+  padding: 10px;
 }
 
 .rule-drag-handle {
@@ -692,10 +692,10 @@ body {
 
 .rule-input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   transition: border-color 0.3s ease;
 }
 
@@ -711,8 +711,8 @@ body {
 }
 
 .rule-delete-btn {
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
   border-radius: 4px;
   white-space: nowrap;
 }
@@ -720,14 +720,14 @@ body {
 .add-rule-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: #667eea;
   color: white;
   border: 2px dashed transparent;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 4px;
+  font-size: 13px;
   transition: all 0.3s ease;
 }
 
@@ -744,37 +744,37 @@ body {
 
 .batch-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 15px;
-  padding-top: 15px;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid #e9ecef;
 }
 
 .batch-actions .btn {
-  font-size: 12px;
-  padding: 6px 12px;
+  font-size: 11px;
+  padding: 5px 10px;
 }
 
 .empty-state {
   text-align: center;
-  padding: 40px 20px;
+  padding: 30px 15px;
   color: #999;
 }
 
 .empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 40px;
+  margin-bottom: 12px;
   opacity: 0.5;
 }
 
 .empty-text {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .empty-hint {
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.7;
 }
 
@@ -794,33 +794,33 @@ body {
 
 .import-dialog-content {
   background: white;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 25px;
+  border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  max-width: 500px;
+  max-width: 450px;
   width: 90%;
 }
 
 .import-dialog h3 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #333;
 }
 
 .import-textarea {
   width: 100%;
-  height: 200px;
-  padding: 12px;
+  height: 180px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-family: monospace;
-  font-size: 14px;
+  font-size: 13px;
   resize: vertical;
 }
 
 .import-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 15px;
   justify-content: flex-end;
 }
 
@@ -919,7 +919,7 @@ body {
 
 /* 改进表单样式 */
 .platform-section .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .platform-section .form-group:last-child {
@@ -933,7 +933,7 @@ body {
 
 /* 平台标签页特定样式 */
 .platform-tabs {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .platform-tab-btn {
@@ -965,9 +965,9 @@ body {
   position: sticky;
   bottom: 0;
   background: white;
-  padding: 20px 0;
+  padding: 15px 0;
   border-top: 1px solid #e9ecef;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .btn {
@@ -1042,18 +1042,18 @@ body {
 
 /* Tag容器样式 */
 .tag-container {
-  min-height: 100px;
+  min-height: 80px;
   border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 6px;
+  padding: 12px;
   background: #f8f9fa;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .tags-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   align-items: flex-start;
 }
 
@@ -1063,10 +1063,10 @@ body {
   align-items: center;
   background: #1890ff;
   color: white;
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 4px;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 11px;
+  line-height: 1.4;
   max-width: 100%;
   position: relative;
   transition: all 0.3s ease;
@@ -1082,21 +1082,21 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px;
+  max-width: 120px;
 }
 
 .tag-close {
-  margin-left: 4px;
+  margin-left: 3px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0.8;
   transition: opacity 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -1109,18 +1109,18 @@ body {
 /* Tag输入框样式 */
 .tag-input-container {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .tag-input {
   flex: 1;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   transition: border-color 0.3s ease;
   background: white;
 }
@@ -1132,12 +1132,12 @@ body {
 }
 
 .tag-add-btn {
-  padding: 6px 16px;
+  padding: 5px 12px;
   background: #52c41a;
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   white-space: nowrap;
@@ -1154,20 +1154,20 @@ body {
 /* Tag提示信息 */
 .tag-hint {
   color: #999;
-  font-size: 14px;
+  font-size: 13px;
   font-style: italic;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
 }
 
 /* 不同类型的Tag颜色 */
 .tag-container[id*="keywords"] .tag {
-  background: #ff4d4f;
+  background: #f39c12;
 }
 
 .tag-container[id*="keywords"] .tag:hover {
-  background: #ff7875;
+  background: #e67e22;
 }
 
 .tag-container[id*="blacklist"] .tag {
