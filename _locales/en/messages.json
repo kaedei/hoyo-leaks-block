@@ -174,7 +174,7 @@
     "message": "Author: kaedei"
   },
   "about_version": {
-    "message": "Version: 103.0"
+    "message": "Version: 104.0"
   },
   "about_description": {
     "message": "This is a browser extension specifically designed for players of games under miHoYo (Hoyoverse), such as Genshin Impact, Honkai: Star Rail, Zenless Zone Zero, etc. It can automatically block content related to \"leaks and smear campaigns\" on major social platforms like Bilibili, YouTube, and Twitter (x.com)."
@@ -267,7 +267,7 @@
     "message": "Total Blocked"
   },
   "version": {
-    "message": "Version 103.0"
+    "message": "Version 104.0"
   },
   "help_link": {
     "message": "Help"

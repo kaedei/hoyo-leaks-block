@@ -174,7 +174,7 @@
     "message": "作者：kaedei"
   },
   "about_version": {
-    "message": "版本：103.0"
+    "message": "版本：104.0"
   },
   "about_description": {
     "message": "這是一個專為米哈遊（Hoyoverse）旗下遊戲（如原神、星穹鐵道、絕區零等）玩家設計的瀏覽器擴充套件，能夠在Bilibili、YouTube、Twitter（x.com）等主流社交平台上自動屏蔽與\"內鬼爆料、黑流量\"相關的內容。"
@@ -267,7 +267,7 @@
     "message": "總計屏蔽"
   },
   "version": {
-    "message": "版本 103.0"
+    "message": "版本 104.0"
   },
   "help_link": {
     "message": "說明文件"

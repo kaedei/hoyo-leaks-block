@@ -57,28 +57,6 @@ class OptionsController {
       }
     }
   }
-
-  /**
-   * 获取应用版本信息
-   * @returns {string} 版本号
-   */
-  getVersion() {
-    return '103.0';
-  }
-
-  /**
-   * 获取应用信息
-   * @returns {Object} 应用信息对象
-   */
-  getAppInfo() {
-    return {
-      name: '米游内鬼信息屏蔽',
-      version: this.getVersion(),
-      author: 'kaedei',
-      description: '用于屏蔽Bilibili、YouTube、Twitter等平台上有关米哈游旗下游戏内鬼爆料内容的浏览器扩展',
-      repository: 'https://github.com/kaedei/hoyo-leaks-block'
-    };
-  }
 }
 
 // 创建主控制器实例
