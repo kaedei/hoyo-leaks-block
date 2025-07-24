@@ -10,7 +10,7 @@
 .hoyo-blur-block:hover,
 [data-hoyo-blocked="true"]:hover {
   filter: blur(0.5px) !important;
-  opacity: 0.9 !important;
+  opacity: 1.0 !important;
 }
 
 /* 强制样式 - 确保在所有平台上都生效 */
