@@ -34,12 +34,13 @@ class AreaManager {
       }
 
       areaList.forEach((area, index) => {
-        DebugLogger.log(`[HoyoBlock-Options] Processing area ${index}: ${area.name} (${area.area}) - ${area.on ? 'enabled' : 'disabled'}`);
+        const localizedName = window.SharedUtils.getLocalizedAreaName(area.name);
+        DebugLogger.log(`[HoyoBlock-Options] Processing area ${index}: ${localizedName} (${area.area}) - ${area.on ? 'enabled' : 'disabled'}`);
 
         const areaItem = document.createElement('div');
         areaItem.className = 'area-item';
         areaItem.innerHTML = `
-          <div class="area-name" title="${area.name}">${area.name}</div>
+          <div class="area-name" title="${localizedName}">${localizedName}</div>
           <div class="area-platform">${window.Utils.getPlatformDisplayName(area.area)}</div>
           <div class="area-status">
             <span class="status-indicator ${area.on ? 'status-active' : 'status-inactive'}">
@@ -71,13 +72,13 @@ class AreaManager {
       if (areaList[index]) {
         const area = areaList[index];
         const action = area.on ? chrome.i18n.getMessage('btn_disable') : chrome.i18n.getMessage('btn_enable');
-        const confirmMsg = chrome.i18n.getMessage('confirm_toggle_area').replace('{action}', action).replace('{name}', area.name);
+        const confirmMsg = chrome.i18n.getMessage('confirm_toggle_area').replace('{action}', action).replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
 
         if (confirm(confirmMsg)) {
           area.on = !area.on;
           chrome.storage.sync.set({ areaList }, () => {
             this.loadAreaList();
-            const successMsg = chrome.i18n.getMessage('area_toggled_success').replace('{name}', area.name).replace('{action}', action);
+            const successMsg = chrome.i18n.getMessage('area_toggled_success').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name)).replace('{action}', action);
             window.Utils.showMessage(successMsg, 'success');
           });
         }
@@ -108,12 +109,12 @@ class AreaManager {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
-        const confirmMsg = chrome.i18n.getMessage('confirm_delete_area').replace('{name}', area.name);
+        const confirmMsg = chrome.i18n.getMessage('confirm_delete_area').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
         if (confirm(confirmMsg)) {
           areaList.splice(index, 1);
           chrome.storage.sync.set({ areaList }, () => {
             this.loadAreaList();
-            const successMsg = chrome.i18n.getMessage('area_deleted_success').replace('{name}', area.name);
+            const successMsg = chrome.i18n.getMessage('area_deleted_success').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
             window.Utils.showMessage(successMsg, 'success');
           });
         }
@@ -159,7 +160,10 @@ class AreaManager {
 
     // 如果是编辑模式，填充现有数据
     if (mode === 'edit' && area) {
-      dialogElement.getElementById('area-name').value = area.name || '';
+      // 对于name字段，如果是国际化key则显示本地化文本，否则显示原值
+      const displayName = window.SharedUtils.getLocalizedAreaName(area.name);
+      dialogElement.getElementById('area-name').value = displayName || '';
+
       dialogElement.getElementById('area-platform').value = area.area || 'bilibili';
       dialogElement.getElementById('area-main').value = area.main || '';
       dialogElement.getElementById('area-item').value = area.item || '';

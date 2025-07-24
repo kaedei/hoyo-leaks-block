@@ -182,6 +182,32 @@ class SharedUtils {
     }
     return result;
   }
+
+  /**
+   * 获取本地化的区域名称
+   * @param {string} nameKey 区域名称的国际化key
+   * @returns {string} 本地化的区域名称
+   */
+  static getLocalizedAreaName(nameKey) {
+    // 如果已经是本地化的文本（不以default_area_开头），直接返回
+    if (!nameKey || !nameKey.startsWith('default_area_')) {
+      return nameKey || '';
+    }
+
+    // 尝试获取国际化文本
+    try {
+      if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getMessage) {
+        const localizedName = chrome.i18n.getMessage(nameKey);
+        // 如果找到了本地化文本，返回它；否则返回原key
+        return localizedName || nameKey;
+      }
+    } catch (error) {
+      console.warn('Failed to get localized area name:', error);
+    }
+
+    // 降级方案：返回原key
+    return nameKey;
+  }
 }
 
 // 导出供其他模块使用

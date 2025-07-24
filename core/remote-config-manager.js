@@ -55,7 +55,7 @@ class RemoteConfigManager {
     // 如果常量不可用，返回基础默认配置
     return [
       {
-        "name": chrome.i18n.getMessage('default_area_bilibili_home'),
+        "name": "default_area_bilibili_home",
         "area": "bilibili",
         "main": ".recommended-container_floor-aside",
         "item": ".bili-video-card",

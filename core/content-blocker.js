@@ -121,7 +121,7 @@ class ContentBlocker {
 
     if (activeAreas.length === 0) {
       DebugLogger.log(`[HoyoBlock-${this.platform}] No active areas for platform ${areaPlatformName}`);
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Available areas:`, areaList.map(a => ({ name: a.name, area: a.area, on: a.on })));
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Available areas:`, areaList.map(a => ({ name: window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(a.name) : a.name, area: a.area, on: a.on })));
       return 0;
     }
 
@@ -129,7 +129,7 @@ class ContentBlocker {
     let totalBlocked = 0;
 
     activeAreas.forEach((area, areaIndex) => {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Processing area ${areaIndex + 1}: ${area.name}`);
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Processing area ${areaIndex + 1}: ${window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(area.name) : area.name}`);
       DebugLogger.log(`[HoyoBlock-${this.platform}] Area config:`, area);
 
       const items = document.querySelectorAll(area.item);

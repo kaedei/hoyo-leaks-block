@@ -1,7 +1,7 @@
 {
   "arealist": [
     {
-      "name": "Bilibili首页列表",
+      "name": "default_area_bilibili_home",
       "area": "bilibili",
       "main": ".recommended-container_floor-aside",
       "item": ".bili-video-card",
@@ -12,7 +12,7 @@
       "home": false
     },
     {
-      "name": "Bilibili视频页右侧列表",
+      "name": "default_area_bilibili_video_sidebar",
       "area": "bilibili",
       "main": ".recommend-list-v1",
       "item": ".video-page-card-small",
@@ -23,7 +23,7 @@
       "home": false
     },
     {
-      "name": "Bilibili视频播放结束推荐列表",
+      "name": "default_area_bilibili_video_end",
       "area": "bilibili",
       "main": ".bpx-player-ending-related",
       "item": ".bpx-player-ending-related-item",
@@ -34,7 +34,7 @@
       "home": false
     },
     {
-      "name": "Bilibili搜索页",
+      "name": "default_area_bilibili_search",
       "area": "bilibili",
       "main": ".search-page .video-list",
       "item": ".bili-video-card",
@@ -45,7 +45,7 @@
       "home": false
     },
     {
-      "name": "Bilibili列表（排行榜）",
+      "name": "default_area_bilibili_ranking",
       "area": "bilibili",
       "main": ".card-list",
       "item": ".video-card",
@@ -56,7 +56,7 @@
       "home": false
     },
     {
-      "name": "动态首页",
+      "name": "default_area_bilibili_dynamic",
       "area": "bilibili",
       "main": ".bili-dyn-home--member .bili-dyn-list__items",
       "item": ".bili-dyn-list__item",
@@ -67,7 +67,7 @@
       "home": false
     },
     {
-      "name": "话题页",
+      "name": "default_area_bilibili_topic",
       "area": "bilibili",
       "main": ".topic-list",
       "item": ".list__topic-card",
@@ -78,7 +78,7 @@
       "home": false
     },
     {
-      "name": "Bilibili UP主空间代表作",
+      "name": "default_area_bilibili_space_masterpiece",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".top-video",
@@ -89,7 +89,7 @@
       "home": true
     },
     {
-      "name": "Bilibili UP主空间通用视频",
+      "name": "default_area_bilibili_space_video",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".bili-video-card",
@@ -100,7 +100,7 @@
       "home": true
     },
     {
-      "name": "Bilibili UP主空间动态",
+      "name": "default_area_bilibili_space_dynamic",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".bili-dyn-list__item",
@@ -111,7 +111,7 @@
       "home": true
     },
     {
-      "name": "Bilibili消息中心（回复我的）",
+      "name": "default_area_bilibili_message",
       "area": "bilibili",
       "main": ".message-main",
       "item": ".interaction-item",
@@ -122,7 +122,7 @@
       "home": false
     },
     {
-      "name": "油管列表",
+      "name": "default_area_youtube_list",
       "area": "youtube",
       "main": "ytd-rich-grid-renderer",
       "item": "ytd-rich-item-renderer",
@@ -133,7 +133,7 @@
       "home": false
     },
     {
-      "name": "油管搜索页",
+      "name": "default_area_youtube_search",
       "area": "youtube",
       "main": "ytd-item-section-renderer",
       "item": "ytd-video-renderer",
@@ -144,7 +144,7 @@
       "home": false
     },
     {
-      "name": "油管视频页右侧推荐栏",
+      "name": "default_area_youtube_sidebar",
       "area": "youtube",
       "main": "ytd-watch-next-secondary-results-renderer",
       "item": "ytd-item-section-renderer ytd-compact-video-renderer",
@@ -155,7 +155,7 @@
       "home": false
     },
     {
-      "name": "推文列表",
+      "name": "default_area_twitter_timeline",
       "area": "twitter",
       "main": "[aria-labelledby='accessible-list-1']",
       "item": "[data-testid=tweet]",
