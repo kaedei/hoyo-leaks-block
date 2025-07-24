@@ -35,7 +35,7 @@ class RemoteConfigManager {
       if (data.arealist && Array.isArray(data.arealist)) {
         return data.arealist;
       } else {
-        throw new Error('服务器返回的数据格式不正确');
+        throw new Error(chrome.i18n.getMessage('invalid_server_data'));
       }
     } catch (error) {
       console.warn('[RemoteConfigManager] Failed to fetch remote config:', error);
@@ -48,14 +48,14 @@ class RemoteConfigManager {
    * @returns {Array} 默认区域配置
    */
   getDefaultAreaList() {
-    if (this.constants && this.constants.DEFAULT_AREA_LIST) {
-      return this.constants.DEFAULT_AREA_LIST;
+    if (this.constants && this.constants.getDefaultAreaList) {
+      return this.constants.getDefaultAreaList();
     }
 
     // 如果常量不可用，返回基础默认配置
     return [
       {
-        "name": "Bilibili首页列表",
+        "name": chrome.i18n.getMessage('default_area_bilibili_home'),
         "area": "bilibili",
         "main": ".recommended-container_floor-aside",
         "item": ".bili-video-card",

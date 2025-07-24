@@ -300,6 +300,255 @@
     "message": "添加黑名单用户"
   },
   "add_whitelist_user": {
-    "message": "添加白名单用户"
+    "message": "Add Whitelist User"
+  },
+  "dialog_edit_area": {
+    "message": "Edit Area"
+  },
+  "dialog_add_area": {
+    "message": "Add New Area"
+  },
+  "dialog_save": {
+    "message": "Save"
+  },
+  "dialog_add": {
+    "message": "Add"
+  },
+  "dialog_cancel": {
+    "message": "Cancel"
+  },
+  "area_empty": {
+    "message": "No area configuration"
+  },
+  "area_enabled": {
+    "message": "Enabled"
+  },
+  "area_disabled": {
+    "message": "Disabled"
+  },
+  "btn_edit": {
+    "message": "Edit"
+  },
+  "btn_delete": {
+    "message": "Delete"
+  },
+  "btn_enable": {
+    "message": "Enable"
+  },
+  "btn_disable": {
+    "message": "Disable"
+  },
+  "confirm_toggle_area": {
+    "message": "Confirm to {action} area \"{name}\"?"
+  },
+  "confirm_delete_area": {
+    "message": "Confirm to delete area \"{name}\"?"
+  },
+  "area_toggled_success": {
+    "message": "Area \"{name}\" has been {action}!"
+  },
+  "area_deleted_success": {
+    "message": "Area \"{name}\" has been deleted!"
+  },
+  "area_form_validation": {
+    "message": "Please fill in complete area information (name, main container, item selector, text selector are required)!"
+  },
+  "area_updated_success": {
+    "message": "Area information has been updated!"
+  },
+  "area_added_success": {
+    "message": "New area has been added!"
+  },
+  "confirm_refresh_areas": {
+    "message": "Confirm to refresh area list?\n\nThis will reload area data from configuration."
+  },
+  "areas_refreshed_success": {
+    "message": "Area list has been refreshed!"
+  },
+  "sample_area_loaded": {
+    "message": "Sample area data has been loaded!"
+  },
+  "remote_update_fetching": {
+    "message": "Fetching latest area configuration from server..."
+  },
+  "confirm_remote_update": {
+    "message": "Retrieved {count} area configurations from server.\n\nDo you want to overwrite current area settings?"
+  },
+  "remote_update_success": {
+    "message": "Area configuration has been updated! Loaded {count} areas in total."
+  },
+  "remote_update_failed": {
+    "message": "Update failed: {error}"
+  },
+  "modules_loading_timeout": {
+    "message": "Module loading timeout, missing modules: {modules}"
+  },
+  "init_failed": {
+    "message": "Initialization failed: {error}"
+  },
+  "open_settings_error": {
+    "message": "Error opening settings page:"
+  },
+  "invalid_server_data": {
+    "message": "Invalid data format returned from server"
+  },
+  "file_not_selected": {
+    "message": "No file selected"
+  },
+  "invalid_file_format": {
+    "message": "Only JSON format files are supported"
+  },
+  "invalid_json_file": {
+    "message": "Invalid file format, please ensure it's a valid JSON file"
+  },
+  "file_read_failed": {
+    "message": "File read failed"
+  },
+  "confirm_clear_cache": {
+    "message": "Confirm to clear all cache configuration?"
+  },
+  "cache_cleared": {
+    "message": "Cache cleared"
+  },
+  "platform_status_changed": {
+    "message": "{platform} {status}"
+  },
+  "status_enabled": {
+    "message": "enabled"
+  },
+  "status_disabled": {
+    "message": "disabled"
+  },
+  "rule_empty_hint": {
+    "message": "No {type}, add in the input box above"
+  },
+  "rule_type_keywords": {
+    "message": "keywords"
+  },
+  "rule_type_blacklist": {
+    "message": "blacklist"
+  },
+  "rule_type_whitelist": {
+    "message": "whitelist"
+  },
+  "add_rule_placeholder": {
+    "message": "Add {type}..."
+  },
+  "btn_add": {
+    "message": "Add"
+  },
+  "rule_already_exists": {
+    "message": "\"{value}\" already exists"
+  },
+  "rule_deleted": {
+    "message": "Deleted \"{item}\""
+  },
+  "save_failed": {
+    "message": "Save failed: {error}"
+  },
+  "rules_saved": {
+    "message": "Rules saved successfully!"
+  },
+  "confirm_reset_rules": {
+    "message": "Confirm to reset all rules to default values?"
+  },
+  "rules_reset": {
+    "message": "Rules have been reset to default values!"
+  },
+  "config_exported": {
+    "message": "Configuration exported successfully!"
+  },
+  "config_filename": {
+    "message": "HoYo-Leaks-Block-Config.json"
+  },
+  "default_area_bilibili_home": {
+    "message": "Bilibili Home List"
+  },
+  "default_area_bilibili_video_sidebar": {
+    "message": "Bilibili Video Page Sidebar"
+  },
+  "default_area_bilibili_video_end": {
+    "message": "Bilibili Video End Recommendations"
+  },
+  "default_area_bilibili_search": {
+    "message": "Bilibili Search Page"
+  },
+  "default_area_bilibili_ranking": {
+    "message": "Bilibili Ranking Lists"
+  },
+  "default_area_bilibili_dynamic": {
+    "message": "Dynamic Homepage"
+  },
+  "default_area_bilibili_topic": {
+    "message": "Topic Page"
+  },
+  "default_area_bilibili_space_masterpiece": {
+    "message": "Bilibili User Space Masterpieces"
+  },
+  "default_area_bilibili_space_video": {
+    "message": "Bilibili User Space Videos"
+  },
+  "default_area_bilibili_space_dynamic": {
+    "message": "Bilibili User Space Dynamics"
+  },
+  "default_area_bilibili_message": {
+    "message": "Bilibili Message Center (Replies)"
+  },
+  "default_area_youtube_list": {
+    "message": "YouTube List"
+  },
+  "default_area_youtube_search": {
+    "message": "YouTube Search Page"
+  },
+  "default_area_youtube_sidebar": {
+    "message": "YouTube Video Sidebar"
+  },
+  "default_area_twitter_timeline": {
+    "message": "Twitter Timeline"
+  },
+  "config_imported": {
+    "message": "Configuration imported successfully!"
+  },
+  "confirm_load_remote_config": {
+    "message": "Confirm to load latest area configuration online?\n\n⚠️ This operation will overwrite current area configuration and cannot be undone!"
+  },
+  "loading_remote_config": {
+    "message": "Loading latest area configuration..."
+  },
+  "save_config_failed": {
+    "message": "Save configuration failed: {error}"
+  },
+  "remote_config_success": {
+    "message": "Remote configuration updated successfully! Loaded {count} area configurations"
+  },
+  "remote_config_failed": {
+    "message": "Remote configuration update failed: {error}"
+  },
+  "confirm_clear_all_data": {
+    "message": "⚠️ Confirm to clear all data? This operation cannot be undone!"
+  },
+  "all_data_cleared": {
+    "message": "All data has been cleared!"
+  },
+  "no_new_rules": {
+    "message": "No new rules to add"
+  },
+  "rules_imported_count": {
+    "message": "Successfully imported {count} rules"
+  },
+  "no_rules_to_export": {
+    "message": "No rules to export"
+  },
+  "rules_copied": {
+    "message": "Rules copied to clipboard"
+  },
+  "rules_exported_file": {
+    "message": "Rules exported as file"
+  },
+  "confirm_clear_rules": {
+    "message": "Confirm to clear all {type} rules?"
+  },
+  "rules_cleared": {
+    "message": "All {type} rules have been cleared"
   }
 }

@@ -27,7 +27,7 @@ class AreaManager {
       if (areaList.length === 0) {
         container.innerHTML = `
           <div class="area-item" style="text-align: center; color: #666; font-style: italic;">
-            <div style="grid-column: 1 / -1;">暂无区域配置</div>
+            <div style="grid-column: 1 / -1;">${chrome.i18n.getMessage('area_empty')}</div>
           </div>
         `;
         return;
@@ -43,15 +43,15 @@ class AreaManager {
           <div class="area-platform">${window.Utils.getPlatformDisplayName(area.area)}</div>
           <div class="area-status">
             <span class="status-indicator ${area.on ? 'status-active' : 'status-inactive'}">
-              ${area.on ? '启用' : '禁用'}
+              ${area.on ? chrome.i18n.getMessage('area_enabled') : chrome.i18n.getMessage('area_disabled')}
             </span>
           </div>
           <div class="area-actions">
             <button data-action="toggle-area" data-index="${index}" class="btn btn-${area.on ? 'secondary' : 'primary'}" style="padding: 4px 8px; font-size: 12px;">
-              ${area.on ? '禁用' : '启用'}
+              ${area.on ? chrome.i18n.getMessage('btn_disable') : chrome.i18n.getMessage('btn_enable')}
             </button>
-            <button data-action="edit-area" data-index="${index}" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">编辑</button>
-            <button data-action="delete-area" data-index="${index}" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">删除</button>
+            <button data-action="edit-area" data-index="${index}" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">${chrome.i18n.getMessage('btn_edit')}</button>
+            <button data-action="delete-area" data-index="${index}" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">${chrome.i18n.getMessage('btn_delete')}</button>
           </div>
         `;
         container.appendChild(areaItem);
@@ -70,13 +70,15 @@ class AreaManager {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
-        const action = area.on ? '禁用' : '启用';
+        const action = area.on ? chrome.i18n.getMessage('btn_disable') : chrome.i18n.getMessage('btn_enable');
+        const confirmMsg = chrome.i18n.getMessage('confirm_toggle_area').replace('{action}', action).replace('{name}', area.name);
 
-        if (confirm(`确认${action}区域 "${area.name}" 吗？`)) {
+        if (confirm(confirmMsg)) {
           area.on = !area.on;
           chrome.storage.sync.set({ areaList }, () => {
             this.loadAreaList();
-            window.Utils.showMessage(`区域 "${area.name}" 已${action}！`, 'success');
+            const successMsg = chrome.i18n.getMessage('area_toggled_success').replace('{name}', area.name).replace('{action}', action);
+            window.Utils.showMessage(successMsg, 'success');
           });
         }
       }
@@ -106,11 +108,13 @@ class AreaManager {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
-        if (confirm(`确认删除区域 "${area.name}" 吗？`)) {
+        const confirmMsg = chrome.i18n.getMessage('confirm_delete_area').replace('{name}', area.name);
+        if (confirm(confirmMsg)) {
           areaList.splice(index, 1);
           chrome.storage.sync.set({ areaList }, () => {
             this.loadAreaList();
-            window.Utils.showMessage(`区域 "${area.name}" 已删除！`, 'success');
+            const successMsg = chrome.i18n.getMessage('area_deleted_success').replace('{name}', area.name);
+            window.Utils.showMessage(successMsg, 'success');
           });
         }
       }
@@ -146,11 +150,11 @@ class AreaManager {
     const saveButton = dialogElement.getElementById('dialog-save-btn');
 
     if (mode === 'add') {
-      titleElement.textContent = '添加新区域';
-      saveButton.textContent = '添加';
+      titleElement.textContent = chrome.i18n.getMessage('dialog_add_area');
+      saveButton.textContent = chrome.i18n.getMessage('dialog_add');
     } else {
-      titleElement.textContent = '编辑区域';
-      saveButton.textContent = '保存';
+      titleElement.textContent = chrome.i18n.getMessage('dialog_edit_area');
+      saveButton.textContent = chrome.i18n.getMessage('dialog_save');
     }
 
     // 如果是编辑模式，填充现有数据
@@ -318,7 +322,7 @@ class AreaManager {
     const newHome = form.querySelector('#area-home').checked;
 
     if (!newName || !newMain || !newItem || !newText) {
-      window.Utils.showMessage('请填写完整的区域信息（名称、主容器、项目选择器、文本选择器为必填项）！', 'error');
+      window.Utils.showMessage(chrome.i18n.getMessage('area_form_validation'), 'error');
       return;
     }
 
@@ -340,7 +344,7 @@ class AreaManager {
         chrome.storage.sync.set({ areaList }, () => {
           this.closeDialog(dialog);
           this.loadAreaList();
-          window.Utils.showMessage('区域信息已更新！', 'success');
+          window.Utils.showMessage(chrome.i18n.getMessage('area_updated_success'), 'success');
         });
       }
     });
@@ -361,7 +365,7 @@ class AreaManager {
     const home = form.querySelector('#area-home').checked;
 
     if (!name || !main || !item || !text) {
-      window.Utils.showMessage('请填写完整的区域信息（名称、主容器、项目选择器、文本选择器为必填项）！', 'error');
+      window.Utils.showMessage(chrome.i18n.getMessage('area_form_validation'), 'error');
       return;
     }
 
@@ -386,7 +390,7 @@ class AreaManager {
       chrome.storage.sync.set({ areaList }, () => {
         this.closeDialog(dialog);
         this.loadAreaList();
-        window.Utils.showMessage('新区域已添加！', 'success');
+        window.Utils.showMessage(chrome.i18n.getMessage('area_added_success'), 'success');
       });
     });
   }
@@ -395,9 +399,9 @@ class AreaManager {
    * 刷新区域列表
    */
   refreshAreas() {
-    if (confirm('确认刷新区域列表？\n\n这将重新从配置中读取区域数据。')) {
+    if (confirm(chrome.i18n.getMessage('confirm_refresh_areas'))) {
       this.loadAreaList();
-      window.Utils.showMessage('区域列表已刷新！', 'success');
+      window.Utils.showMessage(chrome.i18n.getMessage('areas_refreshed_success'), 'success');
     }
   }
 
@@ -407,7 +411,7 @@ class AreaManager {
   loadSampleAreaData() {
     chrome.storage.sync.set({ areaList: this.sampleAreas }, () => {
       this.loadAreaList();
-      window.Utils.showMessage('示例区域数据已加载！', 'success');
+      window.Utils.showMessage(chrome.i18n.getMessage('sample_area_loaded'), 'success');
     });
   }
 
@@ -428,20 +432,23 @@ class AreaManager {
    */
   async updateRemoteAreas() {
     try {
-      window.Utils.showMessage('正在从服务器获取最新区域配置...', 'info');
+      window.Utils.showMessage(chrome.i18n.getMessage('remote_update_fetching'), 'info');
 
       const areaList = await this.remoteManager.fetchRemoteAreaList();
 
       // 确认用户是否要覆盖当前配置
-      if (confirm(`从服务器获取到 ${areaList.length} 个区域配置。\n\n是否要覆盖当前的区域设置？`)) {
+      const confirmMsg = chrome.i18n.getMessage('confirm_remote_update').replace('{count}', areaList.length);
+      if (confirm(confirmMsg)) {
         chrome.storage.sync.set({ areaList }, () => {
           this.loadAreaList();
-          window.Utils.showMessage(`区域配置已更新！共加载了 ${areaList.length} 个区域。`, 'success');
+          const successMsg = chrome.i18n.getMessage('remote_update_success').replace('{count}', areaList.length);
+          window.Utils.showMessage(successMsg, 'success');
         });
       }
     } catch (error) {
       console.warn('Failed to fetch remote area list:', error);
-      window.Utils.showMessage(`更新失败：${error.message}`, 'error');
+      const errorMsg = chrome.i18n.getMessage('remote_update_failed').replace('{error}', error.message);
+      window.Utils.showMessage(errorMsg, 'error');
     }
   }
 }

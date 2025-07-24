@@ -104,7 +104,8 @@ function waitForModules() {
         if (typeof window.AreaManager === 'undefined' || !window.AreaManager) missingModules.push('AreaManager');
         if (typeof window.Utils === 'undefined' || !window.Utils) missingModules.push('Utils');
 
-        reject(new Error(`模块加载超时，未加载的模块: ${missingModules.join(', ')}`));
+        const errorMsg = chrome.i18n.getMessage('modules_loading_timeout').replace('{modules}', missingModules.join(', '));
+        reject(new Error(errorMsg));
       } else {
         setTimeout(checkModules, 100);
       }
@@ -122,7 +123,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     optionsController.init();
   } catch (error) {
     console.error('[HoyoBlock-Options] Failed to initialize:', error);
-    alert('初始化失败: ' + error.message);
+    const errorMsg = chrome.i18n.getMessage('init_failed').replace('{error}', error.message);
+    alert(errorMsg);
   }
 });
 

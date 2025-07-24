@@ -274,5 +274,209 @@
   },
   "block_button": {
     "message": "HoYoリーク情報ブロック"
+  },
+  "dialog_edit_area": {
+    "message": "エリアを編集"
+  },
+  "dialog_add_area": {
+    "message": "新しいエリアを追加"
+  },
+  "dialog_save": {
+    "message": "保存"
+  },
+  "dialog_add": {
+    "message": "追加"
+  },
+  "dialog_cancel": {
+    "message": "キャンセル"
+  },
+  "area_empty": {
+    "message": "エリア設定がありません"
+  },
+  "area_enabled": {
+    "message": "有効"
+  },
+  "area_disabled": {
+    "message": "無効"
+  },
+  "btn_edit": {
+    "message": "編集"
+  },
+  "btn_delete": {
+    "message": "削除"
+  },
+  "btn_enable": {
+    "message": "有効化"
+  },
+  "btn_disable": {
+    "message": "無効化"
+  },
+  "confirm_toggle_area": {
+    "message": "エリア \"{name}\" を{action}しますか？"
+  },
+  "confirm_delete_area": {
+    "message": "エリア \"{name}\" を削除しますか？"
+  },
+  "area_toggled_success": {
+    "message": "エリア \"{name}\" が{action}されました！"
+  },
+  "area_deleted_success": {
+    "message": "エリア \"{name}\" が削除されました！"
+  },
+  "area_form_validation": {
+    "message": "完全なエリア情報を入力してください（名前、メインコンテナ、項目セレクタ、テキストセレクタは必須項目です）！"
+  },
+  "area_updated_success": {
+    "message": "エリア情報が更新されました！"
+  },
+  "area_added_success": {
+    "message": "新しいエリアが追加されました！"
+  },
+  "confirm_refresh_areas": {
+    "message": "エリアリストを更新しますか？\n\n設定からエリアデータを再読み込みします。"
+  },
+  "areas_refreshed_success": {
+    "message": "エリアリストが更新されました！"
+  },
+  "sample_area_loaded": {
+    "message": "サンプルエリアデータが読み込まれました！"
+  },
+  "remote_update_fetching": {
+    "message": "サーバーから最新のエリア設定を取得中..."
+  },
+  "confirm_remote_update": {
+    "message": "サーバーから{count}個のエリア設定を取得しました。\n\n現在のエリア設定を上書きしますか？"
+  },
+  "remote_update_success": {
+    "message": "エリア設定が更新されました！合計{count}個のエリアが読み込まれました。"
+  },
+  "remote_update_failed": {
+    "message": "更新に失敗しました：{error}"
+  },
+  "modules_loading_timeout": {
+    "message": "モジュール読み込みタイムアウト、欠落しているモジュール：{modules}"
+  },
+  "init_failed": {
+    "message": "初期化に失敗しました：{error}"
+  },
+  "open_settings_error": {
+    "message": "設定ページを開く際にエラーが発生しました："
+  },
+  "invalid_server_data": {
+    "message": "サーバーから返されたデータ形式が不正です"
+  },
+  "file_not_selected": {
+    "message": "ファイルが選択されていません"
+  },
+  "invalid_file_format": {
+    "message": "JSON形式のファイルのみサポートされています"
+  },
+  "invalid_json_file": {
+    "message": "ファイル形式が無効です。有効なJSONファイルであることを確認してください"
+  },
+  "file_read_failed": {
+    "message": "ファイル読み込みに失敗しました"
+  },
+  "confirm_clear_cache": {
+    "message": "すべてのキャッシュ設定をクリアしますか？"
+  },
+  "cache_cleared": {
+    "message": "キャッシュがクリアされました"
+  },
+  "platform_status_changed": {
+    "message": "{platform} {status}"
+  },
+  "status_enabled": {
+    "message": "が有効になりました"
+  },
+  "status_disabled": {
+    "message": "が無効になりました"
+  },
+  "rule_empty_hint": {
+    "message": "{type}がありません。上の入力ボックスで追加してください"
+  },
+  "rule_type_keywords": {
+    "message": "キーワード"
+  },
+  "rule_type_blacklist": {
+    "message": "ブラックリスト"
+  },
+  "rule_type_whitelist": {
+    "message": "ホワイトリスト"
+  },
+  "add_rule_placeholder": {
+    "message": "{type}を追加..."
+  },
+  "btn_add": {
+    "message": "追加"
+  },
+  "rule_already_exists": {
+    "message": "\"{value}\" は既に存在します"
+  },
+  "rule_deleted": {
+    "message": "\"{item}\" を削除しました"
+  },
+  "save_failed": {
+    "message": "保存に失敗しました: {error}"
+  },
+  "rules_saved": {
+    "message": "ルールが正常に保存されました！"
+  },
+  "confirm_reset_rules": {
+    "message": "すべてのルールをデフォルト値にリセットしますか？"
+  },
+  "rules_reset": {
+    "message": "ルールがデフォルト値にリセットされました！"
+  },
+  "config_exported": {
+    "message": "設定のエクスポートが完了しました！"
+  },
+  "config_filename": {
+    "message": "HoYoリーク情報ブロック設定.json"
+  },
+  "default_area_bilibili_home": {
+    "message": "Bilibiliホームリスト"
+  },
+  "default_area_bilibili_video_sidebar": {
+    "message": "Bilibili動画ページサイドバー"
+  },
+  "default_area_bilibili_video_end": {
+    "message": "Bilibili動画終了時の推奨リスト"
+  },
+  "default_area_bilibili_search": {
+    "message": "Bilibili検索ページ"
+  },
+  "default_area_bilibili_ranking": {
+    "message": "Bilibiliランキングリスト"
+  },
+  "default_area_bilibili_dynamic": {
+    "message": "ダイナミックホームページ"
+  },
+  "default_area_bilibili_topic": {
+    "message": "トピックページ"
+  },
+  "default_area_bilibili_space_masterpiece": {
+    "message": "Bilibiliユーザースペースマスターピース"
+  },
+  "default_area_bilibili_space_video": {
+    "message": "Bilibiliユーザースペース動画"
+  },
+  "default_area_bilibili_space_dynamic": {
+    "message": "Bilibiliユーザースペースダイナミック"
+  },
+  "default_area_bilibili_message": {
+    "message": "Bilibiliメッセージセンター（返信）"
+  },
+  "default_area_youtube_list": {
+    "message": "YouTubeリスト"
+  },
+  "default_area_youtube_search": {
+    "message": "YouTube検索ページ"
+  },
+  "default_area_youtube_sidebar": {
+    "message": "YouTube動画サイドバー"
+  },
+  "default_area_twitter_timeline": {
+    "message": "Twitterタイムライン"
   }
 }

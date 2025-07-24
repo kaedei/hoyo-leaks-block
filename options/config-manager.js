@@ -86,7 +86,7 @@ class OptionsConfigManager extends BaseConfigManager {
     if (rules.length === 0) {
       const hint = document.createElement('div');
       hint.className = 'tag-hint';
-      hint.textContent = `暂无${this.getRuleTypeName(ruleType)}，在上方输入框中添加`;
+      hint.textContent = chrome.i18n.getMessage('rule_empty_hint').replace('{type}', this.getRuleTypeName(ruleType));
       container.appendChild(hint);
     }
   }
@@ -122,12 +122,12 @@ class OptionsConfigManager extends BaseConfigManager {
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'tag-input';
-    input.placeholder = `添加${this.getRuleTypeName(ruleType)}...`;
+    input.placeholder = chrome.i18n.getMessage('add_rule_placeholder').replace('{type}', this.getRuleTypeName(ruleType));
 
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
     addBtn.className = 'tag-add-btn';
-    addBtn.textContent = '添加';
+    addBtn.textContent = chrome.i18n.getMessage('btn_add');
 
     // 绑定事件
     const addTag = () => {
@@ -169,7 +169,7 @@ class OptionsConfigManager extends BaseConfigManager {
 
     // 检查是否已存在
     if (rules.includes(value)) {
-      window.Utils.showMessage(`"${value}" 已存在`, 'warning');
+      window.Utils.showMessage(chrome.i18n.getMessage('rule_already_exists').replace('{value}', value), 'warning');
       return;
     }
 
@@ -188,7 +188,7 @@ class OptionsConfigManager extends BaseConfigManager {
       this.renderTagList(platform, ruleType, rules);
 
       if (removedItem) {
-        window.Utils.showMessage(`已删除 "${removedItem}"`, 'success');
+        window.Utils.showMessage(chrome.i18n.getMessage('rule_deleted').replace('{item}', removedItem), 'success');
       }
     }
   }
@@ -207,9 +207,9 @@ class OptionsConfigManager extends BaseConfigManager {
    */
   getRuleTypeName(ruleType) {
     const names = {
-      keywords: '关键词',
-      blacklist: '黑名单',
-      whitelist: '白名单'
+      keywords: chrome.i18n.getMessage('rule_type_keywords'),
+      blacklist: chrome.i18n.getMessage('rule_type_blacklist'),
+      whitelist: chrome.i18n.getMessage('rule_type_whitelist')
     };
     return names[ruleType] || ruleType;
   }
@@ -228,10 +228,10 @@ class OptionsConfigManager extends BaseConfigManager {
     chrome.storage.sync.set(configToSave, () => {
       if (chrome.runtime.lastError) {
         console.error('[HoyoBlock-Options] Error saving config:', chrome.runtime.lastError);
-        window.Utils.showMessage('保存失败: ' + chrome.runtime.lastError.message, 'error');
+        window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
       } else {
         DebugLogger.log('[HoyoBlock-Options] Config saved successfully');
-        window.Utils.showMessage('规则保存成功！', 'success');
+        window.Utils.showMessage(chrome.i18n.getMessage('rules_saved'), 'success');
 
         // 验证保存结果
         chrome.storage.sync.get(null, (result) => {
@@ -245,10 +245,10 @@ class OptionsConfigManager extends BaseConfigManager {
    * 重置配置为默认值
    */
   resetRules() {
-    if (confirm('确认重置所有规则为默认值？')) {
+    if (confirm(chrome.i18n.getMessage('confirm_reset_rules'))) {
       chrome.storage.sync.set(this.defaultConfig, () => {
         this.loadConfig();
-        window.Utils.showMessage('规则已重置为默认值！', 'success');
+        window.Utils.showMessage(chrome.i18n.getMessage('rules_reset'), 'success');
       });
     }
   }
@@ -258,8 +258,8 @@ class OptionsConfigManager extends BaseConfigManager {
    */
   exportConfig() {
     chrome.storage.sync.get(null, (result) => {
-      window.Utils.downloadJSON(result, '米游内鬼信息屏蔽插件配置.json');
-      window.Utils.showMessage('配置导出成功！', 'success');
+      window.Utils.downloadJSON(result, chrome.i18n.getMessage('config_filename'));
+      window.Utils.showMessage(chrome.i18n.getMessage('config_exported'), 'success');
     });
   }
 
@@ -280,7 +280,7 @@ class OptionsConfigManager extends BaseConfigManager {
         if (window.AreaManager) {
           window.AreaManager.loadAreaList();
         }
-        window.Utils.showMessage('配置导入成功！', 'success');
+        window.Utils.showMessage(chrome.i18n.getMessage('config_imported'), 'success');
       });
     } catch (error) {
       window.Utils.showMessage(error.message, 'error');
@@ -291,29 +291,29 @@ class OptionsConfigManager extends BaseConfigManager {
    * 更新远程配置
    */
   async updateRemoteConfig() {
-    if (!confirm('确认在线加载最新区域配置？\n\n⚠️ 此操作将覆盖当前的区域配置，无法恢复！')) {
+    if (!confirm(chrome.i18n.getMessage('confirm_load_remote_config'))) {
       return;
     }
 
-    window.Utils.showMessage('正在加载最新区域配置...', 'info');
+    window.Utils.showMessage(chrome.i18n.getMessage('loading_remote_config'), 'info');
 
     try {
       const areaList = await this.remoteManager.fetchRemoteAreaList();
 
       chrome.storage.sync.set({ areaList }, () => {
         if (chrome.runtime.lastError) {
-          window.Utils.showMessage('保存配置失败: ' + chrome.runtime.lastError.message, 'error');
+          window.Utils.showMessage(chrome.i18n.getMessage('save_config_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
         } else {
           // 如果区域管理器可用，重新加载区域列表
           if (window.AreaManager) {
             window.AreaManager.loadAreaList();
           }
-          window.Utils.showMessage(`远程配置更新成功！加载了 ${areaList.length} 个区域配置`, 'success');
+          window.Utils.showMessage(chrome.i18n.getMessage('remote_config_success').replace('{count}', areaList.length), 'success');
         }
       });
     } catch (error) {
       console.error('[HoyoBlock-Options] Remote config update failed:', error);
-      window.Utils.showMessage('远程配置更新失败: ' + error.message, 'error');
+      window.Utils.showMessage(chrome.i18n.getMessage('remote_config_failed').replace('{error}', error.message), 'error');
     }
   }
 
@@ -321,7 +321,7 @@ class OptionsConfigManager extends BaseConfigManager {
    * 清除所有数据
    */
   clearAllData() {
-    if (confirm('⚠️ 确认清除所有数据？此操作无法恢复！')) {
+    if (confirm(chrome.i18n.getMessage('confirm_clear_all_data'))) {
       chrome.storage.sync.clear(() => {
         chrome.storage.local.clear(() => {
           this.loadConfig();
@@ -329,7 +329,7 @@ class OptionsConfigManager extends BaseConfigManager {
           if (window.AreaManager) {
             window.AreaManager.loadAreaList();
           }
-          window.Utils.showMessage('所有数据已清除！', 'info');
+          window.Utils.showMessage(chrome.i18n.getMessage('all_data_cleared'), 'info');
         });
       });
     }
@@ -346,14 +346,14 @@ class OptionsConfigManager extends BaseConfigManager {
     const newRules = lines.filter(line => !existingRules.includes(line));
 
     if (newRules.length === 0) {
-      window.Utils.showMessage('没有新的规则可添加', 'info');
+      window.Utils.showMessage(chrome.i18n.getMessage('no_new_rules'), 'info');
       return;
     }
 
     this.config.blockRules[platform][ruleType].push(...newRules);
     this.renderTagList(platform, ruleType, this.config.blockRules[platform][ruleType]);
 
-    window.Utils.showMessage(`成功导入 ${newRules.length} 个规则`, 'success');
+    window.Utils.showMessage(chrome.i18n.getMessage('rules_imported_count').replace('{count}', newRules.length), 'success');
   }
 
   /**
@@ -362,7 +362,7 @@ class OptionsConfigManager extends BaseConfigManager {
   exportRulesToText(platform, ruleType) {
     const rules = this.config.blockRules?.[platform]?.[ruleType];
     if (!rules || rules.length === 0) {
-      window.Utils.showMessage('没有规则可导出', 'info');
+      window.Utils.showMessage(chrome.i18n.getMessage('no_rules_to_export'), 'info');
       return;
     }
 
@@ -370,7 +370,7 @@ class OptionsConfigManager extends BaseConfigManager {
 
     // 复制到剪贴板
     navigator.clipboard.writeText(text).then(() => {
-      window.Utils.showMessage('规则已复制到剪贴板', 'success');
+      window.Utils.showMessage(chrome.i18n.getMessage('rules_copied'), 'success');
     }).catch(() => {
       // 降级方案：创建文本文件下载
       const blob = new Blob([text], { type: 'text/plain' });
@@ -380,7 +380,7 @@ class OptionsConfigManager extends BaseConfigManager {
       a.download = `${platform}-${ruleType}-rules.txt`;
       a.click();
       URL.revokeObjectURL(url);
-      window.Utils.showMessage('规则已导出为文件', 'success');
+      window.Utils.showMessage(chrome.i18n.getMessage('rules_exported_file'), 'success');
     });
   }
 
@@ -391,10 +391,10 @@ class OptionsConfigManager extends BaseConfigManager {
     const rules = this.config.blockRules?.[platform]?.[ruleType];
     if (!rules || rules.length === 0) return;
 
-    if (confirm(`确认清空所有${this.getRuleTypeName(ruleType)}规则？`)) {
+    if (confirm(chrome.i18n.getMessage('confirm_clear_rules').replace('{type}', this.getRuleTypeName(ruleType)))) {
       this.config.blockRules[platform][ruleType] = [];
       this.renderTagList(platform, ruleType, []);
-      window.Utils.showMessage(`已清空所有${this.getRuleTypeName(ruleType)}规则`, 'success');
+      window.Utils.showMessage(chrome.i18n.getMessage('rules_cleared').replace('{type}', this.getRuleTypeName(ruleType)), 'success');
     }
   }
 }

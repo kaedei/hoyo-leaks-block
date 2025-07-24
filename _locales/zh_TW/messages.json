@@ -274,5 +274,209 @@
   },
   "block_button": {
     "message": "米遊內鬼資訊屏蔽"
+  },
+  "dialog_edit_area": {
+    "message": "編輯區域"
+  },
+  "dialog_add_area": {
+    "message": "新增區域"
+  },
+  "dialog_save": {
+    "message": "儲存"
+  },
+  "dialog_add": {
+    "message": "新增"
+  },
+  "dialog_cancel": {
+    "message": "取消"
+  },
+  "area_empty": {
+    "message": "暫無區域設定"
+  },
+  "area_enabled": {
+    "message": "啟用"
+  },
+  "area_disabled": {
+    "message": "停用"
+  },
+  "btn_edit": {
+    "message": "編輯"
+  },
+  "btn_delete": {
+    "message": "刪除"
+  },
+  "btn_enable": {
+    "message": "啟用"
+  },
+  "btn_disable": {
+    "message": "停用"
+  },
+  "confirm_toggle_area": {
+    "message": "確認{action}區域 \"{name}\" 嗎？"
+  },
+  "confirm_delete_area": {
+    "message": "確認刪除區域 \"{name}\" 嗎？"
+  },
+  "area_toggled_success": {
+    "message": "區域 \"{name}\" 已{action}！"
+  },
+  "area_deleted_success": {
+    "message": "區域 \"{name}\" 已刪除！"
+  },
+  "area_form_validation": {
+    "message": "請填寫完整的區域資訊（名稱、主容器、項目選擇器、文字選擇器為必填項目）！"
+  },
+  "area_updated_success": {
+    "message": "區域資訊已更新！"
+  },
+  "area_added_success": {
+    "message": "新區域已新增！"
+  },
+  "confirm_refresh_areas": {
+    "message": "確認重新整理區域清單？\n\n這將重新從設定中讀取區域資料。"
+  },
+  "areas_refreshed_success": {
+    "message": "區域清單已重新整理！"
+  },
+  "sample_area_loaded": {
+    "message": "範例區域資料已載入！"
+  },
+  "remote_update_fetching": {
+    "message": "正在從伺服器取得最新區域設定..."
+  },
+  "confirm_remote_update": {
+    "message": "從伺服器取得到 {count} 個區域設定。\n\n是否要覆蓋目前的區域設定？"
+  },
+  "remote_update_success": {
+    "message": "區域設定已更新！共載入了 {count} 個區域。"
+  },
+  "remote_update_failed": {
+    "message": "更新失敗：{error}"
+  },
+  "modules_loading_timeout": {
+    "message": "模組載入逾時，未載入的模組：{modules}"
+  },
+  "init_failed": {
+    "message": "初始化失敗：{error}"
+  },
+  "open_settings_error": {
+    "message": "開啟設定頁面時出錯："
+  },
+  "invalid_server_data": {
+    "message": "伺服器回傳的資料格式不正確"
+  },
+  "file_not_selected": {
+    "message": "沒有選擇檔案"
+  },
+  "invalid_file_format": {
+    "message": "只支援JSON格式的檔案"
+  },
+  "invalid_json_file": {
+    "message": "檔案格式錯誤，請確保是有效的JSON檔案"
+  },
+  "file_read_failed": {
+    "message": "檔案讀取失敗"
+  },
+  "confirm_clear_cache": {
+    "message": "確認清除所有快取設定？"
+  },
+  "cache_cleared": {
+    "message": "快取已清除"
+  },
+  "platform_status_changed": {
+    "message": "{platform} {status}"
+  },
+  "status_enabled": {
+    "message": "已啟用"
+  },
+  "status_disabled": {
+    "message": "已停用"
+  },
+  "rule_empty_hint": {
+    "message": "暫無{type}，在上方輸入框中新增"
+  },
+  "rule_type_keywords": {
+    "message": "關鍵字"
+  },
+  "rule_type_blacklist": {
+    "message": "黑名單"
+  },
+  "rule_type_whitelist": {
+    "message": "白名單"
+  },
+  "add_rule_placeholder": {
+    "message": "新增{type}..."
+  },
+  "btn_add": {
+    "message": "新增"
+  },
+  "rule_already_exists": {
+    "message": "\"{value}\" 已存在"
+  },
+  "rule_deleted": {
+    "message": "已刪除 \"{item}\""
+  },
+  "save_failed": {
+    "message": "儲存失敗: {error}"
+  },
+  "rules_saved": {
+    "message": "規則儲存成功！"
+  },
+  "confirm_reset_rules": {
+    "message": "確認重設所有規則為預設值？"
+  },
+  "rules_reset": {
+    "message": "規則已重設為預設值！"
+  },
+  "config_exported": {
+    "message": "設定匯出成功！"
+  },
+  "config_filename": {
+    "message": "米遊內鬼資訊屏蔽外掛程式設定.json"
+  },
+  "default_area_bilibili_home": {
+    "message": "Bilibili首頁清單"
+  },
+  "default_area_bilibili_video_sidebar": {
+    "message": "Bilibili影片頁右側清單"
+  },
+  "default_area_bilibili_video_end": {
+    "message": "Bilibili影片播放結束推薦清單"
+  },
+  "default_area_bilibili_search": {
+    "message": "Bilibili搜尋頁"
+  },
+  "default_area_bilibili_ranking": {
+    "message": "Bilibili清單（排行榜）"
+  },
+  "default_area_bilibili_dynamic": {
+    "message": "動態首頁"
+  },
+  "default_area_bilibili_topic": {
+    "message": "話題頁"
+  },
+  "default_area_bilibili_space_masterpiece": {
+    "message": "Bilibili UP主空間代表作"
+  },
+  "default_area_bilibili_space_video": {
+    "message": "Bilibili UP主空間通用影片"
+  },
+  "default_area_bilibili_space_dynamic": {
+    "message": "Bilibili UP主空間動態"
+  },
+  "default_area_bilibili_message": {
+    "message": "Bilibili訊息中心（回覆我的）"
+  },
+  "default_area_youtube_list": {
+    "message": "YouTube清單"
+  },
+  "default_area_youtube_search": {
+    "message": "YouTube搜尋頁"
+  },
+  "default_area_youtube_sidebar": {
+    "message": "YouTube影片頁右側推薦欄"
+  },
+  "default_area_twitter_timeline": {
+    "message": "推文清單"
   }
 }

@@ -108,12 +108,12 @@ class SharedUtils {
   static async readJSONFile(file) {
     return new Promise((resolve, reject) => {
       if (!file) {
-        reject(new Error('没有选择文件'));
+        reject(new Error(chrome.i18n.getMessage('file_not_selected')));
         return;
       }
 
       if (!file.name.endsWith('.json')) {
-        reject(new Error('只支持JSON格式的文件'));
+        reject(new Error(chrome.i18n.getMessage('invalid_file_format')));
         return;
       }
 
@@ -123,11 +123,11 @@ class SharedUtils {
           const config = JSON.parse(e.target.result);
           resolve(config);
         } catch (error) {
-          reject(new Error('文件格式错误，请确保是有效的JSON文件'));
+          reject(new Error(chrome.i18n.getMessage('invalid_json_file')));
         }
       };
       reader.onerror = () => {
-        reject(new Error('文件读取失败'));
+        reject(new Error(chrome.i18n.getMessage('file_read_failed')));
       };
       reader.readAsText(file);
     });

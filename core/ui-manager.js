@@ -32,7 +32,7 @@ class UIManager {
     // 使用消息传递方式通知 background script 打开选项页面
     chrome.runtime.sendMessage({ action: 'openOptionsPage' }, (response) => {
       if (chrome.runtime.lastError) {
-        console.warn('打开设置页面时出错:', chrome.runtime.lastError);
+        console.warn(chrome.i18n.getMessage('open_settings_error'), chrome.runtime.lastError);
         // 备用方案：尝试直接打开选项页面
         this.openOptionsPageFallback();
       }

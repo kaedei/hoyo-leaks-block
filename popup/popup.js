@@ -56,9 +56,9 @@ function bindEventListeners() {
 
   // 清除缓存按钮
   document.getElementById('clear-cache').addEventListener('click', function () {
-    if (confirm('确认清除所有缓存配置？')) {
+    if (confirm(chrome.i18n.getMessage('confirm_clear_cache'))) {
       chrome.storage.sync.clear(function () {
-        showMessage('缓存已清除');
+        showMessage(chrome.i18n.getMessage('cache_cleared'));
         // 重新设置默认配置
         chrome.runtime.sendMessage({ action: 'resetToDefault' });
         setTimeout(() => {
@@ -91,7 +91,10 @@ function togglePlatform(platform, enabled) {
     });
 
     chrome.storage.sync.set({ areaList: areaList }, function () {
-      showMessage(`${getPlatformName(platform)} ${enabled ? '已启用' : '已禁用'}`);
+      const statusMsg = chrome.i18n.getMessage('platform_status_changed')
+        .replace('{platform}', getPlatformName(platform))
+        .replace('{status}', enabled ? chrome.i18n.getMessage('status_enabled') : chrome.i18n.getMessage('status_disabled'));
+      showMessage(statusMsg);
 
       // 通知content script更新
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

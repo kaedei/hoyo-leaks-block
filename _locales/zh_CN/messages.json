@@ -352,5 +352,254 @@
   },
   "add_whitelist_user": {
     "message": "添加白名单用户"
+  },
+  "dialog_edit_area": {
+    "message": "编辑区域"
+  },
+  "dialog_add_area": {
+    "message": "添加新区域"
+  },
+  "dialog_save": {
+    "message": "保存"
+  },
+  "dialog_add": {
+    "message": "添加"
+  },
+  "dialog_cancel": {
+    "message": "取消"
+  },
+  "area_empty": {
+    "message": "暂无区域配置"
+  },
+  "area_enabled": {
+    "message": "启用"
+  },
+  "area_disabled": {
+    "message": "禁用"
+  },
+  "btn_edit": {
+    "message": "编辑"
+  },
+  "btn_delete": {
+    "message": "删除"
+  },
+  "btn_enable": {
+    "message": "启用"
+  },
+  "btn_disable": {
+    "message": "禁用"
+  },
+  "confirm_toggle_area": {
+    "message": "确认{action}区域 \"{name}\" 吗？"
+  },
+  "confirm_delete_area": {
+    "message": "确认删除区域 \"{name}\" 吗？"
+  },
+  "area_toggled_success": {
+    "message": "区域 \"{name}\" 已{action}！"
+  },
+  "area_deleted_success": {
+    "message": "区域 \"{name}\" 已删除！"
+  },
+  "area_form_validation": {
+    "message": "请填写完整的区域信息（名称、主容器、项目选择器、文本选择器为必填项）！"
+  },
+  "area_updated_success": {
+    "message": "区域信息已更新！"
+  },
+  "area_added_success": {
+    "message": "新区域已添加！"
+  },
+  "confirm_refresh_areas": {
+    "message": "确认刷新区域列表？\n\n这将重新从配置中读取区域数据。"
+  },
+  "areas_refreshed_success": {
+    "message": "区域列表已刷新！"
+  },
+  "sample_area_loaded": {
+    "message": "示例区域数据已加载！"
+  },
+  "remote_update_fetching": {
+    "message": "正在从服务器获取最新区域配置..."
+  },
+  "confirm_remote_update": {
+    "message": "从服务器获取到 {count} 个区域配置。\n\n是否要覆盖当前的区域设置？"
+  },
+  "remote_update_success": {
+    "message": "区域配置已更新！共加载了 {count} 个区域。"
+  },
+  "remote_update_failed": {
+    "message": "更新失败：{error}"
+  },
+  "modules_loading_timeout": {
+    "message": "模块加载超时，未加载的模块: {modules}"
+  },
+  "init_failed": {
+    "message": "初始化失败: {error}"
+  },
+  "open_settings_error": {
+    "message": "打开设置页面时出错:"
+  },
+  "invalid_server_data": {
+    "message": "服务器返回的数据格式不正确"
+  },
+  "file_not_selected": {
+    "message": "没有选择文件"
+  },
+  "invalid_file_format": {
+    "message": "只支持JSON格式的文件"
+  },
+  "invalid_json_file": {
+    "message": "文件格式错误，请确保是有效的JSON文件"
+  },
+  "file_read_failed": {
+    "message": "文件读取失败"
+  },
+  "confirm_clear_cache": {
+    "message": "确认清除所有缓存配置？"
+  },
+  "cache_cleared": {
+    "message": "缓存已清除"
+  },
+  "platform_status_changed": {
+    "message": "{platform} {status}"
+  },
+  "status_enabled": {
+    "message": "已启用"
+  },
+  "status_disabled": {
+    "message": "已禁用"
+  },
+  "rule_empty_hint": {
+    "message": "暂无{type}，在上方输入框中添加"
+  },
+  "rule_type_keywords": {
+    "message": "关键词"
+  },
+  "rule_type_blacklist": {
+    "message": "黑名单"
+  },
+  "rule_type_whitelist": {
+    "message": "白名单"
+  },
+  "add_rule_placeholder": {
+    "message": "添加{type}..."
+  },
+  "btn_add": {
+    "message": "添加"
+  },
+  "rule_already_exists": {
+    "message": "\"{value}\" 已存在"
+  },
+  "rule_deleted": {
+    "message": "已删除 \"{item}\""
+  },
+  "save_failed": {
+    "message": "保存失败: {error}"
+  },
+  "rules_saved": {
+    "message": "规则保存成功！"
+  },
+  "confirm_reset_rules": {
+    "message": "确认重置所有规则为默认值？"
+  },
+  "rules_reset": {
+    "message": "规则已重置为默认值！"
+  },
+  "config_exported": {
+    "message": "配置导出成功！"
+  },
+  "config_filename": {
+    "message": "米游内鬼信息屏蔽插件配置.json"
+  },
+  "default_area_bilibili_home": {
+    "message": "Bilibili首页列表"
+  },
+  "default_area_bilibili_video_sidebar": {
+    "message": "Bilibili视频页右侧列表"
+  },
+  "default_area_bilibili_video_end": {
+    "message": "Bilibili视频播放结束推荐列表"
+  },
+  "default_area_bilibili_search": {
+    "message": "Bilibili搜索页"
+  },
+  "default_area_bilibili_ranking": {
+    "message": "Bilibili列表（排行榜）"
+  },
+  "default_area_bilibili_dynamic": {
+    "message": "动态首页"
+  },
+  "default_area_bilibili_topic": {
+    "message": "话题页"
+  },
+  "default_area_bilibili_space_masterpiece": {
+    "message": "Bilibili UP主空间代表作"
+  },
+  "default_area_bilibili_space_video": {
+    "message": "Bilibili UP主空间通用视频"
+  },
+  "default_area_bilibili_space_dynamic": {
+    "message": "Bilibili UP主空间动态"
+  },
+  "default_area_bilibili_message": {
+    "message": "Bilibili消息中心（回复我的）"
+  },
+  "default_area_youtube_list": {
+    "message": "油管列表"
+  },
+  "default_area_youtube_search": {
+    "message": "油管搜索页"
+  },
+  "default_area_youtube_sidebar": {
+    "message": "油管视频页右侧推荐栏"
+  },
+  "default_area_twitter_timeline": {
+    "message": "推文列表"
+  },
+  "config_imported": {
+    "message": "配置导入成功！"
+  },
+  "confirm_load_remote_config": {
+    "message": "确认在线加载最新区域配置？\n\n⚠️ 此操作将覆盖当前的区域配置，无法恢复！"
+  },
+  "loading_remote_config": {
+    "message": "正在加载最新区域配置..."
+  },
+  "save_config_failed": {
+    "message": "保存配置失败: {error}"
+  },
+  "remote_config_success": {
+    "message": "远程配置更新成功！加载了 {count} 个区域配置"
+  },
+  "remote_config_failed": {
+    "message": "远程配置更新失败: {error}"
+  },
+  "confirm_clear_all_data": {
+    "message": "⚠️ 确认清除所有数据？此操作无法恢复！"
+  },
+  "all_data_cleared": {
+    "message": "所有数据已清除！"
+  },
+  "no_new_rules": {
+    "message": "没有新的规则可添加"
+  },
+  "rules_imported_count": {
+    "message": "成功导入 {count} 个规则"
+  },
+  "no_rules_to_export": {
+    "message": "没有规则可导出"
+  },
+  "rules_copied": {
+    "message": "规则已复制到剪贴板"
+  },
+  "rules_exported_file": {
+    "message": "规则已导出为文件"
+  },
+  "confirm_clear_rules": {
+    "message": "确认清空所有{type}规则？"
+  },
+  "rules_cleared": {
+    "message": "已清空所有{type}规则"
   }
 }
