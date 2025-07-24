@@ -208,6 +208,23 @@ class SharedUtils {
     // 降级方案：返回原key
     return nameKey;
   }
+
+  /**
+   * 获取扩展版本号
+   * @returns {string} 版本号
+   */
+  static getExtensionVersion() {
+    try {
+      if (chrome && chrome.runtime && chrome.runtime.getManifest) {
+        return chrome.runtime.getManifest().version;
+      }
+      // 对于测试环境或无法获取manifest的情况，返回默认版本
+      return '104.0 (missing manifest)';
+    } catch (error) {
+      console.warn('[HoyoBlock] Failed to get extension version:', error);
+      return '104.0 (error)';
+    }
+  }
 }
 
 // 导出供其他模块使用

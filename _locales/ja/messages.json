@@ -207,7 +207,7 @@
     "message": "作者：kaedei"
   },
   "about_version": {
-    "message": "バージョン：104.0"
+    "message": "バージョン"
   },
   "about_description": {
     "message": "これは、Hoyoverseが提供するゲーム（原神、崩壊：スターレイル、ゼンレスゾーンゼロなど）のプレイヤーのために作られたブラウザー拡張機能です。Bilibili、YouTube、Twitter（x.com）などの主要なSNSで、「内部リーク」や「ネガティブキャンペーン」に関する内容を自動的に非表示にすることができます。"
@@ -300,7 +300,7 @@
     "message": "総ブロック数"
   },
   "version": {
-    "message": "バージョン 104.0"
+    "message": "バージョン"
   },
   "help_link": {
     "message": "ヘルプドキュメント"

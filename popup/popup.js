@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 加载统计数据
   loadStats();
+
+  // 更新版本显示
+  updateVersionDisplay();
 });
 
 function initPopup() {
@@ -160,4 +163,22 @@ function showMessage(message) {
       document.body.removeChild(messageEl);
     }, 300);
   }, 2000);
+}
+
+/**
+ * 更新版本显示
+ */
+function updateVersionDisplay() {
+  const versionElement = document.getElementById('version-text');
+  if (versionElement) {
+    try {
+      // 获取当前显示的本地化文本（如"版本"）
+      const currentText = versionElement.textContent;
+      // 获取版本号并组合显示
+      const version = SharedUtils.getExtensionVersion();
+      versionElement.textContent = `${currentText}: ${version}`;
+    } catch (error) {
+      console.warn('[HoyoBlock-Popup] Failed to update version display:', error);
+    }
+  }
 }

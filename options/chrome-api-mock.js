@@ -122,7 +122,7 @@ if (!window.chrome || !window.chrome.storage) {
           'btn_clear_all': 'Clear All Data',
           'about_title': 'About',
           'about_author': 'Author: kaedei',
-          'about_version': 'Version: 103.0',
+          'about_version': 'Version',
           'about_description': 'This is a browser extension for blocking HoYo games leak content on Bilibili, YouTube, Twitter and other platforms.',
           'features_title': 'Features',
           'feature_1': 'Multi-platform content blocking',
@@ -146,7 +146,7 @@ if (!window.chrome || !window.chrome.storage) {
           'btn_clear_cache': 'Clear Cache',
           'stat_today': 'Today Blocked',
           'stat_total': 'Total Blocked',
-          'version': 'Version 103.0',
+          'version': 'Version',
           'help_link': 'Help Documentation',
           'block_button': 'HoYo Leaks Block'
         };

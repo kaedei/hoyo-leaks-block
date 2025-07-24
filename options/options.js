@@ -48,6 +48,9 @@ class OptionsController {
       // 绑定全局配置管理方法到window对象（供HTML中的onclick使用）
       this.bindGlobalMethods();
 
+      // 更新版本显示
+      this.updateVersionDisplay();
+
       this.initialized = true;
       DebugLogger.log('[HoyoBlock-Options] Options page initialized successfully');
 
@@ -65,6 +68,24 @@ class OptionsController {
     // 只保留基本的配置管理方法
     if (window.ConfigManager) {
       DebugLogger.log('[HoyoBlock-Options] ConfigManager methods available');
+    }
+  }
+
+  /**
+   * 更新版本显示
+   */
+  updateVersionDisplay() {
+    const versionElement = document.getElementById('version-text');
+    if (versionElement) {
+      try {
+        // 获取当前显示的本地化文本（如"版本"）
+        const currentText = versionElement.textContent;
+        // 获取版本号并组合显示
+        const version = SharedUtils.getExtensionVersion();
+        versionElement.textContent = `${currentText}: ${version}`;
+      } catch (error) {
+        console.warn('[HoyoBlock-Options] Failed to update version display:', error);
+      }
     }
   }
 }
