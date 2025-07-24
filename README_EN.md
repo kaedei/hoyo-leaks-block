@@ -8,17 +8,19 @@ This is a browser extension specifically designed for players of games under Hoy
 
 ## Features
 
-- 🛡️ **Multi social platform Support**: Bilibili, YouTube, Twitter (x.com)
+- 🛡️ **Multi-platform Support**: Bilibili, YouTube, Twitter (x.com)
 - 🔍 **Smart Recognition**: Automatic identification of leak content by keywords and usernames
 - ⚡ **Real-time Blocking**: Real-time monitoring and automatic blocking of page content
 - 📝 **Custom Rules**: Support for custom keywords, blacklists, and whitelists
 - 🎯 **Area Management**: Visual management of blocking areas with precise control
 - 💾 **Configuration Management**: Support for import/export, remote updates, and cloud sync
-- 🎨 **Modern UI**: Clean and intuitive settings and popup interface
-- 📊 **Statistics**: Count blocked content
+- � **Remote Configuration**: Online retrieval of latest area configs and blocking rules
+- �🎨 **Modern UI**: Clean and intuitive settings and popup interface
+- 📊 **Statistics**: Count blocked content (daily/total)
 - 🛠️ **Performance Optimization**: Debouncing/throttling with low resource usage
 - 🔐 **Data Security**: Local storage, no user data upload
-- 🌐 **Internationalization**: Multi-language interface (Simplified Chinese, Traditional Chinese, English, Japanese, etc.)
+- � **Internationalization**: Multi-language interface (Simplified Chinese, Traditional Chinese, English, Japanese, etc.)
+- 📋 **Debug Support**: Complete debug logging system
 
 ## Installation
 
@@ -41,6 +43,7 @@ This is a browser extension specifically designed for players of games under Hoy
 2. Click the browser toolbar icon to quickly toggle the blocking function
 3. Click the floating button or right-click menu to enter the "Options" page
 4. Customize keywords, blacklists/whitelists, and areas in the settings page
+5. Use "Load Latest Area Config Online" to get the latest blocking rules
 
 ## Configuration
 
@@ -48,6 +51,10 @@ This is a browser extension specifically designed for players of games under Hoy
 - **Author Blacklist/Whitelist**: Separate usernames with `|`
 - **Area Management**: Visual toggle, edit, and delete blocking areas for each platform
 - **Configuration Import/Export**: Support for JSON file import/export and remote updates
+- **Remote Configuration**: Automatically retrieve latest area configurations to keep blocking rules updated
+- **Debug Mode**: Developers can enable debug logging in `core/constants.js`
+
+For detailed area configuration instructions, please refer to: [Area Configuration Guide](docs/AREA_CONFIGURATION_GUIDE.md)
 
 ## File Structure
 
@@ -56,15 +63,27 @@ hoyo-leaks-block/
 ├── manifest.json              # Extension manifest
 ├── background.js              # Background script
 ├── core/
-│   └── block-core.js          # Core blocking logic
+│   ├── block-core.js          # Core blocking logic
+│   ├── config-manager.js      # Configuration management
+│   ├── constants.js           # Constants definition
+│   ├── content-blocker.js     # Content blocker
+│   ├── debug-logger.js        # Debug logging management
+│   ├── remote-config-manager.js # Remote configuration management
+│   ├── stats-manager.js       # Statistics data management
+│   ├── ui-manager.js          # UI management
+│   └── utils.js               # Utility functions
 ├── content-scripts/
 │   ├── bilibili.js            # Bilibili content script
 │   ├── youtube.js             # YouTube content script
 │   └── twitter.js             # Twitter content script
+├── shared/
+│   ├── base-config-manager.js # Base configuration management
+│   └── utils.js               # Shared utility functions
 ├── popup/
 │   ├── popup.html             # Popup page
 │   ├── popup.css              # Popup styles
-│   └── popup.js               # Popup script
+│   ├── popup.js               # Popup script
+│   └── i18n.js                # Internationalization support
 ├── options/
 │   ├── options.html           # Settings page
 │   ├── options.css            # Settings styles
@@ -72,8 +91,16 @@ hoyo-leaks-block/
 │   ├── area-manager.js        # Area management
 │   ├── config-manager.js      # Configuration management
 │   ├── chrome-api-mock.js     # Chrome API Mock
+│   ├── i18n-manager.js        # Internationalization management
 │   ├── ui-manager.js          # UI management
 │   └── utils.js               # Utility functions
+├── _locales/                  # Internationalization resources
+│   ├── en/messages.json       # English
+│   ├── ja/messages.json       # Japanese
+│   ├── zh_CN/messages.json    # Simplified Chinese
+│   └── zh_TW/messages.json    # Traditional Chinese
+├── config/
+│   └── arealist.json          # Area configuration file
 ├── styles/
 │   └── block-styles.css       # Blocking styles
 ├── icons/                     # Icons
@@ -81,9 +108,15 @@ hoyo-leaks-block/
 │   ├── icon48.png
 │   ├── icon128.png
 │   └── icon512.png
+├── docs/
+│   └── AREA_CONFIGURATION_GUIDE.md # Area configuration guide
+├── test/                      # Test files
+│   ├── i18n-test.html
+│   └── title-test.html
 ├── build.bat / build.sh       # Build scripts
 ├── hoyo-leaks-block.zip       # Package file
 ├── README.md                  # Documentation
+├── README_EN.md               # English documentation
 ├── CHANGELOG.md               # Changelog
 └── LICENSE                    # License
 ```
@@ -91,15 +124,19 @@ hoyo-leaks-block/
 ## Development
 
 - **Tech Stack**: Manifest V3, Vanilla JavaScript, CSS3, Chrome Storage API
-- **Modular Design**: Independent core functionality, easy to maintain
-- **Platform Adaptation**: Special handling for different platforms
-- **Real-time Updates**: Configuration changes take effect immediately
-- **Performance Optimization**: Debouncing/throttling with low resource usage
+- **Modular Design**: Independent core functionality, easy to maintain and extend
+- **Shared Foundation**: Use `shared/` directory for common modules, improving code reusability
+- **Platform Adaptation**: Special handling and optimization for different platforms
+- **Real-time Updates**: Configuration changes take effect immediately, support remote config updates
+- **Performance Optimization**: Debouncing/throttling techniques with low resource usage
+- **Debug Support**: Complete debug logging system for development and troubleshooting
+- **Internationalization**: Comprehensive multi-language support mechanism
 - **Development Recommendations**:
   1. Node.js required (for formatting/packaging)
   2. VS Code recommended
   3. Build command: `build.bat` or `npm run build`
   4. Install dependencies: `npm install`
+  5. Development mode: Modify `DEBUG_MODE` in `core/constants.js` to enable debugging
 
 ## Changelog
 
