@@ -61,11 +61,11 @@ class OptionsController {
    * 绑定全局方法供HTML使用
    */
   bindGlobalMethods() {
-    // 将ConfigManager的方法绑定到全局，供HTML中的onclick使用
-    window.ConfigManager.addNewRule = window.ConfigManager.addNewRule.bind(window.ConfigManager);
-    window.ConfigManager.deleteRule = window.ConfigManager.deleteRule.bind(window.ConfigManager);
-    window.ConfigManager.toggleRule = window.ConfigManager.toggleRule.bind(window.ConfigManager);
-    window.ConfigManager.updateRuleValue = window.ConfigManager.updateRuleValue.bind(window.ConfigManager);
+    // Tag界面不需要绑定额外的方法，所有功能都通过事件监听器处理
+    // 只保留基本的配置管理方法
+    if (window.ConfigManager) {
+      DebugLogger.log('[HoyoBlock-Options] ConfigManager methods available');
+    }
   }
 }
 
