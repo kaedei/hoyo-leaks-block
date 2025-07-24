@@ -63,4 +63,3 @@ rmdir /s /q "%BUILD_DIR%"
 echo ✅ 构建目录已清理
 
 echo ✨ 构建脚本执行完成
-pause

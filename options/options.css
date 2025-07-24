@@ -1040,12 +1040,163 @@ body {
   animation: slideIn 0.3s ease;
 }
 
-/* 规则状态样式 */
-.rule-item.disabled {
-  opacity: 0.6;
+/* Tag容器样式 */
+.tag-container {
+  min-height: 100px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  background: #f8f9fa;
+  margin-bottom: 20px;
 }
 
-.rule-item.disabled .rule-input {
-  background: #f8f9fa;
+.tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+/* Tag元素样式 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: #1890ff;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: #40a9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
+}
+
+.tag-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.tag-close {
+  margin-left: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tag-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tag输入框样式 */
+.tag-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+.tag-input {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  background: white;
+}
+
+.tag-input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.tag-add-btn {
+  padding: 6px 16px;
+  background: #52c41a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.tag-add-btn:hover {
+  background: #73d13d;
+}
+
+.tag-add-btn:active {
+  background: #389e0d;
+}
+
+/* Tag提示信息 */
+.tag-hint {
   color: #999;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+
+/* 不同类型的Tag颜色 */
+.tag-container[id*="keywords"] .tag {
+  background: #ff4d4f;
+}
+
+.tag-container[id*="keywords"] .tag:hover {
+  background: #ff7875;
+}
+
+.tag-container[id*="blacklist"] .tag {
+  background: #722ed1;
+}
+
+.tag-container[id*="blacklist"] .tag:hover {
+  background: #9254de;
+}
+
+.tag-container[id*="whitelist"] .tag {
+  background: #52c41a;
+}
+
+.tag-container[id*="whitelist"] .tag:hover {
+  background: #73d13d;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tag-input-container {
+    min-width: 150px;
+  }
+
+  .tag-text {
+    max-width: 100px;
+  }
+
+  .tag-container {
+    padding: 12px;
+  }
 }

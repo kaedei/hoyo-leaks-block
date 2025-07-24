@@ -8,43 +8,20 @@ const APP_CONSTANTS = {
 
   // 默认配置
   DEFAULT_CONFIG: {
-    // 新的对象数组格式
+    // 简化的字符串数组格式
     blockRules: {
       bilibili: {
-        keywords: [
-          { value: '内鬼', enabled: true, id: 'rule_default_bili_k1' },
-          { value: '爆料', enabled: true, id: 'rule_default_bili_k2' },
-          { value: '泄露', enabled: true, id: 'rule_default_bili_k3' },
-          { value: 'leak', enabled: true, id: 'rule_default_bili_k4' },
-          { value: 'beta', enabled: true, id: 'rule_default_bili_k5' },
-          { value: '测试服', enabled: true, id: 'rule_default_bili_k6' },
-          { value: 'v2', enabled: true, id: 'rule_default_bili_k7' },
-          { value: 'v3', enabled: true, id: 'rule_default_bili_k8' },
-          { value: 'v4', enabled: true, id: 'rule_default_bili_k9' },
-          { value: 'v5', enabled: true, id: 'rule_default_bili_k10' }
-        ],
+        keywords: ['内鬼', '爆料', '泄露', 'leak', 'beta', '测试服', 'v2', 'v3', 'v4', 'v5'],
         blacklist: [],
         whitelist: []
       },
       youtube: {
-        keywords: [
-          { value: 'leak', enabled: true, id: 'rule_default_ytb_k1' },
-          { value: 'beta', enabled: true, id: 'rule_default_ytb_k2' },
-          { value: 'insider', enabled: true, id: 'rule_default_ytb_k3' },
-          { value: 'spoiler', enabled: true, id: 'rule_default_ytb_k4' },
-          { value: 'unreleased', enabled: true, id: 'rule_default_ytb_k5' }
-        ],
+        keywords: ['leak', 'beta', 'insider', 'spoiler', 'unreleased'],
         blacklist: [],
         whitelist: []
       },
       twitter: {
-        keywords: [
-          { value: 'leak', enabled: true, id: 'rule_default_tw_k1' },
-          { value: 'beta', enabled: true, id: 'rule_default_tw_k2' },
-          { value: 'insider', enabled: true, id: 'rule_default_tw_k3' },
-          { value: 'spoiler', enabled: true, id: 'rule_default_tw_k4' },
-          { value: 'unreleased', enabled: true, id: 'rule_default_tw_k5' }
-        ],
+        keywords: ['leak', 'beta', 'insider', 'spoiler', 'unreleased'],
         blacklist: [],
         whitelist: []
       }

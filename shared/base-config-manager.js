@@ -57,12 +57,13 @@ class BaseConfigManager {
 
     if (platform && ruleType && this.config.blockRules && this.config.blockRules[platform]) {
       const rules = this.config.blockRules[platform][ruleType];
-      if (Array.isArray(rules)) {
-        const enabledRules = rules.filter(rule => rule.enabled).map(rule => rule.value);
-        if (enabledRules.length === 0) {
+      if (Array.isArray(rules) && rules.length > 0) {
+        // 过滤空值
+        const validRules = rules.filter(rule => rule && rule.trim());
+        if (validRules.length === 0) {
           return null;
         }
-        const pattern = enabledRules.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+        const pattern = validRules.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
         return new RegExp(pattern, 'i');
       }
     }
@@ -114,13 +115,6 @@ class BaseConfigManager {
         }
       });
     });
-  }
-
-  /**
-   * 生成规则ID
-   */
-  generateRuleId() {
-    return 'rule_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }  /**
    * 获取配置
    */

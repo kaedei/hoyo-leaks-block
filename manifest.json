@@ -27,7 +27,6 @@
       "js": [
         "core/debug-logger.js",
         "core/constants.js",
-        "core/config-migration.js",
         "shared/base-config-manager.js",
         "shared/utils.js",
         "core/utils.js",
