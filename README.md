@@ -1,6 +1,8 @@
 # 米游内鬼信息屏蔽 (Hoyo Leaks Block)
 
-\*\*语言 /## 使用方法
+**Language / 语言**：中文 | [English](README_EN.md)
+
+## 使用方法
 
 1. 安装扩展后，页面右侧会出现蓝色悬浮按钮
 2. 点击浏览器工具栏图标可快速开关屏蔽功能
@@ -17,7 +19,7 @@
 - **远程配置**：自动获取最新区域配置，保持屏蔽规则更新
 - **调试模式**：开发者可在 `core/constants.js` 中启用调试日志
 
-详细的区域配置说明请参考：[区域配置指南](docs/AREA_CONFIGURATION_GUIDE.md)文 | [English](README_EN.md)
+详细的区域配置说明请参考：[区域配置指南](docs/AREA_CONFIGURATION_GUIDE.md)
 
 这是一个专为米哈游（Hoyoverse）旗下游戏（如原神、星穹铁道、绝区零等）玩家设计的浏览器扩展，能够在 B 站、YouTube、Twitter（x.com）等主流社交平台上自动屏蔽与“内鬼爆料、黑流量”相关的内容。
 
