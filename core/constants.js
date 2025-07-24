@@ -23,7 +23,7 @@ const APP_CONSTANTS = {
   // 默认区域列表
   DEFAULT_AREA_LIST: [
     {
-      "name": "B站首页列表",
+      "name": "Bilibili首页列表",
       "area": "bilibili",
       "main": ".recommended-container_floor-aside",
       "item": ".bili-video-card",
@@ -34,7 +34,7 @@ const APP_CONSTANTS = {
       "home": false
     },
     {
-      "name": "B站视频页右侧列表",
+      "name": "Bilibili视频页右侧列表",
       "area": "bilibili",
       "main": ".recommend-list-v1",
       "item": ".video-page-card-small",
@@ -45,7 +45,7 @@ const APP_CONSTANTS = {
       "home": false
     },
     {
-      "name": "B站视频播放结束推荐列表",
+      "name": "Bilibili视频播放结束推荐列表",
       "area": "bilibili",
       "main": ".bpx-player-ending-related",
       "item": ".bpx-player-ending-related-item",
@@ -56,7 +56,7 @@ const APP_CONSTANTS = {
       "home": false
     },
     {
-      "name": "B站搜索页",
+      "name": "Bilibili搜索页",
       "area": "bilibili",
       "main": ".search-page .video-list",
       "item": ".bili-video-card",
@@ -67,7 +67,7 @@ const APP_CONSTANTS = {
       "home": false
     },
     {
-      "name": "B站列表（排行榜）",
+      "name": "Bilibili列表（排行榜）",
       "area": "bilibili",
       "main": ".card-list",
       "item": ".video-card",
@@ -100,7 +100,7 @@ const APP_CONSTANTS = {
       "home": false
     },
     {
-      "name": "B站UP主空间代表作",
+      "name": "Bilibili UP主空间代表作",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".top-video",
@@ -111,7 +111,7 @@ const APP_CONSTANTS = {
       "home": true
     },
     {
-      "name": "B站UP主空间通用视频",
+      "name": "Bilibili UP主空间通用视频",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".bili-video-card",
@@ -122,7 +122,7 @@ const APP_CONSTANTS = {
       "home": true
     },
     {
-      "name": "B站UP主空间动态",
+      "name": "Bilibili UP主空间动态",
       "area": "bilibili",
       "main": ".space-main",
       "item": ".bili-dyn-list__item",
@@ -133,7 +133,7 @@ const APP_CONSTANTS = {
       "home": true
     },
     {
-      "name": "B站消息中心（回复我的）",
+      "name": "Bilibili消息中心（回复我的）",
       "area": "bilibili",
       "main": ".message-main",
       "item": ".interaction-item",

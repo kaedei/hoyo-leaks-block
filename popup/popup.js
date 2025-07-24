@@ -109,7 +109,7 @@ function togglePlatform(platform, enabled) {
 
 function getPlatformName(platform) {
   const names = {
-    'bili': 'B站',
+    'bili': 'Bilibili',
     'ytb': 'YouTube',
     'twitter': 'Twitter'
   };

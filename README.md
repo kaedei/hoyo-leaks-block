@@ -58,7 +58,7 @@ hoyo-leaks-block/
 ├── core/
 │   └── block-core.js          # 核心屏蔽逻辑
 ├── content-scripts/
-│   ├── bilibili.js            # B站内容脚本
+│   ├── bilibili.js            # Bilibili内容脚本
 │   ├── youtube.js             # YouTube内容脚本
 │   └── twitter.js             # Twitter内容脚本
 ├── popup/

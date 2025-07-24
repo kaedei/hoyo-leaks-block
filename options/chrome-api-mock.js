@@ -14,7 +14,7 @@ if (!window.chrome || !window.chrome.storage) {
           const mockData = {
             areaList: [
               {
-                name: "B站视频卡片",
+                name: "Bilibili视频卡片",
                 area: "bilibili",
                 selector: ".video-item",
                 on: true

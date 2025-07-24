@@ -1,20 +1,20 @@
-// B站内容脚本
+// Bilibili内容脚本
 (function () {
   'use strict';
 
   DebugLogger.log('[HoyoBlock-Bilibili] Content script loaded');
 
   function initBilibiliBlock() {
-    DebugLogger.log('[HoyoBlock-Bilibili] Initializing B站 block instance');
+    DebugLogger.log('[HoyoBlock-Bilibili] Initializing Bilibili block instance');
 
-    // 创建B站专用的屏蔽实例
+    // 创建Bilibili专用的屏蔽实例
     const blockInstance = new HoyoLeaksBlockCore('Bili');
 
-    // B站特定的处理逻辑
+    // Bilibili特定的处理逻辑
     blockInstance.platformSpecificInit = function () {
       DebugLogger.log('[HoyoBlock-Bilibili] Platform specific initialization starting');
 
-      // 监听页面变化（B站是SPA）
+      // 监听页面变化（Bilibili是SPA）
       let lastUrl = location.href;
       let mutationTimeout = null;
 

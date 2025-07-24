@@ -66,7 +66,7 @@
 **示例**：
 
 ```css
-/* B站首页推荐区域 */
+/* Bilibili首页推荐区域 */
 .recommended-container_floor-aside
 
 ytd-rich-grid-renderer
@@ -94,7 +94,7 @@ ytd-rich-grid-renderer
 **示例**：
 
 ```css
-/* B站视频卡片 */
+/* Bilibili视频卡片 */
 .bili-video-card
 
 ytd-rich-item-renderer
@@ -133,13 +133,13 @@ const text = allTexts.join(" ");
 **示例**：
 
 ```css
-/* B站视频标题 */
+/* Bilibili视频标题 */
 .bili-video-card__info--tit a
 
 /* YouTube 视频标题 */
 #video-title
 
-/* B站动态多种文本 */
+/* Bilibili动态多种文本 */
 .bili-dyn-content__orig__desc, .bili-dyn-card-video__title, .bili-dyn-card-video__desc;
 ```
 
@@ -164,7 +164,7 @@ mediaElements.forEach((media) => this.applyBlur(media, true));
 **示例**：
 
 ```css
-/* B站视频封面 */
+/* Bilibili视频封面 */
 .bili-video-card__image
 
 ytd-thumbnail
@@ -196,7 +196,7 @@ const user = userElement ? userElement.textContent?.trim() : "";
 **示例**：
 
 ```css
-/* B站UP主名称 */
+/* Bilibili UP主名称 */
 .bili-video-card__info--author
 
 ytd-channel-name
@@ -317,7 +317,7 @@ ytd-channel-name
 
 ```json
 {
-  "name": "B站专栏列表",
+  "name": "Bilibili专栏列表",
   "area": "bilibili",
   "main": ".article-list",
   "item": ".article-item",
@@ -395,7 +395,7 @@ ytd-channel-name
 
 ```javascript
 // 查看区域配置是否正确加载
-[HoyoBlock-bilibili] Area config: {name: "B站首页列表", area: "bilibili", ...}
+[HoyoBlock-bilibili] Area config: {name: "Bilibili首页列表", area: "bilibili", ...}
 
 // 查看找到的内容项数量
 [HoyoBlock-bilibili] Found 20 items for selector ".bili-video-card"
@@ -520,7 +520,7 @@ $(".bili-video-card__info--tit a").map((el) => el.textContent);
 
 ```json
 {
-  "name": "B站-页面名称",
+  "name": "Bilibili-页面名称",
   "area": "bilibili",
   "main": ".容器类名",
   "item": ".视频卡片类名",

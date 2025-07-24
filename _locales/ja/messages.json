@@ -3,7 +3,7 @@
     "message": "HoYoリーク情報ブロック"
   },
   "description": {
-    "message": "B站、YouTube、TwitterなどのプラットフォームでHoyoverseゲームのリーク情報をブロック"
+    "message": "Bilibili、YouTube、TwitterなどのプラットフォームでHoyoverseゲームのリーク情報をブロック"
   },
   "options_title": {
     "message": "HoYoリーク情報ブロック - 設定"
@@ -27,7 +27,7 @@
     "message": "ブロックルール設定"
   },
   "platform_bilibili": {
-    "message": "B站 (Bilibili)"
+    "message": "Bilibili"
   },
   "platform_youtube": {
     "message": "YouTube"
@@ -180,13 +180,13 @@
     "message": "これは、Hoyoverseが提供するゲーム（原神、崩壊：スターレイル、ゼンレスゾーンゼロなど）のプレイヤーのために作られたブラウザー拡張機能です。Bilibili、YouTube、Twitter（x.com）などの主要なSNSで、「内部リーク」や「ネガティブキャンペーン」に関する内容を自動的に非表示にすることができます。"
   },
   "about_thanks": {
-    "message": "謝辞：本プロジェクトはB站の @凡雲 氏が開発したオリジナルのTampermonkeyスクリプトをリファクタリングしたものです。オープンソースへの貢献に感謝いたします！"
+    "message": "謝辞：本プロジェクトはBilibiliの @凡雲 氏が開発したオリジナルのTampermonkeyスクリプトをリファクタリングしたものです。オープンソースへの貢献に感謝いたします！"
   },
   "features_title": {
     "message": "機能特徴"
   },
   "feature_1": {
-    "message": "🛡️ マルチプラットフォーム対応：B站、YouTube、Twitter（x.com）"
+    "message": "🛡️ マルチプラットフォーム対応：Bilibili、YouTube、Twitter（x.com）"
   },
   "feature_2": {
     "message": "🔍 スマート認識：キーワードとユーザー名によるリーク内容の自動識別"
@@ -249,7 +249,7 @@
     "message": "原神、スターレイルのリーク情報をブロック"
   },
   "platform_bilibili_short": {
-    "message": "B站"
+    "message": "Bilibili"
   },
   "btn_settings": {
     "message": "設定オプション"

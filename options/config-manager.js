@@ -20,7 +20,7 @@ class ConfigManager {
     chrome.storage.sync.get(null, (result) => {
       DebugLogger.log('[HoyoBlock-Options] Raw config loaded:', result);
 
-      // 加载B站配置
+      // 加载Bilibili配置
       document.getElementById('bili-title').value = result.blockTitleBili || '';
       document.getElementById('bili-users').value = result.blockUsersBili || '';
       document.getElementById('bili-whitelist').value = result.blockUsersWhiteBili || '';

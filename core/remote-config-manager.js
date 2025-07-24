@@ -55,7 +55,7 @@ class RemoteConfigManager {
     // 如果常量不可用，返回基础默认配置
     return [
       {
-        "name": "B站首页列表",
+        "name": "Bilibili首页列表",
         "area": "bilibili",
         "main": ".recommended-container_floor-aside",
         "item": ".bili-video-card",

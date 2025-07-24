@@ -36,7 +36,7 @@ article.hoyo-blur-block:hover,
   opacity: 0.9 !important;
 }
 
-/* 针对B站特定元素的强制样式 */
+/* 针对Bilibili特定元素的强制样式 */
 .bili-video-card.hoyo-blur-block,
 .bili-video-card[data-hoyo-blocked="true"],
 .video-card.hoyo-blur-block,
@@ -54,7 +54,7 @@ article.hoyo-blur-block:hover,
   opacity: 0.9 !important;
 }
 
-/* B站特定的强制样式 */
+/* Bilibili特定的强制样式 */
 .bilibili-com .hoyo-blur-block,
 .bilibili-com [data-hoyo-blocked="true"],
 [class*="bili-"] .hoyo-blur-block,
@@ -95,13 +95,14 @@ article.hoyo-blur-block:hover,
   text-decoration: none !important;
   outline: none !important;
   cursor: pointer !important;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyUzYuNDggMjIgMTIgMjIgMjIgMTcuNTIgMjIgMTJTMTcuNTIgMiAxMiAyWk0xNy41NiAxN0wxNiAxNS40NEwxMC40NCAxMEwxMiA4LjQ0TDE3LjU2IDEzLjU2TDE3LjU2IDE3WiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K') !important;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyUzYuNDggMjIgMTIgMjIgMjIgMTcuNTIgMjIgMTJTMTcuNTIgMiAxMiAyWk0xNy41NiAxN0wxNiAxNS40NEwxMC40NCAxMEwxMiA4LjQ0TDE3LjU2IDEzLjU2TDE3LjU2IDE3WiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K") !important;
   background-position: center 5px !important;
   background-size: 20px !important;
   background-repeat: no-repeat !important;
   padding-top: 30px !important;
   transition: all 0.3s ease !important;
-  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial,
+    sans-serif !important;
   user-select: none !important;
   box-shadow: 0 2px 8px rgba(0, 178, 255, 0.3) !important;
 }
@@ -128,7 +129,8 @@ article.hoyo-blur-block:hover,
   opacity: 0 !important;
   visibility: hidden !important;
   transition: all 0.3s ease !important;
-  font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif !important;
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial,
+    sans-serif !important;
 }
 
 .hoyo-message.show {
@@ -137,7 +139,7 @@ article.hoyo-blur-block:hover,
 }
 
 /* 特定平台的样式调整 */
-/* B站 */
+/* Bilibili */
 .bilibili .hoyo-blur-block .bili-video-card__info--tit {
   color: transparent !important;
   background-color: #f0f0f0 !important;
@@ -162,5 +164,3 @@ article.hoyo-blur-block:hover,
 [data-hoyo-blocked="true"] {
   position: relative !important;
 }
-
-

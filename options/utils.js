@@ -9,7 +9,7 @@
  */
 function getPlatformDisplayName(platform) {
   const names = {
-    'bilibili': 'B站',
+    'bilibili': 'Bilibili',
     'youtube': 'YouTube',
     'twitter': 'Twitter'
   };
