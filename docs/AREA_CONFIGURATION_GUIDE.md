@@ -73,6 +73,10 @@
 /* YouTube 主要内容网格 */
 /* YouTube 主要内容网格 */
 /* YouTube 主要内容网格 */
+/* YouTube 主要内容网格 */
+/* YouTube 主要内容网格 */
+/* YouTube 主要内容网格 */
+/* YouTube 主要内容网格 */
 ytd-rich-grid-renderer
 
 /* Twitter 推文列表 */
@@ -101,6 +105,10 @@ ytd-rich-grid-renderer
 /* B站视频卡片 */
 .bili-video-card
 
+/* YouTube 视频项 */
+/* YouTube 视频项 */
+/* YouTube 视频项 */
+/* YouTube 视频项 */
 /* YouTube 视频项 */
 /* YouTube 视频项 */
 /* YouTube 视频项 */
@@ -209,8 +217,6 @@ const user = userElement ? userElement.textContent?.trim() : "";
 /* B站UP主名称 */
 .bili-video-card__info--author
 
-/* YouTube 频道名 */
-/* YouTube 频道名 */
 /* YouTube 频道名 */
 /* YouTube 频道名 */
 ytd-channel-name
