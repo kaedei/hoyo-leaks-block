@@ -69,14 +69,6 @@
 /* B站首页推荐区域 */
 .recommended-container_floor-aside
 
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
-/* YouTube 主要内容网格 */
 ytd-rich-grid-renderer
 
 /* Twitter 推文列表 */
@@ -105,14 +97,6 @@ ytd-rich-grid-renderer
 /* B站视频卡片 */
 .bili-video-card
 
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
-/* YouTube 视频项 */
 ytd-rich-item-renderer
 
 /* Twitter 推文 */
@@ -183,8 +167,6 @@ mediaElements.forEach((media) => this.applyBlur(media, true));
 /* B站视频封面 */
 .bili-video-card__image
 
-/* YouTube 缩略图 */
-/* YouTube 缩略图 */
 ytd-thumbnail
 
 /* Twitter 图片和视频 */
@@ -217,8 +199,6 @@ const user = userElement ? userElement.textContent?.trim() : "";
 /* B站UP主名称 */
 .bili-video-card__info--author
 
-/* YouTube 频道名 */
-/* YouTube 频道名 */
 ytd-channel-name
 
 /* Twitter 用户名 */
