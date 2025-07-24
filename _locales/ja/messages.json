@@ -36,7 +36,22 @@
     "message": "Twitter"
   },
   "keywords_label": {
-    "message": "ブロックキーワード（|で区切る）"
+    "message": "ブロックキーワード"
+  },
+  "keywords_description": {
+    "message": "キーワードに基づいてコンテンツをブロック"
+  },
+  "blacklist_label": {
+    "message": "ユーザーブラックリスト"
+  },
+  "blacklist_description": {
+    "message": "指定されたユーザーのすべてのコンテンツをブロック"
+  },
+  "whitelist_label": {
+    "message": "ユーザーホワイトリスト"
+  },
+  "whitelist_description": {
+    "message": "ホワイトリストユーザーのコンテンツはブロックされません"
   },
   "keywords_placeholder_bili": {
     "message": "例：内鬼|爆料|泄露|leak|beta"
@@ -47,35 +62,53 @@
   "keywords_placeholder_twitter": {
     "message": "例：leak|beta|insider|spoiler"
   },
-  "blacklist_label": {
-    "message": "作者ブラックリスト（|で区切る）"
-  },
-  "blacklist_placeholder_bili": {
-    "message": "例：ユーザー名1|ユーザー名2"
-  },
-  "blacklist_placeholder_ytb": {
-    "message": "例：channel1|channel2"
-  },
-  "blacklist_placeholder_twitter": {
-    "message": "例：@user1|@user2"
-  },
-  "whitelist_label": {
-    "message": "作者ホワイトリスト（|で区切る）"
-  },
-  "whitelist_placeholder_bili": {
-    "message": "例：公式アカウント|信頼できるユーザー"
-  },
-  "whitelist_placeholder_ytb": {
-    "message": "例：公式チャンネル|信頼できるチャンネル"
-  },
-  "whitelist_placeholder_twitter": {
-    "message": "例：@official|@trusted"
-  },
   "btn_save_rules": {
     "message": "ルールを保存"
   },
   "btn_reset_rules": {
     "message": "デフォルトにリセット"
+  },
+  "btn_add_rule": {
+    "message": "ルールを追加"
+  },
+  "btn_delete_rule": {
+    "message": "削除"
+  },
+  "btn_toggle_all": {
+    "message": "全選択/全解除"
+  },
+  "btn_delete_disabled": {
+    "message": "無効なものを削除"
+  },
+  "btn_clear_all_rules": {
+    "message": "すべてクリア"
+  },
+  "placeholder_keyword": {
+    "message": "キーワードを入力..."
+  },
+  "placeholder_username": {
+    "message": "ユーザー名を入力..."
+  },
+  "empty_rules_title": {
+    "message": "ルールがありません"
+  },
+  "empty_rules_hint": {
+    "message": "下のボタンをクリックして新しいルールを追加"
+  },
+  "confirm_delete_disabled": {
+    "message": "すべての無効なルールを削除しますか？"
+  },
+  "confirm_clear_all": {
+    "message": "すべてのルールをクリアしますか？"
+  },
+  "success_import_rules": {
+    "message": "ルールのインポートに成功"
+  },
+  "success_export_rules": {
+    "message": "ルールがエクスポートされました"
+  },
+  "error_no_rules": {
+    "message": "エクスポートするルールがありません"
   },
   "areas_title": {
     "message": "エリア管理"
@@ -478,5 +511,77 @@
   },
   "default_area_twitter_timeline": {
     "message": "Twitterタイムライン"
+  },
+  "config_imported": {
+    "message": "設定のインポートが完了しました！"
+  },
+  "confirm_load_remote_config": {
+    "message": "最新のエリア設定をオンラインで読み込みますか？\n\n⚠️ この操作は現在のエリア設定を上書きし、元に戻すことはできません！"
+  },
+  "loading_remote_config": {
+    "message": "最新のエリア設定を読み込み中..."
+  },
+  "save_config_failed": {
+    "message": "設定の保存に失敗しました：{error}"
+  },
+  "remote_config_success": {
+    "message": "リモート設定の更新が成功しました！{count} 個のエリア設定を読み込みました"
+  },
+  "remote_config_failed": {
+    "message": "リモート設定の更新に失敗しました：{error}"
+  },
+  "confirm_clear_all_data": {
+    "message": "⚠️ すべてのデータを削除しますか？この操作は元に戻すことができません！"
+  },
+  "all_data_cleared": {
+    "message": "すべてのデータが削除されました！"
+  },
+  "no_new_rules": {
+    "message": "追加する新しいルールがありません"
+  },
+  "rules_imported_count": {
+    "message": "{count} 個のルールを正常にインポートしました"
+  },
+  "no_rules_to_export": {
+    "message": "エクスポートするルールがありません"
+  },
+  "rules_copied": {
+    "message": "ルールがクリップボードにコピーされました"
+  },
+  "rules_exported_file": {
+    "message": "ルールがファイルとしてエクスポートされました"
+  },
+  "confirm_clear_rules": {
+    "message": "すべての{type}ルールをクリアしますか？"
+  },
+  "rules_cleared": {
+    "message": "すべての{type}ルールがクリアされました"
+  },
+  "add_rule": {
+    "message": "ルールを追加"
+  },
+  "delete_rule": {
+    "message": "削除"
+  },
+  "enable_rule": {
+    "message": "有効化"
+  },
+  "disable_rule": {
+    "message": "無効化"
+  },
+  "rule_placeholder_keyword": {
+    "message": "キーワードを入力..."
+  },
+  "rule_placeholder_user": {
+    "message": "ユーザー名を入力..."
+  },
+  "add_keyword": {
+    "message": "キーワードを追加"
+  },
+  "add_blacklist_user": {
+    "message": "ブラックリストユーザーを追加"
+  },
+  "add_whitelist_user": {
+    "message": "ホワイトリストユーザーを追加"
   }
 }

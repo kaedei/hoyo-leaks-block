@@ -36,7 +36,22 @@
     "message": "Twitter"
   },
   "keywords_label": {
-    "message": "屏蔽關鍵詞（用|分隔）"
+    "message": "屏蔽關鍵詞"
+  },
+  "keywords_description": {
+    "message": "根據內容中的關鍵詞進行屏蔽"
+  },
+  "blacklist_label": {
+    "message": "使用者黑名單"
+  },
+  "blacklist_description": {
+    "message": "屏蔽指定使用者的所有內容"
+  },
+  "whitelist_label": {
+    "message": "使用者白名單"
+  },
+  "whitelist_description": {
+    "message": "白名單使用者的內容不會被屏蔽"
   },
   "keywords_placeholder_bili": {
     "message": "例如：內鬼|爆料|洩露|leak|beta"
@@ -47,35 +62,53 @@
   "keywords_placeholder_twitter": {
     "message": "例如：leak|beta|insider|spoiler"
   },
-  "blacklist_label": {
-    "message": "作者黑名單（用|分隔）"
-  },
-  "blacklist_placeholder_bili": {
-    "message": "例如：用戶名1|用戶名2"
-  },
-  "blacklist_placeholder_ytb": {
-    "message": "例如：channel1|channel2"
-  },
-  "blacklist_placeholder_twitter": {
-    "message": "例如：@user1|@user2"
-  },
-  "whitelist_label": {
-    "message": "作者白名單（用|分隔）"
-  },
-  "whitelist_placeholder_bili": {
-    "message": "例如：官方帳號|可信用戶"
-  },
-  "whitelist_placeholder_ytb": {
-    "message": "例如：官方頻道|可信頻道"
-  },
-  "whitelist_placeholder_twitter": {
-    "message": "例如：@official|@trusted"
-  },
   "btn_save_rules": {
     "message": "儲存規則"
   },
   "btn_reset_rules": {
     "message": "重設為預設"
+  },
+  "btn_add_rule": {
+    "message": "新增規則"
+  },
+  "btn_delete_rule": {
+    "message": "刪除"
+  },
+  "btn_toggle_all": {
+    "message": "全選/全不選"
+  },
+  "btn_delete_disabled": {
+    "message": "刪除已停用"
+  },
+  "btn_clear_all_rules": {
+    "message": "清空所有"
+  },
+  "placeholder_keyword": {
+    "message": "輸入關鍵詞..."
+  },
+  "placeholder_username": {
+    "message": "輸入使用者名稱..."
+  },
+  "empty_rules_title": {
+    "message": "暫無規則"
+  },
+  "empty_rules_hint": {
+    "message": "點擊下方按鈕新增新規則"
+  },
+  "confirm_delete_disabled": {
+    "message": "確認刪除所有已停用的規則？"
+  },
+  "confirm_clear_all": {
+    "message": "確認清空所有規則？"
+  },
+  "success_import_rules": {
+    "message": "成功匯入規則"
+  },
+  "success_export_rules": {
+    "message": "規則已匯出"
+  },
+  "error_no_rules": {
+    "message": "沒有規則可匯出"
   },
   "areas_title": {
     "message": "區域管理"
@@ -478,5 +511,77 @@
   },
   "default_area_twitter_timeline": {
     "message": "推文清單"
+  },
+  "config_imported": {
+    "message": "設定匯入成功！"
+  },
+  "confirm_load_remote_config": {
+    "message": "確認線上載入最新區域設定？\n\n⚠️ 此操作將覆蓋目前的區域設定，無法復原！"
+  },
+  "loading_remote_config": {
+    "message": "正在載入最新區域設定..."
+  },
+  "save_config_failed": {
+    "message": "儲存設定失敗：{error}"
+  },
+  "remote_config_success": {
+    "message": "遠端設定更新成功！載入了 {count} 個區域設定"
+  },
+  "remote_config_failed": {
+    "message": "遠端設定更新失敗：{error}"
+  },
+  "confirm_clear_all_data": {
+    "message": "⚠️ 確認清除所有資料？此操作無法復原！"
+  },
+  "all_data_cleared": {
+    "message": "所有資料已清除！"
+  },
+  "no_new_rules": {
+    "message": "沒有新的規則可新增"
+  },
+  "rules_imported_count": {
+    "message": "成功匯入 {count} 個規則"
+  },
+  "no_rules_to_export": {
+    "message": "沒有規則可匯出"
+  },
+  "rules_copied": {
+    "message": "規則已複製到剪貼簿"
+  },
+  "rules_exported_file": {
+    "message": "規則已匯出為檔案"
+  },
+  "confirm_clear_rules": {
+    "message": "確認清空所有{type}規則？"
+  },
+  "rules_cleared": {
+    "message": "已清空所有{type}規則"
+  },
+  "add_rule": {
+    "message": "新增規則"
+  },
+  "delete_rule": {
+    "message": "刪除"
+  },
+  "enable_rule": {
+    "message": "啟用"
+  },
+  "disable_rule": {
+    "message": "停用"
+  },
+  "rule_placeholder_keyword": {
+    "message": "輸入關鍵詞..."
+  },
+  "rule_placeholder_user": {
+    "message": "輸入使用者名稱..."
+  },
+  "add_keyword": {
+    "message": "新增關鍵詞"
+  },
+  "add_blacklist_user": {
+    "message": "新增黑名單使用者"
+  },
+  "add_whitelist_user": {
+    "message": "新增白名單使用者"
   }
 }

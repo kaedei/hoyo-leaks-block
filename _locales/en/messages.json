@@ -36,7 +36,16 @@
     "message": "Twitter"
   },
   "keywords_label": {
-    "message": "Block Keywords (separated by |)"
+    "message": "Block Keywords"
+  },
+  "keywords_description": {
+    "message": "Block content based on keywords"
+  },
+  "blacklist_label": {
+    "message": "Author Blacklist"
+  },
+  "whitelist_label": {
+    "message": "Author Whitelist"
   },
   "keywords_placeholder_bili": {
     "message": "e.g.: leak|spoiler|beta|insider"
@@ -47,35 +56,53 @@
   "keywords_placeholder_twitter": {
     "message": "e.g.: leak|beta|insider|spoiler"
   },
-  "blacklist_label": {
-    "message": "Author Blacklist (separated by |)"
-  },
-  "blacklist_placeholder_bili": {
-    "message": "e.g.: user1|user2"
-  },
-  "blacklist_placeholder_ytb": {
-    "message": "e.g.: channel1|channel2"
-  },
-  "blacklist_placeholder_twitter": {
-    "message": "e.g.: @user1|@user2"
-  },
-  "whitelist_label": {
-    "message": "Author Whitelist (separated by |)"
-  },
-  "whitelist_placeholder_bili": {
-    "message": "e.g.: official|trusted"
-  },
-  "whitelist_placeholder_ytb": {
-    "message": "e.g.: official|trusted"
-  },
-  "whitelist_placeholder_twitter": {
-    "message": "e.g.: @official|@trusted"
-  },
   "btn_save_rules": {
     "message": "Save Rules"
   },
   "btn_reset_rules": {
     "message": "Reset to Default"
+  },
+  "btn_add_rule": {
+    "message": "Add Rule"
+  },
+  "btn_delete_rule": {
+    "message": "Delete"
+  },
+  "btn_toggle_all": {
+    "message": "Select All/None"
+  },
+  "btn_delete_disabled": {
+    "message": "Delete Disabled"
+  },
+  "btn_clear_all_rules": {
+    "message": "Clear All"
+  },
+  "placeholder_keyword": {
+    "message": "Enter keyword..."
+  },
+  "placeholder_username": {
+    "message": "Enter username..."
+  },
+  "empty_rules_title": {
+    "message": "No Rules"
+  },
+  "empty_rules_hint": {
+    "message": "Click the button below to add new rules"
+  },
+  "confirm_delete_disabled": {
+    "message": "Confirm to delete all disabled rules?"
+  },
+  "confirm_clear_all": {
+    "message": "Confirm to clear all rules?"
+  },
+  "success_import_rules": {
+    "message": "Successfully imported rules"
+  },
+  "success_export_rules": {
+    "message": "Rules exported"
+  },
+  "error_no_rules": {
+    "message": "No rules to export"
   },
   "areas_title": {
     "message": "Area Management"
@@ -276,28 +303,28 @@
     "message": "HoYo Leaks Block"
   },
   "add_rule": {
-    "message": "添加规则"
+    "message": "Add Rule"
   },
   "delete_rule": {
-    "message": "删除"
+    "message": "Delete"
   },
   "enable_rule": {
-    "message": "启用"
+    "message": "Enable"
   },
   "disable_rule": {
-    "message": "禁用"
+    "message": "Disable"
   },
   "rule_placeholder_keyword": {
-    "message": "输入关键词..."
+    "message": "Enter keyword..."
   },
   "rule_placeholder_user": {
-    "message": "输入用户名..."
+    "message": "Enter username..."
   },
   "add_keyword": {
-    "message": "添加关键词"
+    "message": "Add Keyword"
   },
   "add_blacklist_user": {
-    "message": "添加黑名单用户"
+    "message": "Add Blacklist User"
   },
   "add_whitelist_user": {
     "message": "Add Whitelist User"
