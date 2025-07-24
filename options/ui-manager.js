@@ -38,8 +38,24 @@ class UIManager {
    * 初始化标签页切换
    */
   initTabNavigation() {
+    // 恢复上次的标签页状态
+    const savedTab = localStorage.getItem('hoyo-block-active-tab') || 'rules';
+    this.activeTab = savedTab;
+
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
+
+    // 设置初始状态
+    navItems.forEach(nav => nav.classList.remove('active'));
+    tabContents.forEach(content => content.classList.remove('active'));
+
+    const activeNavItem = document.querySelector(`[data-tab="${savedTab}"]`);
+    const activeTabContent = document.getElementById(`${savedTab}-tab`);
+
+    if (activeNavItem && activeTabContent) {
+      activeNavItem.classList.add('active');
+      activeTabContent.classList.add('active');
+    }
 
     navItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -54,6 +70,8 @@ class UIManager {
         document.getElementById(`${targetTab}-tab`).classList.add('active');
 
         this.activeTab = targetTab;
+        // 保存状态到 localStorage
+        localStorage.setItem('hoyo-block-active-tab', targetTab);
       });
     });
   }
@@ -62,8 +80,24 @@ class UIManager {
    * 初始化平台标签页切换
    */
   initPlatformTabs() {
+    // 恢复上次的平台标签页状态
+    const savedPlatform = localStorage.getItem('hoyo-block-active-platform') || 'bilibili';
+    this.activePlatform = savedPlatform;
+
     const platformBtns = document.querySelectorAll('.platform-tab-btn');
     const platformPanels = document.querySelectorAll('.platform-config-panel');
+
+    // 设置初始状态
+    platformBtns.forEach(btn => btn.classList.remove('active'));
+    platformPanels.forEach(panel => panel.classList.remove('active'));
+
+    const activePlatformBtn = document.querySelector(`[data-platform="${savedPlatform}"]`);
+    const activePlatformPanel = document.getElementById(`${savedPlatform}-config`);
+
+    if (activePlatformBtn && activePlatformPanel) {
+      activePlatformBtn.classList.add('active');
+      activePlatformPanel.classList.add('active');
+    }
 
     platformBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -78,6 +112,8 @@ class UIManager {
         document.getElementById(`${targetPlatform}-config`).classList.add('active');
 
         this.activePlatform = targetPlatform;
+        // 保存状态到 localStorage
+        localStorage.setItem('hoyo-block-active-platform', targetPlatform);
       });
     });
   }

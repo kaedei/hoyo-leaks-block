@@ -143,7 +143,6 @@ class ContentBlocker {
           return; // 跳过已处理的元素
         }
 
-        const textElement = item.querySelector(area.text);
         const userElement = area.home ?
           document.querySelector(area.user) :
           item.querySelector(area.user);

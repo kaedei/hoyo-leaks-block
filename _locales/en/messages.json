@@ -120,7 +120,7 @@
     "message": "User Selector"
   },
   "area_home_enable": {
-    "message": "Enable on Home"
+    "message": "Find user element from document root"
   },
   "area_main_selector_placeholder": {
     "message": "e.g.: .video-container"

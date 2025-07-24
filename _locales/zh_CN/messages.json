@@ -120,7 +120,7 @@
     "message": "用户选择器"
   },
   "area_home_enable": {
-    "message": "首页启用"
+    "message": "从文档根节点查找用户元素"
   },
   "area_main_selector_placeholder": {
     "message": "例如：.video-container"

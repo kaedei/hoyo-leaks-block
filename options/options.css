@@ -468,6 +468,13 @@ body {
   color: #555;
 }
 
+/* 特殊处理复选框标签 */
+.edit-dialog .form-group label.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .edit-dialog input,
 .edit-dialog select,
 .edit-dialog textarea {
@@ -477,6 +484,12 @@ body {
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.3s ease;
+}
+
+/* 复选框特殊处理 */
+.edit-dialog input[type="checkbox"] {
+  width: auto;
+  margin: 0;
 }
 
 .edit-dialog input:focus,

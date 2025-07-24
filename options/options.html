@@ -211,6 +211,59 @@
   <!-- 消息提示 -->
   <div id="message" class="message"></div>
 
+  <!-- 对话框模板 -->
+  <template id="area-dialog-template">
+    <div class="edit-dialog-overlay">
+      <div class="edit-dialog">
+        <h3 id="dialog-title">编辑区域</h3>
+        <form id="area-form">
+          <div class="form-group">
+            <label for="area-name">__MSG_area_name__:</label>
+            <input type="text" id="area-name" placeholder="请输入区域名称" required>
+          </div>
+          <div class="form-group">
+            <label for="area-platform">__MSG_area_platform__:</label>
+            <select id="area-platform">
+              <option value="bilibili">B站</option>
+              <option value="youtube">YouTube</option>
+              <option value="twitter">Twitter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="area-main">__MSG_area_main_selector__:</label>
+            <textarea id="area-main" rows="2" placeholder="__MSG_area_main_selector_placeholder__" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="area-item">__MSG_area_item_selector__:</label>
+            <textarea id="area-item" rows="2" placeholder="__MSG_area_item_selector_placeholder__" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="area-text">__MSG_area_text_selector__:</label>
+            <textarea id="area-text" rows="2" placeholder="__MSG_area_text_selector_placeholder__" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="area-media">__MSG_area_media_selector__:</label>
+            <textarea id="area-media" rows="2" placeholder="__MSG_area_media_selector_placeholder__"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="area-user">__MSG_area_user_selector__:</label>
+            <textarea id="area-user" rows="2" placeholder="__MSG_area_user_selector_placeholder__"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="area-home">
+              __MSG_area_home_enable__
+            </label>
+          </div>
+          <div class="dialog-actions">
+            <button type="submit" class="btn btn-primary" id="dialog-save-btn">保存</button>
+            <button type="button" class="btn btn-secondary" id="dialog-cancel-btn">取消</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </template>
+
   <!-- 按顺序加载JavaScript模块 -->
   <script src="../core/debug-logger.js"></script>
   <script src="../core/constants.js"></script>
