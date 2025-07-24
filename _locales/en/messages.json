@@ -274,5 +274,32 @@
   },
   "block_button": {
     "message": "HoYo Leaks Block"
+  },
+  "add_rule": {
+    "message": "添加规则"
+  },
+  "delete_rule": {
+    "message": "删除"
+  },
+  "enable_rule": {
+    "message": "启用"
+  },
+  "disable_rule": {
+    "message": "禁用"
+  },
+  "rule_placeholder_keyword": {
+    "message": "输入关键词..."
+  },
+  "rule_placeholder_user": {
+    "message": "输入用户名..."
+  },
+  "add_keyword": {
+    "message": "添加关键词"
+  },
+  "add_blacklist_user": {
+    "message": "添加黑名单用户"
+  },
+  "add_whitelist_user": {
+    "message": "添加白名单用户"
   }
 }

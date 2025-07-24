@@ -31,6 +31,9 @@ class ConfigManager extends BaseConfigManager {
           this.config = directResult || {};
           this.areaList = directResult?.areaList || [];
 
+          // 初始化配置结构
+          this.initConfigStructure();
+
           // 验证配置的完整性
           this.validateConfig();
           resolve();

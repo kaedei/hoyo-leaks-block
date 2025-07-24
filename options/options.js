@@ -45,17 +45,27 @@ class OptionsController {
       // 初始化区域数据（如果没有数据则加载示例数据）
       window.AreaManager.initAreaData();
 
+      // 绑定全局配置管理方法到window对象（供HTML中的onclick使用）
+      this.bindGlobalMethods();
+
       this.initialized = true;
       DebugLogger.log('[HoyoBlock-Options] Options page initialized successfully');
 
     } catch (error) {
-      console.error('[HoyoBlock-Options] Error initializing options page:', error);
-      if (typeof window.Utils !== 'undefined' && window.Utils.showMessage) {
-        window.Utils.showMessage('初始化失败: ' + error.message, 'error');
-      } else {
-        alert('初始化失败: ' + error.message);
-      }
+      console.error('[HoyoBlock-Options] Failed to initialize:', error);
+      throw error;
     }
+  }
+
+  /**
+   * 绑定全局方法供HTML使用
+   */
+  bindGlobalMethods() {
+    // 将ConfigManager的方法绑定到全局，供HTML中的onclick使用
+    window.ConfigManager.addNewRule = window.ConfigManager.addNewRule.bind(window.ConfigManager);
+    window.ConfigManager.deleteRule = window.ConfigManager.deleteRule.bind(window.ConfigManager);
+    window.ConfigManager.toggleRule = window.ConfigManager.toggleRule.bind(window.ConfigManager);
+    window.ConfigManager.updateRuleValue = window.ConfigManager.updateRuleValue.bind(window.ConfigManager);
   }
 }
 
@@ -118,16 +128,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // 导出主控制器和全局函数（向后兼容）
 window.OptionsController = optionsController;
-
-// 为了向后兼容，导出一些全局函数
-window.toggleArea = (index) => window.AreaManager.toggleArea(index);
-window.editArea = (index) => window.AreaManager.editArea(index);
-window.deleteArea = (index) => window.AreaManager.deleteArea(index);
-window.addArea = () => window.AreaManager.addArea();
-window.refreshAreas = () => window.AreaManager.refreshAreas();
-window.closeEditDialog = () => window.Utils.closeDialog();
-window.closeAddDialog = () => window.Utils.closeDialog();
-
-// 导出工具函数（向后兼容）
-window.getPlatformDisplayName = window.Utils.getPlatformDisplayName;
-window.showMessage = window.Utils.showMessage;

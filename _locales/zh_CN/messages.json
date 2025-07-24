@@ -36,7 +36,22 @@
     "message": "Twitter"
   },
   "keywords_label": {
-    "message": "屏蔽关键词（用|分隔）"
+    "message": "屏蔽关键词"
+  },
+  "keywords_description": {
+    "message": "根据内容中的关键词进行屏蔽"
+  },
+  "blacklist_label": {
+    "message": "用户黑名单"
+  },
+  "blacklist_description": {
+    "message": "屏蔽指定用户的所有内容"
+  },
+  "whitelist_label": {
+    "message": "用户白名单"
+  },
+  "whitelist_description": {
+    "message": "白名单用户的内容不会被屏蔽"
   },
   "keywords_placeholder_bili": {
     "message": "例如：内鬼|爆料|泄露|leak|beta"
@@ -47,9 +62,6 @@
   "keywords_placeholder_twitter": {
     "message": "例如：leak|beta|insider|spoiler"
   },
-  "blacklist_label": {
-    "message": "作者黑名单（用|分隔）"
-  },
   "blacklist_placeholder_bili": {
     "message": "例如：用户名1|用户名2"
   },
@@ -58,9 +70,6 @@
   },
   "blacklist_placeholder_twitter": {
     "message": "例如：@user1|@user2"
-  },
-  "whitelist_label": {
-    "message": "作者白名单（用|分隔）"
   },
   "whitelist_placeholder_bili": {
     "message": "例如：官方账号|可信用户"
@@ -76,6 +85,48 @@
   },
   "btn_reset_rules": {
     "message": "重置为默认"
+  },
+  "btn_add_rule": {
+    "message": "添加规则"
+  },
+  "btn_delete_rule": {
+    "message": "删除"
+  },
+  "btn_toggle_all": {
+    "message": "全选/全不选"
+  },
+  "btn_delete_disabled": {
+    "message": "删除已禁用"
+  },
+  "btn_clear_all_rules": {
+    "message": "清空所有"
+  },
+  "placeholder_keyword": {
+    "message": "输入关键词..."
+  },
+  "placeholder_username": {
+    "message": "输入用户名..."
+  },
+  "empty_rules_title": {
+    "message": "暂无规则"
+  },
+  "empty_rules_hint": {
+    "message": "点击下方按钮添加新规则"
+  },
+  "confirm_delete_disabled": {
+    "message": "确认删除所有已禁用的规则？"
+  },
+  "confirm_clear_all": {
+    "message": "确认清空所有规则？"
+  },
+  "success_import_rules": {
+    "message": "成功导入规则"
+  },
+  "success_export_rules": {
+    "message": "规则已导出"
+  },
+  "error_no_rules": {
+    "message": "没有规则可导出"
   },
   "areas_title": {
     "message": "区域管理"
@@ -274,5 +325,32 @@
   },
   "block_button": {
     "message": "米游内鬼信息屏蔽"
+  },
+  "add_rule": {
+    "message": "添加规则"
+  },
+  "delete_rule": {
+    "message": "删除"
+  },
+  "enable_rule": {
+    "message": "启用"
+  },
+  "disable_rule": {
+    "message": "禁用"
+  },
+  "rule_placeholder_keyword": {
+    "message": "输入关键词..."
+  },
+  "rule_placeholder_user": {
+    "message": "输入用户名..."
+  },
+  "add_keyword": {
+    "message": "添加关键词"
+  },
+  "add_blacklist_user": {
+    "message": "添加黑名单用户"
+  },
+  "add_whitelist_user": {
+    "message": "添加白名单用户"
   }
 }

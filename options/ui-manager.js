@@ -312,6 +312,57 @@ class UIManager {
   getCurrentPlatform() {
     return this.activePlatform;
   }
+
+  /**
+   * 显示导入规则对话框
+   */
+  showImportDialog(platform, ruleType) {
+    const dialog = document.createElement('div');
+    dialog.className = 'import-dialog';
+    dialog.innerHTML = `
+      <div class="import-dialog-content">
+        <h3>导入${window.ConfigManager.getRuleTypeName(ruleType)}规则</h3>
+        <p>请将规则内容粘贴到下方文本框中，每行一个规则：</p>
+        <textarea class="import-textarea" placeholder="规则1
+规则2
+规则3
+..."></textarea>
+        <div class="import-actions">
+          <button class="btn btn-secondary cancel-import">取消</button>
+          <button class="btn btn-primary confirm-import">导入</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(dialog);
+
+    // 绑定事件
+    const textarea = dialog.querySelector('.import-textarea');
+    const cancelBtn = dialog.querySelector('.cancel-import');
+    const confirmBtn = dialog.querySelector('.confirm-import');
+
+    cancelBtn.addEventListener('click', () => {
+      document.body.removeChild(dialog);
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      const text = textarea.value.trim();
+      if (text) {
+        window.ConfigManager.importRulesFromText(platform, ruleType, text);
+      }
+      document.body.removeChild(dialog);
+    });
+
+    // 点击背景关闭
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        document.body.removeChild(dialog);
+      }
+    });
+
+    // 聚焦到文本框
+    setTimeout(() => textarea.focus(), 100);
+  }
 }
 
 // 导出UI管理器
