@@ -27,6 +27,8 @@
       "js": [
         "core/debug-logger.js",
         "core/constants.js",
+        "shared/base-config-manager.js",
+        "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",
@@ -47,6 +49,8 @@
       "js": [
         "core/debug-logger.js",
         "core/constants.js",
+        "shared/base-config-manager.js",
+        "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",
@@ -68,6 +72,8 @@
       "js": [
         "core/debug-logger.js",
         "core/constants.js",
+        "shared/base-config-manager.js",
+        "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
         "core/stats-manager.js",

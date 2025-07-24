@@ -1,9 +1,8 @@
-// 配置管理模块
-class ConfigManager {
+// 配置管理模块 - 内容脚本版本
+class ConfigManager extends BaseConfigManager {
   constructor(platform) {
+    super();
     this.platform = platform;
-    this.config = {};
-    this.areaList = [];
   }
 
   async loadConfig() {
@@ -136,19 +135,9 @@ class ConfigManager {
       return null;
     }
 
-    // 处理多个关键词，用|分隔
-    const keywords = str.split('|').map(k => k.trim()).filter(k => k);
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Keywords for ${configKey}:`, keywords);
-
-    if (keywords.length === 0) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] No valid keywords for ${configKey}, returning null`);
-      return null;
-    }
-
-    const pattern = keywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Regex pattern for ${configKey}:`, pattern);
-
-    return new RegExp(pattern, 'i');
+    const regex = this.buildRegExp(configKey);
+    DebugLogger.log(`[HoyoBlock-${this.platform}] Regex pattern for ${configKey}:`, regex?.source);
+    return regex;
   }
 
   getConfig() {

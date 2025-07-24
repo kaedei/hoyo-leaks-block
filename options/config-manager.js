@@ -1,12 +1,13 @@
 /**
- * 配置管理模块
+ * 配置管理模块 - 选项页面版本
  */
 
 /**
  * 配置管理器
  */
-class ConfigManager {
+class OptionsConfigManager extends BaseConfigManager {
   constructor() {
+    super();
     this.remoteManager = new RemoteConfigManager();
     this.defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
   }
@@ -173,4 +174,4 @@ class ConfigManager {
 }
 
 // 导出配置管理器
-window.ConfigManager = new ConfigManager();
+window.ConfigManager = new OptionsConfigManager();

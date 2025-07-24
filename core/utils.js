@@ -1,5 +1,5 @@
-// 工具函数模块
-class Utils {
+// 工具函数模块 - 内容脚本版本
+class Utils extends SharedUtils {
   /**
    * 等待Chrome运行时准备就绪
    * @param {string} platform 平台名称
@@ -98,43 +98,6 @@ class Utils {
   static cleanString(str) {
     if (typeof str !== 'string') return '';
     return str.replace(/\s+/g, ' ').trim();
-  }
-
-  /**
-   * 防抖函数
-   * @param {Function} func 要防抖的函数
-   * @param {number} wait 等待时间
-   * @returns {Function} 防抖后的函数
-   */
-  static debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
-  /**
-   * 节流函数
-   * @param {Function} func 要节流的函数
-   * @param {number} limit 限制时间
-   * @returns {Function} 节流后的函数
-   */
-  static throttle(func, limit) {
-    let inThrottle;
-    return function () {
-      const args = arguments;
-      const context = this;
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
-      }
-    };
   }
 }
 
