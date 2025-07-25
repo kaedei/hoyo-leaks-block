@@ -1,6 +1,14 @@
+![](icons/icon128.png)
+
 # 米游内鬼信息屏蔽 (Hoyo Leaks Block)
 
 **Language / 语言**：中文 | [English](README_EN.md)
+
+## 简介
+
+这是一个专为米哈游（Hoyoverse）旗下游戏（如原神、星穹铁道、绝区零等）玩家设计的浏览器扩展，能够在 B 站、YouTube、Twitter（x.com）等主流社交平台上自动屏蔽与“内鬼爆料、黑流量”相关的内容。
+
+> **致谢**: 本项目基于 B 站大佬 @凡云 开发的原始 Tampermonkey 脚本重构而成，感谢原作者的开源贡献！原项目地址：https://github.com/LCYBFF/genshinLeaksBlock
 
 ## 使用方法
 
@@ -20,10 +28,6 @@
 - **调试模式**：开发者可在 `core/constants.js` 中启用调试日志
 
 详细的区域配置说明请参考：[区域配置指南](docs/AREA_CONFIGURATION_GUIDE.md)
-
-这是一个专为米哈游（Hoyoverse）旗下游戏（如原神、星穹铁道、绝区零等）玩家设计的浏览器扩展，能够在 B 站、YouTube、Twitter（x.com）等主流社交平台上自动屏蔽与“内鬼爆料、黑流量”相关的内容。
-
-> **致谢**: 本项目基于 B 站大佬 @凡云 开发的原始 Tampermonkey 脚本重构而成，感谢原作者的开源贡献！原项目地址：https://github.com/LCYBFF/genshinLeaksBlock
 
 ## 功能特点
 

@@ -1,10 +1,12 @@
+![](icons/icon128.png)
+
 # Hoyo Leaks Block
 
 **Language / 语言**：[中文](README.md) | English
 
 This is a browser extension specifically designed for players of games under Hoyoverse, such as Genshin Impact, Honkai: Star Rail, Zenless Zone Zero, etc. It can automatically block content related to "leaks and smear campaigns" on major social platforms like Bilibili, YouTube, and Twitter (x.com).
 
-> **Acknowledgment**: This project is a refactored browser extension based on the original Tampermonkey script developed by @凡云 from Bilibili. Thanks to the original author for their open-source contribution! Original project: https://github.com/LCYBFF/genshinLeaksBlock
+> **Special Thanks**: This project is a refactored browser extension based on the original Tampermonkey script developed by @凡云 from Bilibili. Thanks to the original author for their open-source contribution! Original project: https://github.com/LCYBFF/genshinLeaksBlock
 
 ## Features
 
