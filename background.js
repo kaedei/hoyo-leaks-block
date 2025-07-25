@@ -3,11 +3,12 @@
 importScripts('core/debug-logger.js');
 importScripts('core/constants.js');
 importScripts('core/remote-config-manager.js');
+importScripts('shared/base-config-manager.js');
 
 DebugLogger.log('Hoyo Leaks Block Extension background script loaded');
 
 // Initialize default storage values
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   const defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
 
   // 设置默认配置
@@ -25,6 +26,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
   // 获取并设置默认区域列表
   fetchDefaultAreaList();
+
+  // 如果是首次安装或更新，尝试从云端获取默认规则
+  if (details.reason === 'install' || details.reason === 'update') {
+    fetchAndMergeRemoteRules();
+  }
 });
 
 // 获取默认区域列表配置
@@ -39,6 +45,37 @@ async function fetchDefaultAreaList() {
     // 使用本地默认区域列表
     const defaultAreaList = remoteManager.getDefaultAreaList();
     chrome.storage.sync.set({ areaList: defaultAreaList });
+  }
+}
+
+// 获取并合并远程默认规则
+async function fetchAndMergeRemoteRules() {
+  try {
+    DebugLogger.log('[HoyoBlock-Background] Fetching remote default rules...');
+
+    // 创建配置管理器实例
+    const configManager = new BaseConfigManager();
+
+    // 获取当前配置
+    const currentConfig = await new Promise((resolve) => {
+      chrome.storage.sync.get(null, (result) => {
+        resolve(result);
+      });
+    });
+
+    configManager.config = currentConfig;
+    configManager.initConfigStructure();
+
+    // 从云端同步规则
+    const result = await configManager.syncWithRemoteConfig(false);
+
+    if (result.success) {
+      DebugLogger.log('[HoyoBlock-Background] Remote rules synced successfully:', result);
+    } else {
+      console.warn('[HoyoBlock-Background] Failed to sync remote rules:', result.error);
+    }
+  } catch (error) {
+    console.warn('[HoyoBlock-Background] Error fetching remote rules:', error);
   }
 }
 

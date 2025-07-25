@@ -128,6 +128,108 @@ class BaseConfigManager {
   getAreaList() {
     return this.areaList;
   }
+
+  /**
+   * 从云端获取默认配置
+   */
+  async fetchRemoteDefaultConfig() {
+    const url = 'https://raw.githubusercontent.com/kaedei/hoyo-leaks-block/refs/heads/main/config/default-v1.json';
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const remoteConfig = await response.json();
+      return remoteConfig;
+    } catch (error) {
+      console.error('[BaseConfigManager] Failed to fetch remote config:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 合并远程配置到本地配置
+   * @param {Object} remoteConfig - 远程配置对象
+   * @param {boolean} overwrite - 是否覆盖已存在的规则，默认为false（只添加新规则）
+   */
+  mergeRemoteConfig(remoteConfig, overwrite = false) {
+    if (!remoteConfig || !remoteConfig.blockRules) {
+      throw new Error('Invalid remote config format');
+    }
+
+    // 确保本地配置结构存在
+    this.initConfigStructure();
+
+    const platforms = ['bilibili', 'youtube', 'twitter'];
+    const ruleTypes = ['keywords', 'blacklist', 'whitelist'];
+
+    let mergedCount = 0;
+    let skippedCount = 0;
+
+    platforms.forEach(platform => {
+      if (!remoteConfig.blockRules[platform]) return;
+
+      ruleTypes.forEach(ruleType => {
+        const remoteRules = remoteConfig.blockRules[platform][ruleType];
+        if (!Array.isArray(remoteRules)) return;
+
+        const localRules = this.config.blockRules[platform][ruleType];
+
+        remoteRules.forEach(remoteRule => {
+          if (!remoteRule || !remoteRule.trim()) return;
+
+          const ruleExists = localRules.some(localRule =>
+            localRule.toLowerCase().trim() === remoteRule.toLowerCase().trim()
+          );
+
+          if (!ruleExists) {
+            localRules.push(remoteRule.trim());
+            mergedCount++;
+          } else if (overwrite) {
+            // 如果选择覆盖且规则已存在，更新规则
+            const existingIndex = localRules.findIndex(localRule =>
+              localRule.toLowerCase().trim() === remoteRule.toLowerCase().trim()
+            );
+            if (existingIndex !== -1) {
+              localRules[existingIndex] = remoteRule.trim();
+            }
+          } else {
+            skippedCount++;
+          }
+        });
+      });
+    });
+
+    return { mergedCount, skippedCount };
+  }
+
+  /**
+   * 获取并合并远程默认配置
+   * @param {boolean} overwrite - 是否覆盖已存在的规则
+   */
+  async syncWithRemoteConfig(overwrite = false) {
+    try {
+      const remoteConfig = await this.fetchRemoteDefaultConfig();
+      const result = this.mergeRemoteConfig(remoteConfig, overwrite);
+
+      // 保存到本地存储
+      await this.setStorageData({ blockRules: this.config.blockRules });
+
+      return {
+        success: true,
+        ...result,
+        remoteVersion: remoteConfig.version,
+        lastUpdated: remoteConfig.lastUpdated
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
 }
 
 // 导出供其他模块使用

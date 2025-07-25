@@ -68,6 +68,9 @@
   "btn_reset_rules": {
     "message": "重設為預設"
   },
+  "btn_sync_remote_rules": {
+    "message": "從雲端同步規則"
+  },
   "btn_add_rule": {
     "message": "新增規則"
   },
@@ -583,5 +586,17 @@
   },
   "add_whitelist_user": {
     "message": "新增白名單使用者"
+  },
+  "sync_remote_success": {
+    "message": "雲端同步成功！新增 {merged} 個規則，跳過 {skipped} 個重複規則"
+  },
+  "sync_remote_error": {
+    "message": "雲端同步失敗：{error}"
+  },
+  "sync_remote_confirm": {
+    "message": "確認從雲端同步預設規則嗎？這將添加新的規則到您的設定中（不會刪除現有規則）。"
+  },
+  "sync_remote_loading": {
+    "message": "正在從雲端獲取最新規則..."
   }
 }

@@ -68,6 +68,9 @@
   "btn_reset_rules": {
     "message": "デフォルトにリセット"
   },
+  "btn_sync_remote_rules": {
+    "message": "クラウドからルール同期"
+  },
   "btn_add_rule": {
     "message": "ルールを追加"
   },
@@ -583,5 +586,17 @@
   },
   "add_whitelist_user": {
     "message": "ホワイトリストユーザーを追加"
+  },
+  "sync_remote_success": {
+    "message": "クラウド同期成功！{merged} 個の新しいルールを追加、{skipped} 個の重複ルールをスキップしました"
+  },
+  "sync_remote_error": {
+    "message": "クラウド同期失敗：{error}"
+  },
+  "sync_remote_confirm": {
+    "message": "クラウドからデフォルトルールを同期しますか？新しいルールが設定に追加されます（既存のルールは削除されません）。"
+  },
+  "sync_remote_loading": {
+    "message": "クラウドから最新ルールを取得中..."
   }
 }

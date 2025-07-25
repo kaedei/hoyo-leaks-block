@@ -1,0 +1,45 @@
+{
+  "version": "1",
+  "description": "Default block rules configuration for Hoyo Leaks Block extension",
+  "lastUpdated": "2025-07-25",
+  "blockRules": {
+    "bilibili": {
+      "keywords": [
+        "内鬼",
+        "爆料",
+        "泄露",
+        "leak",
+        "beta",
+        "测试服",
+        "v2",
+        "v3",
+        "v4",
+        "v5"
+      ],
+      "blacklist": [],
+      "whitelist": []
+    },
+    "youtube": {
+      "keywords": [
+        "leak",
+        "beta",
+        "insider",
+        "spoiler",
+        "unreleased"
+      ],
+      "blacklist": [],
+      "whitelist": []
+    },
+    "twitter": {
+      "keywords": [
+        "leak",
+        "beta",
+        "insider",
+        "spoiler",
+        "unreleased"
+      ],
+      "blacklist": [],
+      "whitelist": []
+    }
+  }
+}

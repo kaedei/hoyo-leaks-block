@@ -148,6 +148,13 @@ class UIManager {
       });
     }
 
+    const syncRemoteRulesBtn = getElement('sync-remote-rules');
+    if (syncRemoteRulesBtn) {
+      syncRemoteRulesBtn.addEventListener('click', () => {
+        window.ConfigManager.syncRemoteRules();
+      });
+    }
+
     const exportConfigBtn = getElement('export-config');
     if (exportConfigBtn) {
       exportConfigBtn.addEventListener('click', () => {

@@ -62,6 +62,9 @@
   "btn_reset_rules": {
     "message": "Reset to Default"
   },
+  "btn_sync_remote_rules": {
+    "message": "Sync Rules from Cloud"
+  },
   "btn_add_rule": {
     "message": "Add Rule"
   },
@@ -577,5 +580,17 @@
   },
   "rules_cleared": {
     "message": "All {type} rules have been cleared"
+  },
+  "sync_remote_success": {
+    "message": "Cloud sync successful! Added {merged} new rules, skipped {skipped} duplicate rules"
+  },
+  "sync_remote_error": {
+    "message": "Cloud sync failed: {error}"
+  },
+  "sync_remote_confirm": {
+    "message": "Confirm to sync default rules from cloud? This will add new rules to your configuration (existing rules will not be removed)."
+  },
+  "sync_remote_loading": {
+    "message": "Fetching latest rules from cloud..."
   }
 }

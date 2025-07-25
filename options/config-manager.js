@@ -397,6 +397,48 @@ class OptionsConfigManager extends BaseConfigManager {
       window.Utils.showMessage(chrome.i18n.getMessage('rules_cleared').replace('{type}', this.getRuleTypeName(ruleType)), 'success');
     }
   }
+
+  /**
+   * 从云端同步规则
+   */
+  async syncRemoteRules() {
+    try {
+      // 显示确认对话框
+      if (!confirm(chrome.i18n.getMessage('sync_remote_confirm'))) {
+        return;
+      }
+
+      // 显示加载提示
+      window.Utils.showMessage(chrome.i18n.getMessage('sync_remote_loading'), 'info');
+
+      // 执行同步
+      const result = await this.syncWithRemoteConfig(false);
+
+      if (result.success) {
+        // 重新加载UI
+        this.loadRulesToUI();
+
+        // 显示成功消息
+        const message = chrome.i18n.getMessage('sync_remote_success')
+          .replace('{merged}', result.mergedCount)
+          .replace('{skipped}', result.skippedCount);
+
+        window.Utils.showMessage(message, 'success');
+      } else {
+        // 显示错误消息
+        const message = chrome.i18n.getMessage('sync_remote_error')
+          .replace('{error}', result.error);
+
+        window.Utils.showMessage(message, 'error');
+      }
+    } catch (error) {
+      console.error('[ConfigManager] Sync remote rules failed:', error);
+      const message = chrome.i18n.getMessage('sync_remote_error')
+        .replace('{error}', error.message);
+
+      window.Utils.showMessage(message, 'error');
+    }
+  }
 }
 
 // 导出配置管理器

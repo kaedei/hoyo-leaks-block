@@ -241,6 +241,16 @@ body {
   transform: translateY(-2px);
 }
 
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
 .btn-danger {
   background: #dc3545;
   color: white;
