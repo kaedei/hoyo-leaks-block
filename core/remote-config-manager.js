@@ -65,25 +65,8 @@ class RemoteConfigManager {
       }
     }
 
-    // 如果新方法失败，回退到旧方法
-    if (this.constants && this.constants.getDefaultAreaList) {
-      return this.constants.getDefaultAreaList();
-    }
-
-    // 如果常量不可用，返回最基础的默认配置
-    return [
-      {
-        "name": "default_area_bilibili_home",
-        "area": "bilibili",
-        "main": ".recommended-container_floor-aside",
-        "item": ".bili-video-card",
-        "text": ".bili-video-card__info--tit a",
-        "media": ".bili-video-card__image",
-        "user": ".bili-video-card__info--author",
-        "on": true,
-        "home": false
-      }
-    ];
+    console.warn('[RemoteConfigManager] Using fallback empty area list');
+    return [];
   }
 
   /**

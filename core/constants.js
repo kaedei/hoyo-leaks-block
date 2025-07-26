@@ -64,55 +64,10 @@ const APP_CONSTANTS = {
     } catch (error) {
       console.warn('[APP_CONSTANTS] Failed to load arealist.json:', error);
     }
-
-    // 如果加载失败，返回基础的备用配置
-    return this.getFallbackAreaList();
+    // 如果加载失败，返回一个空数组
+    return [];
   },
 
-  // 获取本地化的默认区域列表（同步方法，用于向后兼容）
-  getDefaultAreaList() {
-    // 返回基础备用配置，主要用于向后兼容
-    return this.getFallbackAreaList();
-  },
-
-  // 获取备用的区域配置
-  getFallbackAreaList() {
-    return [
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_home'),
-        "area": "bilibili",
-        "main": ".recommended-container_floor-aside",
-        "item": ".bili-video-card",
-        "text": ".bili-video-card__info--tit a",
-        "media": ".bili-video-card__image",
-        "user": ".bili-video-card__info--author",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_youtube_list'),
-        "area": "youtube",
-        "main": "ytd-rich-grid-renderer",
-        "item": "ytd-rich-item-renderer",
-        "text": "#video-title",
-        "media": "ytd-thumbnail",
-        "user": "ytd-channel-name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_twitter_timeline'),
-        "area": "twitter",
-        "main": "[aria-labelledby='accessible-list-1']",
-        "item": "[data-testid=tweet]",
-        "text": "[data-testid=tweetText]",
-        "media": "[data-testid=tweetPhoto], video",
-        "user": "[data-testid=User-Name]",
-        "on": true,
-        "home": false
-      }
-    ];
-  }
 };
 
 // 如果在扩展环境中，将常量添加到全局
