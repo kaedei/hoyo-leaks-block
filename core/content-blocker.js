@@ -281,19 +281,20 @@ class ContentBlocker {
         // 提取所有可能的文本内容
         const textElements = item.querySelectorAll(area.text);
         const allTexts = Array.from(textElements).map(el => {
-          // 使用 textContent 确保获取所有文本，包括子元素内的文本
-          let textContent = el.textContent?.trim() || '';
+          // 通用的文本提取策略：优先使用 title 属性获取完整文本，然后使用 textContent
+          let textContent = '';
 
-          // 特别处理 Bilibili 搜索页面的情况，确保获取完整的标题文本
-          if (this.platform === 'bilibili' && el.classList.contains('bili-video-card__info--tit')) {
-            // 如果元素有 title 属性，优先使用 title 属性的值，因为它通常包含完整的标题
-            const titleAttr = el.getAttribute('title');
-            if (titleAttr && titleAttr.trim()) {
-              textContent = titleAttr.trim();
+          // 1. 首先尝试从 title 属性获取完整文本（通常包含未被截断的内容）
+          const titleAttr = el.getAttribute('title');
+          if (titleAttr && titleAttr.trim()) {
+            textContent = titleAttr.trim();
+            if (DebugLogger.isDebugMode) {
               DebugLogger.log(`[HoyoBlock-${this.platform}] Using title attribute: "${titleAttr}"`);
-            } else {
-              // 否则使用 textContent，但确保包含所有子元素的文本
-              textContent = el.textContent?.trim() || '';
+            }
+          } else {
+            // 2. 否则使用 textContent，确保包含所有子元素的文本
+            textContent = el.textContent?.trim() || '';
+            if (DebugLogger.isDebugMode && textContent) {
               DebugLogger.log(`[HoyoBlock-${this.platform}] Using textContent: "${textContent}"`);
             }
           }
