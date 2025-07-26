@@ -12,6 +12,23 @@ class AreaManager {
   }
 
   /**
+   * 安全地获取国际化消息
+   * @param {string} key 消息键
+   * @param {string} fallback 备用文本
+   * @returns {string} 本地化消息或备用文本
+   */
+  getI18nMessage(key, fallback = key) {
+    try {
+      if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id && chrome.i18n) {
+        return chrome.i18n.getMessage(key) || fallback;
+      }
+    } catch (error) {
+      // 扩展上下文失效时静默处理
+    }
+    return fallback;
+  }
+
+  /**
    * 加载区域列表
    */
   loadAreaList() {
@@ -27,7 +44,7 @@ class AreaManager {
       if (areaList.length === 0) {
         container.innerHTML = `
           <div class="area-item" style="text-align: center; color: #666; font-style: italic;">
-            <div style="grid-column: 1 / -1;">${chrome.i18n.getMessage('area_empty')}</div>
+            <div style="grid-column: 1 / -1;">${this.getI18nMessage('area_empty', '暂无配置区域')}</div>
           </div>
         `;
         return;
@@ -44,15 +61,15 @@ class AreaManager {
           <div class="area-platform">${window.Utils.getPlatformDisplayName(area.area)}</div>
           <div class="area-status">
             <span class="status-indicator ${area.on ? 'status-active' : 'status-inactive'}">
-              ${area.on ? chrome.i18n.getMessage('area_enabled') : chrome.i18n.getMessage('area_disabled')}
+              ${area.on ? this.getI18nMessage('area_enabled', '已启用') : this.getI18nMessage('area_disabled', '已禁用')}
             </span>
           </div>
           <div class="area-actions">
             <button data-action="toggle-area" data-index="${index}" class="btn btn-${area.on ? 'secondary' : 'primary'}" style="padding: 4px 8px; font-size: 12px;">
-              ${area.on ? chrome.i18n.getMessage('btn_disable') : chrome.i18n.getMessage('btn_enable')}
+              ${area.on ? this.getI18nMessage('btn_disable', '禁用') : this.getI18nMessage('btn_enable', '启用')}
             </button>
-            <button data-action="edit-area" data-index="${index}" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">${chrome.i18n.getMessage('btn_edit')}</button>
-            <button data-action="delete-area" data-index="${index}" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">${chrome.i18n.getMessage('btn_delete')}</button>
+            <button data-action="edit-area" data-index="${index}" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;">${this.getI18nMessage('btn_edit', '编辑')}</button>
+            <button data-action="delete-area" data-index="${index}" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;">${this.getI18nMessage('btn_delete', '删除')}</button>
           </div>
         `;
         container.appendChild(areaItem);
@@ -71,14 +88,14 @@ class AreaManager {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
-        const action = area.on ? chrome.i18n.getMessage('btn_disable') : chrome.i18n.getMessage('btn_enable');
-        const confirmMsg = chrome.i18n.getMessage('confirm_toggle_area').replace('{action}', action).replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
+        const action = area.on ? this.getI18nMessage('btn_disable', '禁用') : this.getI18nMessage('btn_enable', '启用');
+        const confirmMsg = this.getI18nMessage('confirm_toggle_area', '确定要{action}{name}吗？').replace('{action}', action).replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
 
         if (confirm(confirmMsg)) {
           area.on = !area.on;
           chrome.storage.sync.set({ areaList }, () => {
             this.loadAreaList();
-            const successMsg = chrome.i18n.getMessage('area_toggled_success').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name)).replace('{action}', action);
+            const successMsg = this.getI18nMessage('area_toggled_success', '{name}已{action}').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name)).replace('{action}', action);
             window.Utils.showMessage(successMsg, 'success');
           });
         }

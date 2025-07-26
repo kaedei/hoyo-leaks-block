@@ -35,7 +35,16 @@ class RemoteConfigManager {
       if (data.arealist && Array.isArray(data.arealist)) {
         return data.arealist;
       } else {
-        throw new Error(chrome.i18n.getMessage('invalid_server_data'));
+        // 安全地获取国际化消息
+        let errorMsg = 'Invalid server data';
+        try {
+          if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id && chrome.i18n) {
+            errorMsg = chrome.i18n.getMessage('invalid_server_data') || errorMsg;
+          }
+        } catch (e) {
+          // 扩展上下文失效时使用默认消息
+        }
+        throw new Error(errorMsg);
       }
     } catch (error) {
       console.warn('[RemoteConfigManager] Failed to fetch remote config:', error);

@@ -194,15 +194,30 @@ class SharedUtils {
       return nameKey || '';
     }
 
+    // 检查扩展上下文是否有效
+    try {
+      if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.id) {
+        // 扩展上下文无效，直接返回原key
+        return nameKey;
+      }
+    } catch (error) {
+      // 扩展上下文检查失败，直接返回原key
+      return nameKey;
+    }
+
     // 尝试获取国际化文本
     try {
-      if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getMessage) {
+      if (chrome.i18n && chrome.i18n.getMessage) {
         const localizedName = chrome.i18n.getMessage(nameKey);
         // 如果找到了本地化文本，返回它；否则返回原key
         return localizedName || nameKey;
       }
     } catch (error) {
-      console.warn('Failed to get localized area name:', error);
+      // 静默处理错误，避免控制台噪音
+      // 只有在调试模式下才输出错误信息
+      if (typeof DebugLogger !== 'undefined' && DebugLogger.isDebugMode) {
+        DebugLogger.log('Failed to get localized area name (extension context may be invalidated):', error.message);
+      }
     }
 
     // 降级方案：返回原key

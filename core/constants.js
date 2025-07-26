@@ -5,9 +5,13 @@
 // 获取本地化的区域名称
 function getLocalizedAreaName(areaKey) {
   try {
+    // 检查扩展上下文是否有效
+    if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.id) {
+      return areaKey;
+    }
     return chrome.i18n.getMessage(areaKey) || areaKey;
   } catch (error) {
-    console.warn('Failed to get localized area name:', error);
+    // 静默处理扩展上下文失效的错误
     return areaKey;
   }
 }

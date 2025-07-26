@@ -4,8 +4,15 @@ class ContentBlocker {
     this.platform = platform;
     this.configManager = configManager;
     this.processedElements = new WeakSet(); // 缓存已处理的元素
-    this.blockTimeout = 500;
+    this.blockTimeout = 1000; // 增加到1秒，减少检查频率
     this.intervalId = null;
+
+    // 日志控制变量
+    this.lastLogTime = null;
+    this.lastAreaLogTime = null;
+    this.lastItemCounts = {};
+    this.noActiveAreasLogged = false;
+    this.lastPageContentHash = null; // 添加页面内容哈希缓存
 
     // 平台名称映射
     this.platformMapping = {
@@ -25,9 +32,9 @@ class ContentBlocker {
     const blockUsersKey = `blockUsers${this.platform}`;
     const blockUsersWhiteKey = `blockUsersWhite${this.platform}`;
 
-    // 只在有实际内容时才输出详细日志
-    if (text.length > 0 || user.length > 0) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Checking content - Text: "${text.substring(0, 100)}...", User: "${user}"`);
+    // 只在调试模式且有实际内容时才输出详细日志
+    if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Checking content - Text: "${text.substring(0, 50)}...", User: "${user}"`);
     }
 
     const blockTitle = this.configManager.getBlockRegExp(blockTitleKey);
@@ -36,7 +43,9 @@ class ContentBlocker {
 
     // 检查白名单
     if (blockUsersWhite && blockUsersWhite.test(user.trim())) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" is whitelisted, allowing content`);
+      if (DebugLogger.isDebugMode) {
+        DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" is whitelisted, allowing content`);
+      }
       return false;
     }
 
@@ -45,12 +54,14 @@ class ContentBlocker {
     const userMatch = blockUsers ? blockUsers.test(user) : false;
 
     if (titleMatch || userMatch) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] BLOCKING - Title match: ${titleMatch}, User match: ${userMatch}`);
+      if (DebugLogger.isDebugMode) {
+        DebugLogger.log(`[HoyoBlock-${this.platform}] BLOCKING - Title match: ${titleMatch}, User match: ${userMatch}`);
+      }
       return true;
     }
 
-    // 只在调试模式或有意义的情况下输出允许日志
-    if (text.length > 0 || user.length > 0) {
+    // 只在调试模式且有意义的情况下输出允许日志
+    if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
       DebugLogger.log(`[HoyoBlock-${this.platform}] Content allowed - no matches found`);
     }
     return false;
@@ -110,30 +121,94 @@ class ContentBlocker {
   }
 
   blockContent() {
+    // 检查扩展上下文是否有效
+    if (typeof DebugLogger !== 'undefined' && DebugLogger.isExtensionContextValid && !DebugLogger.isExtensionContextValid()) {
+      // 扩展上下文失效，停止屏蔽并清理
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Extension context invalidated, stopping content blocking`);
+      this.stopBlocking();
+      return 0;
+    }
+
     const areaPlatformName = this.getAreaPlatformName();
     const areaList = this.configManager.getAreaList();
     const activeAreas = areaList.filter(area =>
       area.area === areaPlatformName && area.on === true
     );
 
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Starting content blocking check - Platform: ${this.platform} -> ${areaPlatformName}`);
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Active areas: ${activeAreas.length}`);
+    // 快速检查：计算页面内容的简单哈希
+    const pageItemsCount = activeAreas.reduce((count, area) => {
+      return count + document.querySelectorAll(area.item).length;
+    }, 0);
 
-    if (activeAreas.length === 0) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] No active areas for platform ${areaPlatformName}`);
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Available areas:`, areaList.map(a => ({ name: window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(a.name) : a.name, area: a.area, on: a.on })));
+    const currentContentHash = `${pageItemsCount}-${activeAreas.length}-${location.href}`;
+
+    // 如果页面内容没有变化，跳过处理（但每60秒至少执行一次）
+    if (this.lastPageContentHash === currentContentHash &&
+      this.lastLogTime && Date.now() - this.lastLogTime < 60000) {
       return 0;
     }
+
+    this.lastPageContentHash = currentContentHash;
+
+    // 只在首次执行或有意义的状态变化时输出日志
+    if (!this.lastLogTime || Date.now() - this.lastLogTime > 60000) { // 增加到60秒间隔
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking check - Platform: ${this.platform} -> ${areaPlatformName}, Active areas: ${activeAreas.length}, Items: ${pageItemsCount}`);
+      this.lastLogTime = Date.now();
+    }
+
+    if (activeAreas.length === 0) {
+      // 只在第一次或状态改变时输出详细信息
+      if (!this.noActiveAreasLogged) {
+        DebugLogger.log(`[HoyoBlock-${this.platform}] No active areas for platform ${areaPlatformName}`);
+        // 安全地获取区域名称，避免扩展上下文失效时的错误
+        const safeGetAreaName = (area) => {
+          try {
+            return window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(area.name) : area.name;
+          } catch (error) {
+            return area.name; // 降级方案
+          }
+        };
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Available areas:`, areaList.map(a => ({
+          name: safeGetAreaName(a),
+          area: a.area,
+          on: a.on
+        })));
+        this.noActiveAreasLogged = true;
+      }
+      return 0;
+    }
+
+    // 重置标志，如果有活跃区域
+    this.noActiveAreasLogged = false;
 
     let totalProcessed = 0;
     let totalBlocked = 0;
 
     activeAreas.forEach((area, areaIndex) => {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Processing area ${areaIndex + 1}: ${window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(area.name) : area.name}`);
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Area config:`, area);
+      // 安全地获取区域名称
+      const safeGetAreaName = (area) => {
+        try {
+          return window.SharedUtils ? window.SharedUtils.getLocalizedAreaName(area.name) : area.name;
+        } catch (error) {
+          return area.name; // 降级方案
+        }
+      };
+
+      // 减少区域处理日志的频率
+      if (!this.lastAreaLogTime || Date.now() - this.lastAreaLogTime > 120000) { // 增加到120秒间隔
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Processing area: ${safeGetAreaName(area)}`);
+        this.lastAreaLogTime = Date.now();
+      }
 
       const items = document.querySelectorAll(area.item);
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Found ${items.length} items for selector "${area.item}"`);
+
+      // 只在items数量有变化时输出日志
+      const areaKey = `${area.item}_count`;
+      if (this.lastItemCounts && this.lastItemCounts[areaKey] !== items.length) {
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Found ${items.length} items for selector "${area.item}"`);
+      }
+      if (!this.lastItemCounts) this.lastItemCounts = {};
+      this.lastItemCounts[areaKey] = items.length;
 
       items.forEach((item, itemIndex) => {
         totalProcessed++;
@@ -153,11 +228,10 @@ class ContentBlocker {
         const text = allTexts.join(' ');
         const user = userElement ? userElement.textContent?.trim() : '';
 
-        // 增强调试输出
-        if (itemIndex < 3 || text.length > 0 || user.length > 0) {
+        // 只在调试模式且前几个项目或有实际内容时输出详细日志
+        if (DebugLogger.isDebugMode && (itemIndex < 2 || (text.length > 0 && user.length > 0))) {
           DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Found ${textElements.length} text elements, User element found: ${!!userElement}`);
-          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: All texts: [${allTexts.map(t => `"${t.substring(0, 30)}..."`).join(', ')}]`);
-          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text.substring(0, 100)}...", User: "${user}"`);
+          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text.substring(0, 50)}...", User: "${user}"`);
         }
 
         const shouldBlockThis = this.shouldBlock(text, user);
@@ -168,7 +242,10 @@ class ContentBlocker {
           const mediaElements = item.querySelectorAll(area.media);
           mediaElements.forEach(media => this.applyBlur(media, true));
           totalBlocked++;
-          DebugLogger.log(`[HoyoBlock-${this.platform}] Blocked item: "${text.substring(0, 50)}..." from user: "${user}"`);
+          // 只在调试模式下输出屏蔽日志
+          if (DebugLogger.isDebugMode) {
+            DebugLogger.log(`[HoyoBlock-${this.platform}] Blocked item: "${text.substring(0, 50)}..." from user: "${user}"`);
+          }
         } else {
           this.applyBlur(item, false);
           const mediaElements = item.querySelectorAll(area.media);
@@ -180,7 +257,10 @@ class ContentBlocker {
       });
     });
 
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking completed - Processed: ${totalProcessed}, Blocked: ${totalBlocked}`);
+    // 只在有屏蔽内容或调试模式时输出完成日志
+    if (totalBlocked > 0 || DebugLogger.isDebugMode) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking completed - Processed: ${totalProcessed}, Blocked: ${totalBlocked}`);
+    }
     return totalBlocked;
   }
 

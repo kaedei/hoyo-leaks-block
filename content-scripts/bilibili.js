@@ -17,8 +17,12 @@
       // 监听页面变化（Bilibili是SPA）
       let lastUrl = location.href;
       let mutationTimeout = null;
+      let mutationCount = 0;
+      let lastMutationLog = 0;
 
       const observer = new MutationObserver(() => {
+        mutationCount++;
+
         // 清除之前的定时器
         if (mutationTimeout) {
           clearTimeout(mutationTimeout);
@@ -26,6 +30,7 @@
 
         // 使用防抖机制，避免频繁触发
         mutationTimeout = setTimeout(() => {
+          // 只在URL实际变化时才处理
           if (location.href !== lastUrl) {
             DebugLogger.log('[HoyoBlock-Bilibili] Page URL changed from', lastUrl, 'to', location.href);
             lastUrl = location.href;
@@ -34,8 +39,16 @@
               DebugLogger.log('[HoyoBlock-Bilibili] Re-running block content after URL change');
               this.blockContent();
             }, 1000);
+          } else {
+            // 对于DOM变化但URL未变化的情况，减少日志输出
+            const now = Date.now();
+            if (DebugLogger.isDebugMode && now - lastMutationLog > 10000) { // 10秒间隔
+              DebugLogger.log(`[HoyoBlock-Bilibili] DOM mutations detected (${mutationCount} total), but URL unchanged`);
+              lastMutationLog = now;
+            }
           }
-        }, 500); // 500ms 防抖延迟
+          mutationCount = 0; // 重置计数器
+        }, 1000); // 增加到1秒防抖延迟，减少频繁触发
       });
 
       observer.observe(document.body, {

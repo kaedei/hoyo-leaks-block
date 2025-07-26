@@ -4,7 +4,7 @@
  */
 
 // 是否为调试模式
-const IS_DEBUG_MODE = false; // 本地调试时可以改为 true 来启用调试日志
+const IS_DEBUG_MODE = true; // 本地调试时可以改为 true 来启用调试日志
 
 // 创建调试工具对象
 const DebugLogger = {
@@ -38,8 +38,28 @@ const DebugLogger = {
   // 调试信息（包含调试状态）
   debugInfo: function () {
     if (this.isDebugMode) {
-      console.log('[Debug] Extension ID:', chrome.runtime?.id);
-      console.log('[Debug] Debug mode enabled');
+      try {
+        // 检查Chrome扩展上下文是否有效
+        if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id) {
+          console.log('[Debug] Extension ID:', chrome.runtime.id);
+          console.log('[Debug] Debug mode enabled');
+        } else {
+          console.log('[Debug] Extension context unavailable or invalidated');
+          console.log('[Debug] Debug mode enabled (offline)');
+        }
+      } catch (error) {
+        console.log('[Debug] Extension context check failed:', error.message);
+        console.log('[Debug] Debug mode enabled (context error)');
+      }
+    }
+  },
+
+  // 检查扩展上下文是否有效
+  isExtensionContextValid: function () {
+    try {
+      return typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id;
+    } catch (error) {
+      return false;
     }
   }
 };
