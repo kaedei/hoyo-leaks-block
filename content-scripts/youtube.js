@@ -4,7 +4,7 @@
 
   function initYouTubeBlock() {
     // 创建YouTube专用的屏蔽实例
-    const blockInstance = new HoyoLeaksBlockCore('Ytb');
+    const blockInstance = new HoyoLeaksBlockCore('youtube');
 
     // YouTube特定的处理逻辑
     blockInstance.platformSpecificInit = function () {

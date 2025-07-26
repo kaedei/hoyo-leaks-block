@@ -13,24 +13,19 @@ class ContentBlocker {
     this.lastItemCounts = {};
     this.noActiveAreasLogged = false;
     this.lastPageContentHash = null; // 添加页面内容哈希缓存
-
-    // 平台名称映射
-    this.platformMapping = {
-      'Bili': 'bilibili',
-      'Ytb': 'youtube',
-      'Twitter': 'twitter'
-    };
   }
 
   // 获取area配置中使用的平台名称
   getAreaPlatformName() {
-    return this.platformMapping[this.platform] || this.platform.toLowerCase();
+    return this.platform;
   }
 
   shouldBlock(text, user) {
-    const blockTitleKey = `blockTitle${this.platform}`;
-    const blockUsersKey = `blockUsers${this.platform}`;
-    const blockUsersWhiteKey = `blockUsersWhite${this.platform}`;
+    // 转换平台名称为配置键格式：首字母大写
+    const platformKey = this.platform.charAt(0).toUpperCase() + this.platform.slice(1);
+    const blockTitleKey = `blockTitle${platformKey}`;
+    const blockUsersKey = `blockUsers${platformKey}`;
+    const blockUsersWhiteKey = `blockUsersWhite${platformKey}`;
 
     // 只在调试模式且有实际内容时才输出详细日志
     if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
@@ -290,7 +285,7 @@ class ContentBlocker {
           let textContent = el.textContent?.trim() || '';
 
           // 特别处理 Bilibili 搜索页面的情况，确保获取完整的标题文本
-          if (this.platform === 'Bili' && el.classList.contains('bili-video-card__info--tit')) {
+          if (this.platform === 'bilibili' && el.classList.contains('bili-video-card__info--tit')) {
             // 如果元素有 title 属性，优先使用 title 属性的值，因为它通常包含完整的标题
             const titleAttr = el.getAttribute('title');
             if (titleAttr && titleAttr.trim()) {

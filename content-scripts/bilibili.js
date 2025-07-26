@@ -8,7 +8,7 @@
     DebugLogger.log('[HoyoBlock-Bilibili] Initializing Bilibili block instance');
 
     // 创建Bilibili专用的屏蔽实例
-    const blockInstance = new HoyoLeaksBlockCore('Bili');
+    const blockInstance = new HoyoLeaksBlockCore('bilibili');
 
     // Bilibili特定的处理逻辑
     blockInstance.platformSpecificInit = function () {

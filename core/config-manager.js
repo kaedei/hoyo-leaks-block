@@ -79,7 +79,7 @@ class ConfigManager extends BaseConfigManager {
       this.config.blockRules = {};
     }
 
-    const platformName = this.platform.toLowerCase() === 'bili' ? 'bilibili' : this.platform.toLowerCase();
+    const platformName = this.platform;
 
     if (!this.config.blockRules[platformName]) {
       this.config.blockRules[platformName] = {
@@ -169,8 +169,8 @@ class ConfigManager extends BaseConfigManager {
 
   // 从配置键名获取平台名称
   getPlatformFromConfigKey(configKey) {
-    if (configKey.includes('Bili')) return 'bilibili';
-    if (configKey.includes('Ytb')) return 'youtube';
+    if (configKey.includes('Bilibili')) return 'bilibili';
+    if (configKey.includes('Youtube')) return 'youtube';
     if (configKey.includes('Twitter')) return 'twitter';
     return null;
   }

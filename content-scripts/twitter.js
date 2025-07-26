@@ -4,7 +4,7 @@
 
   function initTwitterBlock() {
     // 创建Twitter专用的屏蔽实例
-    const blockInstance = new HoyoLeaksBlockCore('Twitter');
+    const blockInstance = new HoyoLeaksBlockCore('twitter');
 
     // Twitter特定的处理逻辑
     blockInstance.platformSpecificInit = function () {
