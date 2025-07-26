@@ -72,26 +72,42 @@ class ConfigManager extends BaseConfigManager {
   }
 
   validateConfig() {
-    const requiredKeys = [
-      `blockTitle${this.platform}`,
-      `blockUsers${this.platform}`,
-      `blockUsersWhite${this.platform}`
-    ];
+    DebugLogger.log(`[HoyoBlock-${this.platform}] Validating config structure...`);
 
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Validating config for keys:`, requiredKeys);
+    // 确保新的配置结构存在
+    if (!this.config.blockRules) {
+      this.config.blockRules = {};
+    }
 
-    requiredKeys.forEach(key => {
-      if (!(key in this.config)) {
-        console.warn(`[HoyoBlock-${this.platform}] Missing config key: ${key}`);
-        this.config[key] = '';
-      } else {
-        DebugLogger.log(`[HoyoBlock-${this.platform}] Config ${key}:`, this.config[key]);
+    const platformName = this.platform.toLowerCase() === 'bili' ? 'bilibili' : this.platform.toLowerCase();
+
+    if (!this.config.blockRules[platformName]) {
+      this.config.blockRules[platformName] = {
+        keywords: [],
+        blacklist: [],
+        whitelist: []
+      };
+    }
+
+    // 确保每个规则类型都存在
+    const ruleTypes = ['keywords', 'blacklist', 'whitelist'];
+    ruleTypes.forEach(type => {
+      if (!Array.isArray(this.config.blockRules[platformName][type])) {
+        this.config.blockRules[platformName][type] = [];
       }
+    });
+
+    // 输出配置信息用于调试
+    const platformRules = this.config.blockRules[platformName];
+    DebugLogger.log(`[HoyoBlock-${this.platform}] Platform rules for ${platformName}:`, {
+      keywords: platformRules.keywords.length,
+      blacklist: platformRules.blacklist.length,
+      whitelist: platformRules.whitelist.length
     });
 
     DebugLogger.log(`[HoyoBlock-${this.platform}] Active area list count:`, this.areaList.length);
     const activeAreas = this.areaList.filter(area =>
-      area.area === this.platform.toLowerCase() && area.on === true
+      area.area === platformName && area.on === true
     );
     DebugLogger.log(`[HoyoBlock-${this.platform}] Areas for this platform:`, activeAreas);
   }
@@ -129,18 +145,42 @@ class ConfigManager extends BaseConfigManager {
     });
   }
 
-  getBlockRegExp(configKey) {
-    const str = this.config[configKey] || '';
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Building regex for ${configKey}:`, str);
+  getBlockRules(configKey) {
+    const platform = this.getPlatformFromConfigKey(configKey);
+    const ruleType = this.getRuleTypeFromConfigKey(configKey);
 
-    if (!str) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] No keywords for ${configKey}, returning null`);
-      return null;
+    if (platform && ruleType && this.config.blockRules && this.config.blockRules[platform]) {
+      const rules = this.config.blockRules[platform][ruleType];
+      if (Array.isArray(rules) && rules.length > 0) {
+        // 过滤空值
+        const validRules = rules.filter(rule => rule && rule.trim());
+        if (validRules.length === 0) {
+          DebugLogger.log(`[HoyoBlock-${this.platform}] No valid rules for ${configKey}, returning empty array`);
+          return [];
+        }
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Found rules for ${configKey}:`, validRules);
+        return validRules;
+      }
     }
 
-    const regex = this.buildRegExp(configKey);
-    DebugLogger.log(`[HoyoBlock-${this.platform}] Regex pattern for ${configKey}:`, regex?.source);
-    return regex;
+    DebugLogger.log(`[HoyoBlock-${this.platform}] No rules found for ${configKey}, returning empty array`);
+    return [];
+  }
+
+  // 从配置键名获取平台名称
+  getPlatformFromConfigKey(configKey) {
+    if (configKey.includes('Bili')) return 'bilibili';
+    if (configKey.includes('Ytb')) return 'youtube';
+    if (configKey.includes('Twitter')) return 'twitter';
+    return null;
+  }
+
+  // 从配置键名获取规则类型
+  getRuleTypeFromConfigKey(configKey) {
+    if (configKey.includes('Title')) return 'keywords';
+    if (configKey.includes('Users') && !configKey.includes('White')) return 'blacklist';
+    if (configKey.includes('UsersWhite')) return 'whitelist';
+    return null;
   }
 
   getConfig() {

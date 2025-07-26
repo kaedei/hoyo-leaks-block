@@ -34,24 +34,60 @@ class ContentBlocker {
 
     // 只在调试模式且有实际内容时才输出详细日志
     if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Checking content - Text: "${text.substring(0, 50)}...", User: "${user}"`);
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Checking content - Text: "${text}", User: "${user}"`);
     }
 
-    const blockTitle = this.configManager.getBlockRegExp(blockTitleKey);
-    const blockUsers = this.configManager.getBlockRegExp(blockUsersKey);
-    const blockUsersWhite = this.configManager.getBlockRegExp(blockUsersWhiteKey);
+    const titleRules = this.configManager.getBlockRules(blockTitleKey);
+    const userRules = this.configManager.getBlockRules(blockUsersKey);
+    const whiteRules = this.configManager.getBlockRules(blockUsersWhiteKey);
 
-    // 检查白名单
-    if (blockUsersWhite && blockUsersWhite.test(user.trim())) {
-      if (DebugLogger.isDebugMode) {
-        DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" is whitelisted, allowing content`);
+    // 输出当前的屏蔽规则用于调试
+    if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Block rules - Title rules: ${titleRules.length}, User rules: ${userRules.length}, White rules: ${whiteRules.length}`);
+    }
+
+    // 检查白名单 - 如果用户在白名单中，直接放行
+    if (whiteRules.length > 0 && user.trim()) {
+      const userLower = user.trim().toLowerCase();
+      for (const rule of whiteRules) {
+        if (userLower.includes(rule.toLowerCase())) {
+          if (DebugLogger.isDebugMode) {
+            DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" matched whitelist rule "${rule}", allowing content`);
+          }
+          return false;
+        }
       }
-      return false;
     }
 
-    // 检查黑名单
-    const titleMatch = blockTitle ? blockTitle.test(text) : false;
-    const userMatch = blockUsers ? blockUsers.test(user) : false;
+    // 检查标题黑名单
+    let titleMatch = false;
+    if (titleRules.length > 0 && text.trim()) {
+      const textLower = text.trim().toLowerCase();
+      for (const rule of titleRules) {
+        if (textLower.includes(rule.toLowerCase())) {
+          titleMatch = true;
+          if (DebugLogger.isDebugMode) {
+            DebugLogger.log(`[HoyoBlock-${this.platform}] Title "${text}" matched rule "${rule}"`);
+          }
+          break;
+        }
+      }
+    }
+
+    // 检查用户黑名单
+    let userMatch = false;
+    if (userRules.length > 0 && user.trim()) {
+      const userLower = user.trim().toLowerCase();
+      for (const rule of userRules) {
+        if (userLower.includes(rule.toLowerCase())) {
+          userMatch = true;
+          if (DebugLogger.isDebugMode) {
+            DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" matched rule "${rule}"`);
+          }
+          break;
+        }
+      }
+    }
 
     if (titleMatch || userMatch) {
       if (DebugLogger.isDebugMode) {
@@ -153,6 +189,13 @@ class ContentBlocker {
     // 只在首次执行或有意义的状态变化时输出日志
     if (!this.lastLogTime || Date.now() - this.lastLogTime > 60000) { // 增加到60秒间隔
       DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking check - Platform: ${this.platform} -> ${areaPlatformName}, Active areas: ${activeAreas.length}, Items: ${pageItemsCount}`);
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Current URL: ${location.href}`);
+      DebugLogger.log(`[HoyoBlock-${this.platform}] All areas for platform:`, areaList.filter(area => area.area === areaPlatformName).map(area => ({
+        name: area.name,
+        on: area.on,
+        main: area.main,
+        item: area.item
+      })));
       this.lastLogTime = Date.now();
     }
 
@@ -194,10 +237,28 @@ class ContentBlocker {
         }
       };
 
-      // 减少区域处理日志的频率
-      if (!this.lastAreaLogTime || Date.now() - this.lastAreaLogTime > 120000) { // 增加到120秒间隔
+      // 检查主容器是否存在
+      const mainContainer = document.querySelector(area.main);
+
+      // 只在调试模式或容器不存在时输出详细日志
+      if (!this.lastAreaLogTime || Date.now() - this.lastAreaLogTime > 120000 || !mainContainer) {
         DebugLogger.log(`[HoyoBlock-${this.platform}] Processing area: ${safeGetAreaName(area)}`);
+        DebugLogger.log(`[HoyoBlock-${this.platform}] Area details:`, {
+          name: area.name,
+          main: area.main,
+          item: area.item,
+          text: area.text,
+          mainContainerFound: !!mainContainer
+        });
+        if (!mainContainer) {
+          DebugLogger.log(`[HoyoBlock-${this.platform}] WARNING: Main container not found for selector "${area.main}", skipping this area`);
+        }
         this.lastAreaLogTime = Date.now();
+      }
+
+      // 如果主容器不存在，跳过这个区域
+      if (!mainContainer) {
+        return;
       }
 
       const items = document.querySelectorAll(area.item);
@@ -224,14 +285,40 @@ class ContentBlocker {
 
         // 提取所有可能的文本内容
         const textElements = item.querySelectorAll(area.text);
-        const allTexts = Array.from(textElements).map(el => el.textContent?.trim() || '').filter(t => t);
+        const allTexts = Array.from(textElements).map(el => {
+          // 使用 textContent 确保获取所有文本，包括子元素内的文本
+          let textContent = el.textContent?.trim() || '';
+
+          // 特别处理 Bilibili 搜索页面的情况，确保获取完整的标题文本
+          if (this.platform === 'Bili' && el.classList.contains('bili-video-card__info--tit')) {
+            // 如果元素有 title 属性，优先使用 title 属性的值，因为它通常包含完整的标题
+            const titleAttr = el.getAttribute('title');
+            if (titleAttr && titleAttr.trim()) {
+              textContent = titleAttr.trim();
+              DebugLogger.log(`[HoyoBlock-${this.platform}] Using title attribute: "${titleAttr}"`);
+            } else {
+              // 否则使用 textContent，但确保包含所有子元素的文本
+              textContent = el.textContent?.trim() || '';
+              DebugLogger.log(`[HoyoBlock-${this.platform}] Using textContent: "${textContent}"`);
+            }
+          }
+
+          return textContent;
+        }).filter(t => t);
         const text = allTexts.join(' ');
         const user = userElement ? userElement.textContent?.trim() : '';
 
         // 只在调试模式且前几个项目或有实际内容时输出详细日志
-        if (DebugLogger.isDebugMode && (itemIndex < 2 || (text.length > 0 && user.length > 0))) {
+        if (DebugLogger.isDebugMode && (itemIndex < 3 || (text.length > 0 && user.length > 0))) {
           DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Found ${textElements.length} text elements, User element found: ${!!userElement}`);
-          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text.substring(0, 50)}...", User: "${user}"`);
+          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Area: ${area.name}, Selector: ${area.text}`);
+          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Element details:`, textElements[0] ? {
+            className: textElements[0].className,
+            title: textElements[0].getAttribute('title'),
+            textContent: textElements[0].textContent,
+            innerHTML: textElements[0].innerHTML.substring(0, 100)
+          } : 'No text element found');
+          DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text}", User: "${user}"`);
         }
 
         const shouldBlockThis = this.shouldBlock(text, user);
