@@ -4,7 +4,7 @@
  */
 
 // 是否为调试模式
-const IS_DEBUG_MODE = true; // 本地调试时可以改为 true 来启用调试日志
+const IS_DEBUG_MODE = false; // 本地调试时可以改为 true 来启用调试日志
 
 // 创建调试工具对象
 const DebugLogger = {
