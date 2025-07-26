@@ -33,7 +33,7 @@ section.hoyo-blur-block:hover,
 article.hoyo-blur-block:hover,
 *[data-hoyo-blocked="true"]:hover {
   filter: blur(0.5px) !important;
-  opacity: 0.9 !important;
+  opacity: 1.0 !important;
 }
 
 /* 针对Bilibili特定元素的强制样式 */
@@ -51,7 +51,7 @@ article.hoyo-blur-block:hover,
 .video-card.hoyo-blur-block:hover,
 .video-card[data-hoyo-blocked="true"]:hover {
   filter: blur(0.5px) !important;
-  opacity: 0.9 !important;
+  opacity: 1.0 !important;
 }
 
 /* Bilibili特定的强制样式 */
@@ -74,7 +74,7 @@ article.hoyo-blur-block:hover,
 [class*="video-card"] .hoyo-blur-block:hover,
 [class*="video-card"][data-hoyo-blocked="true"]:hover {
   filter: blur(0.5px) !important;
-  opacity: 0.9 !important;
+  opacity: 1.0 !important;
 }
 
 /* 设置按钮样式 */

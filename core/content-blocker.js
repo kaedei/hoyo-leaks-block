@@ -128,7 +128,7 @@ class ContentBlocker {
         element.addEventListener('mouseenter', () => {
           element.style.cssText += `
             filter: blur(0.5px) !important;
-            opacity: 0.9 !important;
+            opacity: 1.0 !important;
           `;
         });
 

@@ -8,7 +8,7 @@
 class AreaManager {
   constructor() {
     this.remoteManager = new RemoteConfigManager();
-    this.sampleAreas = this.remoteManager.getDefaultAreaList().slice(0, 3); // 只取前3个作为示例
+    this.sampleAreas = this.remoteManager.getDefaultAreaList();
   }
 
   /**
