@@ -43,8 +43,14 @@ async function fetchDefaultAreaList() {
   } catch (error) {
     console.warn('Failed to fetch default area list:', error);
     // 使用本地默认区域列表
-    const defaultAreaList = remoteManager.getDefaultAreaList();
-    chrome.storage.sync.set({ areaList: defaultAreaList });
+    try {
+      const defaultAreaList = await remoteManager.getDefaultAreaList();
+      chrome.storage.sync.set({ areaList: defaultAreaList });
+    } catch (fallbackError) {
+      console.warn('Failed to get default area list:', fallbackError);
+      // 最后的备用方案：使用空数组
+      chrome.storage.sync.set({ areaList: [] });
+    }
   }
 }
 

@@ -43,8 +43,40 @@ const APP_CONSTANTS = {
     areaList: []
   },
 
-  // 获取本地化的默认区域列表
+  // 从本地arealist.json文件获取默认区域列表
+  async loadDefaultAreaListFromConfig() {
+    try {
+      // 在扩展环境中，尝试从打包文件中加载arealist.json
+      if (typeof chrome !== 'undefined' && chrome.runtime) {
+        const url = chrome.runtime.getURL('config/arealist.json');
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.arealist && Array.isArray(data.arealist)) {
+            // 应用本地化名称
+            return data.arealist.map(area => ({
+              ...area,
+              name: getLocalizedAreaName(area.name)
+            }));
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('[APP_CONSTANTS] Failed to load arealist.json:', error);
+    }
+
+    // 如果加载失败，返回基础的备用配置
+    return this.getFallbackAreaList();
+  },
+
+  // 获取本地化的默认区域列表（同步方法，用于向后兼容）
   getDefaultAreaList() {
+    // 返回基础备用配置，主要用于向后兼容
+    return this.getFallbackAreaList();
+  },
+
+  // 获取备用的区域配置
+  getFallbackAreaList() {
     return [
       {
         "name": getLocalizedAreaName('default_area_bilibili_home'),
@@ -58,156 +90,24 @@ const APP_CONSTANTS = {
         "home": false
       },
       {
-        "name": getLocalizedAreaName('default_area_bilibili_video_sidebar'),
-        "area": "bilibili",
-        "main": ".recommend-list-v1",
-        "item": ".video-page-card-small",
-        "text": ".title",
-        "media": ".cover",
-        "user": ".name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_video_end'),
-        "area": "bilibili",
-        "main": ".rec-list",
-        "item": ".rec-card",
-        "text": ".info .title",
-        "media": ".cover",
-        "user": ".info .name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_search'),
-        "area": "bilibili",
-        "main": ".video-list.row",
-        "item": ".bili-video-card",
-        "text": ".bili-video-card__info--tit a",
-        "media": ".bili-video-card__image",
-        "user": ".bili-video-card__info--author",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_ranking'),
-        "area": "bilibili",
-        "main": ".rank-list",
-        "item": ".rank-item",
-        "text": ".info .title",
-        "media": ".img",
-        "user": ".detail .up",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_dynamic'),
-        "area": "bilibili",
-        "main": ".feed",
-        "item": ".bili-dyn-item",
-        "text": ".bili-dyn-content__orig__desc, .bili-dyn-content__forw__desc",
-        "media": ".bili-dyn-item__header__avatar, .bili-album__preview__picture__img, .bili-album__watch__pic__img",
-        "user": ".bili-dyn-item__header__author .bili-dyn-item__interaction",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_topic'),
-        "area": "bilibili",
-        "main": ".topic-detail",
-        "item": ".bili-dyn-item",
-        "text": ".bili-rich-text__content",
-        "media": ".bili-album__preview__picture__img",
-        "user": ".bili-dyn-item__header__author",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_space_masterpiece'),
-        "area": "bilibili",
-        "main": ".masterpiece",
-        "item": ".small-item",
-        "text": ".title",
-        "media": ".cover",
-        "user": ".info .name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_space_video'),
-        "area": "bilibili",
-        "main": ".cube-list",
-        "item": ".small-item",
-        "text": ".title",
-        "media": ".cover",
-        "user": ".info .name",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_space_dynamic'),
-        "area": "bilibili",
-        "main": ".bili-dyn-list",
-        "item": ".bili-dyn-item",
-        "text": ".bili-rich-text__content",
-        "media": ".bili-album__preview__picture__img",
-        "user": ".bili-dyn-item__header__author",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_bilibili_message'),
-        "area": "bilibili",
-        "main": ".reply-list",
-        "item": ".reply-item",
-        "text": ".reply-content",
-        "media": ".reply-face",
-        "user": ".reply-name",
-        "on": true,
-        "home": false
-      },
-      {
         "name": getLocalizedAreaName('default_area_youtube_list'),
         "area": "youtube",
-        "main": "#contents",
-        "item": "ytd-rich-item-renderer, ytd-video-renderer, ytd-compact-video-renderer",
-        "text": "#video-title, #dismissible #details #meta h3, a#video-title",
-        "media": "ytd-thumbnail, #thumbnail, .ytp-ce-covering-image",
-        "user": "#channel-name, #byline-container #text",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_youtube_search'),
-        "area": "youtube",
-        "main": "#contents",
-        "item": "ytd-video-renderer",
-        "text": "#video-title, #dismissible #details #meta h3",
-        "media": "ytd-thumbnail",
-        "user": "#channel-name, #byline-container #text",
-        "on": true,
-        "home": false
-      },
-      {
-        "name": getLocalizedAreaName('default_area_youtube_sidebar'),
-        "area": "youtube",
-        "main": "#related",
-        "item": "ytd-compact-video-renderer",
+        "main": "ytd-rich-grid-renderer",
+        "item": "ytd-rich-item-renderer",
         "text": "#video-title",
         "media": "ytd-thumbnail",
-        "user": "#channel-name",
+        "user": "ytd-channel-name",
         "on": true,
         "home": false
       },
       {
         "name": getLocalizedAreaName('default_area_twitter_timeline'),
         "area": "twitter",
-        "main": "[data-testid=\"primaryColumn\"]",
-        "item": "article[data-testid=\"tweet\"]",
-        "text": "[data-testid=\"tweetText\"], [data-testid=\"card.wrapper\"] span",
-        "media": "[data-testid=\"tweetPhoto\"], [data-testid=\"card.wrapper\"] img",
-        "user": "[data-testid=\"User-Name\"] div[dir] span",
+        "main": "[aria-labelledby='accessible-list-1']",
+        "item": "[data-testid=tweet]",
+        "text": "[data-testid=tweetText]",
+        "media": "[data-testid=tweetPhoto], video",
+        "user": "[data-testid=User-Name]",
         "on": true,
         "home": false
       }

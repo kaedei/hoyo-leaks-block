@@ -5,7 +5,7 @@ echo 🚀 开始构建 Hoyo Leaks Block Chrome Extension...
 
 :: 检查必要文件
 echo 📋 检查必要文件...
-set "required_files=manifest.json background.js popup\popup.html options\options.html"
+set "required_files=manifest.json background.js popup\popup.html options\options.html config\arealist.json config\default-v1.json"
 
 for %%f in (%required_files%) do (
     if not exist "%%f" (
@@ -35,6 +35,8 @@ xcopy options "%BUILD_DIR%\options\" /e /i /q >nul
 xcopy styles "%BUILD_DIR%\styles\" /e /i /q >nul
 xcopy icons "%BUILD_DIR%\icons\" /e /i /q >nul
 xcopy _locales "%BUILD_DIR%\_locales\" /e /i /q >nul
+xcopy shared "%BUILD_DIR%\shared\" /e /i /q >nul
+xcopy config "%BUILD_DIR%\config\" /e /i /q >nul
 
 :: 删除旧的ZIP文件（如果存在）
 if exist "hoyo-leaks-block.zip" (

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_name__",
-  "version": "104.0",
+  "version": "1.0.4",
   "description": "__MSG_description__",
   "default_locale": "zh_CN",
   "permissions": [
@@ -93,6 +93,17 @@
     "default_title": "__MSG_name__"
   },
   "options_page": "options/options.html",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "config/arealist.json",
+        "config/default-v1.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
