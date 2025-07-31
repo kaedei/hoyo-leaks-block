@@ -49,14 +49,6 @@ function bindEventListeners() {
     window.close();
   });
 
-  // 刷新页面按钮
-  document.getElementById('refresh-page').addEventListener('click', function () {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.reload(tabs[0].id);
-      window.close();
-    });
-  });
-
   // 清除缓存按钮
   document.getElementById('clear-cache').addEventListener('click', function () {
     if (confirm(chrome.i18n.getMessage('confirm_clear_cache'))) {
@@ -69,14 +61,6 @@ function bindEventListeners() {
         }, 1000);
       });
     }
-  });
-
-  // 帮助链接
-  document.getElementById('help-link').addEventListener('click', function (e) {
-    e.preventDefault();
-    chrome.tabs.create({
-      url: 'https://github.com/kaedei/hoyo-leaks-block'
-    });
   });
 }
 
@@ -98,17 +82,6 @@ function togglePlatform(platform, enabled) {
         .replace('{platform}', getPlatformName(platform))
         .replace('{status}', enabled ? chrome.i18n.getMessage('status_enabled') : chrome.i18n.getMessage('status_disabled'));
       showMessage(statusMsg);
-
-      // 通知content script更新
-      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-          action: 'configUpdated',
-          platform: platform,
-          enabled: enabled
-        }).catch(() => {
-          // 忽略错误，可能是在不支持的页面
-        });
-      });
     });
   });
 }

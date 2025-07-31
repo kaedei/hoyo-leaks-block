@@ -5,10 +5,7 @@
   "description": "__MSG_description__",
   "default_locale": "zh_CN",
   "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "*://*.bilibili.com/*",
