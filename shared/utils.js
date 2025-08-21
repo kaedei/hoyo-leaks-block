@@ -234,10 +234,10 @@ class SharedUtils {
         return chrome.runtime.getManifest().version;
       }
       // 对于测试环境或无法获取manifest的情况，返回默认版本
-      return '104.0 (missing manifest)';
+      return '0.0 (missing manifest)';
     } catch (error) {
       console.warn('[HoyoBlock] Failed to get extension version:', error);
-      return '104.0 (error)';
+      return '0.0 (error)';
     }
   }
 }
