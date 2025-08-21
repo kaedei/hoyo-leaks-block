@@ -1,7 +1,6 @@
 // Background script for the extension
-// Import debug logger and constants
-importScripts('core/debug-logger.js');
-importScripts('core/constants.js');
+// Import core modules
+importScripts('core/common.js');
 importScripts('core/remote-config-manager.js');
 importScripts('shared/base-config-manager.js');
 

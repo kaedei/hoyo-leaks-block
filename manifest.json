@@ -22,13 +22,11 @@
         "*://*.bilibili.com/*"
       ],
       "js": [
-        "core/debug-logger.js",
-        "core/constants.js",
+        "core/common.js",
         "shared/base-config-manager.js",
         "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
-        "core/stats-manager.js",
         "core/content-blocker.js",
         "core/ui-manager.js",
         "core/block-core.js",
@@ -44,13 +42,11 @@
         "*://*.youtube.com/*"
       ],
       "js": [
-        "core/debug-logger.js",
-        "core/constants.js",
+        "core/common.js",
         "shared/base-config-manager.js",
         "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
-        "core/stats-manager.js",
         "core/content-blocker.js",
         "core/ui-manager.js",
         "core/block-core.js",
@@ -67,13 +63,11 @@
         "*://*.x.com/*"
       ],
       "js": [
-        "core/debug-logger.js",
-        "core/constants.js",
+        "core/common.js",
         "shared/base-config-manager.js",
         "shared/utils.js",
         "core/utils.js",
         "core/config-manager.js",
-        "core/stats-manager.js",
         "core/content-blocker.js",
         "core/ui-manager.js",
         "core/block-core.js",

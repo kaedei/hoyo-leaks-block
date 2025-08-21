@@ -3,13 +3,13 @@ class HoyoLeaksBlockCore {
   constructor(platform) {
     this.platform = platform;
     this.isInitialized = false;
-    
+
     // 初始化各个管理器
     this.configManager = new ConfigManager(platform);
     this.statsManager = new StatsManager(platform);
     this.uiManager = new UIManager(platform);
     this.contentBlocker = new ContentBlocker(platform, this.configManager);
-    
+
     this.init();
   }
 

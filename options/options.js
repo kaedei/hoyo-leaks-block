@@ -1,13 +1,167 @@
 /**
- * 米游内鬼信息屏蔽 - 设置页面主入口
- *
- * 模块说明：
- * - chrome-api-mock.js: Chrome API 模拟（用于测试）
- * - utils.js: 工具函数
- * - config-manager.js: 配置管理
- * - area-manager.js: 区域管理
- * - ui-manager.js: UI管理和事件处理
- * - options.js: 主入口文件（当前文件）
+ * 米游内鬼信息屏蔽 - 设置页面（合并了工具函数和国际化）
+ */
+
+/**
+ * ==================== 工具函数 ====================
+ */
+
+/**
+ * 创建对话框元素
+ * @param {string} title 对话框标题
+ * @param {string} content 对话框内容HTML
+ * @param {string} className 对话框CSS类名
+ * @returns {HTMLElement} 对话框元素
+ */
+function createDialog(title, content, className = 'edit-dialog') {
+  const dialog = document.createElement('div');
+  dialog.className = 'edit-dialog-overlay';
+  dialog.innerHTML = `
+    <div class="${className}">
+      <h3>${title}</h3>
+      ${content}
+    </div>
+  `;
+  return dialog;
+}
+
+/**
+ * 关闭对话框
+ */
+function closeDialog() {
+  const dialog = document.querySelector('.edit-dialog-overlay');
+  if (dialog) {
+    dialog.remove();
+  }
+}
+
+/**
+ * ==================== 国际化工具 ====================
+ */
+
+/**
+ * 国际化管理器
+ */
+class I18nManager {
+  constructor() {
+    this.initialized = false;
+  }
+
+  /**
+   * 初始化国际化
+   */
+  init() {
+    if (this.initialized) {
+      console.warn('[I18nManager] Already initialized');
+      return;
+    }
+
+    DebugLogger.log('[I18nManager] Initializing i18n...');
+
+    try {
+      this.localizeHTML();
+      this.initialized = true;
+      DebugLogger.log('[I18nManager] I18n initialized successfully');
+    } catch (error) {
+      console.error('[I18nManager] Error initializing i18n:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 本地化HTML内容
+   */
+  localizeHTML() {
+    // 获取所有包含 __MSG_*__ 的元素（包括head和body）
+    const walker = document.createTreeWalker(
+      document.documentElement, // 从根元素开始，包括head和body
+      NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+      null,
+      false
+    );
+
+    const textNodesToProcess = [];
+    const attributesToProcess = [];
+
+    let node;
+    while (node = walker.nextNode()) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (node.textContent.includes('__MSG_')) {
+          textNodesToProcess.push(node);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // 检查元素的属性
+        if (node.hasAttributes()) {
+          Array.from(node.attributes).forEach(attr => {
+            if (attr.value.includes('__MSG_')) {
+              attributesToProcess.push({ element: node, attribute: attr });
+            }
+          });
+        }
+      }
+    }
+
+    // 处理文本节点
+    textNodesToProcess.forEach(node => {
+      node.textContent = this.processText(node.textContent);
+    });
+
+    // 处理属性
+    attributesToProcess.forEach(({ element, attribute }) => {
+      const newValue = this.processText(attribute.value);
+      element.setAttribute(attribute.name, newValue);
+    });
+
+    // 特别处理title标签
+    this.localizeTitle();
+  }
+
+  /**
+   * 处理文本中的本地化标记
+   * @param {string} text 包含 __MSG_*__ 标记的文本
+   * @returns {string} 本地化后的文本
+   */
+  processText(text) {
+    return text.replace(/__MSG_([a-zA-Z0-9_]+)__/g, (match, key) => {
+      try {
+        const message = chrome.i18n.getMessage(key);
+        return message || match; // 如果找不到对应的消息，返回原始标记
+      } catch (error) {
+        console.warn(`[I18nManager] Failed to get message for key: ${key}`, error);
+        return match;
+      }
+    });
+  }
+
+  /**
+   * 获取本地化消息
+   * @param {string} key 消息键
+   * @param {string|string[]} substitutions 替换参数
+   * @returns {string} 本地化后的消息
+   */
+  getMessage(key, substitutions = null) {
+    try {
+      return chrome.i18n.getMessage(key, substitutions);
+    } catch (error) {
+      console.warn(`[I18nManager] Failed to get message for key: ${key}`, error);
+      return key;
+    }
+  }
+
+  /**
+   * 特别处理title标签的本地化
+   */
+  localizeTitle() {
+    const titleElement = document.querySelector('title');
+    if (titleElement && titleElement.textContent.includes('__MSG_')) {
+      titleElement.textContent = this.processText(titleElement.textContent);
+      DebugLogger.log('[I18nManager] Title localized:', titleElement.textContent);
+    }
+  }
+}
+
+/**
+ * ==================== 设置页面主控制器 ====================
  */
 
 /**
@@ -148,6 +302,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     alert(errorMsg);
   }
 });
+
+/**
+ * ==================== 全局导出 ====================
+ */
+
+// 创建并导出国际化管理器实例
+window.I18nManager = new I18nManager();
+
+// 导出工具函数（合并共享工具和本地特有工具）
+window.Utils = {
+  // 从SharedUtils继承的方法
+  getPlatformDisplayName: SharedUtils.getPlatformDisplayName,
+  showMessage: SharedUtils.showMessage,
+  downloadJSON: SharedUtils.downloadJSON,
+  readJSONFile: SharedUtils.readJSONFile,
+  debounce: SharedUtils.debounce,
+  throttle: SharedUtils.throttle,
+  getNestedProperty: SharedUtils.getNestedProperty,
+  generateId: SharedUtils.generateId,
+
+  // 本地特有的方法
+  createDialog,
+  closeDialog
+};
 
 // 导出主控制器和全局函数（向后兼容）
 window.OptionsController = optionsController;
