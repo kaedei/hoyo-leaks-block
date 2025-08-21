@@ -9,6 +9,7 @@ class OptionsConfigManager extends BaseConfigManager {
   constructor() {
     super();
     this.remoteManager = new RemoteConfigManager();
+    this.autoUpdateManager = new AutoUpdateManager();
     this.defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
   }
 
@@ -28,6 +29,9 @@ class OptionsConfigManager extends BaseConfigManager {
 
       // 加载到新的UI组件
       this.loadRulesToUI();
+
+      // 加载自动更新配置
+      this.loadAutoUpdateConfig();
 
       DebugLogger.log('[HoyoBlock-Options] Configuration loaded to UI');
     });
@@ -225,12 +229,20 @@ class OptionsConfigManager extends BaseConfigManager {
 
     DebugLogger.log('[HoyoBlock-Options] Config to save:', configToSave);
 
-    chrome.storage.sync.set(configToSave, () => {
+    chrome.storage.sync.set(configToSave, async () => {
       if (chrome.runtime.lastError) {
         console.error('[HoyoBlock-Options] Error saving config:', chrome.runtime.lastError);
         window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
       } else {
         DebugLogger.log('[HoyoBlock-Options] Config saved successfully');
+
+        // 保存自动更新配置
+        try {
+          await this.saveAutoUpdateConfig();
+        } catch (error) {
+          console.error('[HoyoBlock-Options] Failed to save auto update config:', error);
+        }
+
         window.Utils.showMessage(chrome.i18n.getMessage('rules_saved'), 'success');
 
         // 验证保存结果
@@ -437,6 +449,96 @@ class OptionsConfigManager extends BaseConfigManager {
         .replace('{error}', error.message);
 
       window.Utils.showMessage(message, 'error');
+    }
+  }
+
+  /**
+   * 加载自动更新配置到UI
+   */
+  async loadAutoUpdateConfig() {
+    try {
+      const config = await this.autoUpdateManager.getAutoUpdateConfig();
+
+      // 设置自动更新开关
+      const enabledCheckbox = document.getElementById('auto-update-enabled');
+      if (enabledCheckbox) {
+        enabledCheckbox.checked = config.enabled;
+      }
+
+      // 设置更新间隔
+      const intervalSelect = document.getElementById('auto-update-interval');
+      if (intervalSelect) {
+        intervalSelect.value = config.interval.toString();
+      }
+
+      // 更新界面状态
+      this.updateAutoUpdateUI(config.enabled);
+
+      // 显示上次更新时间
+      this.updateLastUpdateTime(config.lastUpdateTime);
+
+    } catch (error) {
+      console.error('[ConfigManager] Failed to load auto update config:', error);
+    }
+  }
+
+  /**
+   * 保存自动更新配置
+   */
+  async saveAutoUpdateConfig() {
+    try {
+      const enabledCheckbox = document.getElementById('auto-update-enabled');
+      const intervalSelect = document.getElementById('auto-update-interval');
+
+      const config = {
+        enabled: enabledCheckbox ? enabledCheckbox.checked : true, // 默认开启
+        interval: intervalSelect ? parseInt(intervalSelect.value) : 1 // 默认每天
+      };
+
+      await this.autoUpdateManager.saveAutoUpdateConfig(config);
+
+      // 更新界面状态
+      this.updateAutoUpdateUI(config.enabled);
+
+      DebugLogger.log('[ConfigManager] Auto update config saved:', config);
+      return true;
+    } catch (error) {
+      console.error('[ConfigManager] Failed to save auto update config:', error);
+      return false;
+    }
+  }
+
+  /**
+   * 更新自动更新UI状态
+   */
+  updateAutoUpdateUI(enabled) {
+    const intervalGroup = document.getElementById('auto-update-interval-group');
+    if (intervalGroup) {
+      if (enabled) {
+        intervalGroup.classList.remove('disabled');
+      } else {
+        intervalGroup.classList.add('disabled');
+      }
+    }
+  }
+
+  /**
+   * 更新上次更新时间显示
+   */
+  updateLastUpdateTime(lastUpdateTime) {
+    const lastUpdateElement = document.getElementById('last-update-text');
+    if (lastUpdateElement) {
+      if (lastUpdateTime) {
+        const formattedTime = this.autoUpdateManager.formatLastUpdateTime(lastUpdateTime);
+        if (formattedTime) {
+          const message = chrome.i18n.getMessage('last_update_time', [formattedTime]);
+          lastUpdateElement.textContent = message;
+        } else {
+          lastUpdateElement.textContent = chrome.i18n.getMessage('last_update_never');
+        }
+      } else {
+        lastUpdateElement.textContent = chrome.i18n.getMessage('last_update_never');
+      }
     }
   }
 }

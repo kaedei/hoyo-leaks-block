@@ -155,6 +155,29 @@ class UIManager {
       });
     }
 
+    // 自动更新相关控件
+    const autoUpdateEnabledCheckbox = getElement('auto-update-enabled');
+    if (autoUpdateEnabledCheckbox) {
+      autoUpdateEnabledCheckbox.addEventListener('change', (event) => {
+        const enabled = event.target.checked;
+        window.ConfigManager.updateAutoUpdateUI(enabled);
+        // 保存配置（异步，不阻塞UI）
+        window.ConfigManager.saveAutoUpdateConfig().catch(error => {
+          console.error('[UIManager] Failed to save auto update config:', error);
+        });
+      });
+    }
+
+    const autoUpdateIntervalSelect = getElement('auto-update-interval');
+    if (autoUpdateIntervalSelect) {
+      autoUpdateIntervalSelect.addEventListener('change', () => {
+        // 保存配置（异步，不阻塞UI）
+        window.ConfigManager.saveAutoUpdateConfig().catch(error => {
+          console.error('[UIManager] Failed to save auto update config:', error);
+        });
+      });
+    }
+
     const exportConfigBtn = getElement('export-config');
     if (exportConfigBtn) {
       exportConfigBtn.addEventListener('click', () => {

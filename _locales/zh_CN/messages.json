@@ -616,5 +616,59 @@
   },
   "sync_remote_loading": {
     "message": "正在从云端获取最新规则..."
+  },
+  "auto_update_title": {
+    "message": "定期更新"
+  },
+  "auto_update_enabled": {
+    "message": "启用定期更新屏蔽规则"
+  },
+  "auto_update_interval": {
+    "message": "更新间隔"
+  },
+  "auto_update_1_day": {
+    "message": "每天"
+  },
+  "auto_update_3_days": {
+    "message": "每3天"
+  },
+  "auto_update_7_days": {
+    "message": "每周"
+  },
+  "auto_update_15_days": {
+    "message": "每15天"
+  },
+  "auto_update_30_days": {
+    "message": "每月"
+  },
+  "last_update_never": {
+    "message": "从未更新"
+  },
+  "last_update_time": {
+    "message": "上次更新: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2024-01-01 12:00:00"
+      }
+    }
+  },
+  "auto_update_success": {
+    "message": "自动更新屏蔽规则成功，新增 $COUNT$ 条规则",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "auto_update_failed": {
+    "message": "自动更新屏蔽规则失败: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "网络错误"
+      }
+    }
   }
 }

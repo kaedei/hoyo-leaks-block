@@ -103,6 +103,32 @@
             </div>
           </div>
 
+          <!-- 定期更新设置 -->
+          <div class="auto-update-section">
+            <h3>__MSG_auto_update_title__</h3>
+            <div class="form-group">
+              <label for="auto-update-enabled" class="checkbox-label">
+                <input type="checkbox" id="auto-update-enabled" checked>
+                __MSG_auto_update_enabled__
+              </label>
+            </div>
+            <div class="form-group" id="auto-update-interval-group">
+              <label for="auto-update-interval">__MSG_auto_update_interval__:</label>
+              <select id="auto-update-interval">
+                <option value="1" selected>__MSG_auto_update_1_day__</option>
+                <option value="3">__MSG_auto_update_3_days__</option>
+                <option value="7">__MSG_auto_update_7_days__</option>
+                <option value="15">__MSG_auto_update_15_days__</option>
+                <option value="30">__MSG_auto_update_30_days__</option>
+              </select>
+            </div>
+            <div class="form-group" id="last-update-info">
+              <small class="info-text">
+                <span id="last-update-text">__MSG_last_update_never__</span>
+              </small>
+            </div>
+          </div>
+
           <div class="actions">
             <button id="save-rules" class="btn btn-primary">__MSG_btn_save_rules__</button>
             <button id="reset-rules" class="btn btn-secondary">__MSG_btn_reset_rules__</button>
@@ -268,6 +294,7 @@
   <script src="../shared/base-config-manager.js"></script>
   <script src="../shared/utils.js"></script>
   <script src="../core/remote-config-manager.js"></script>
+  <script src="../core/auto-update-manager.js"></script>
   <script src="chrome-api-mock.js"></script>
   <script src="config-manager.js"></script>
   <script src="area-manager.js"></script>

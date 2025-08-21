@@ -592,5 +592,59 @@
   },
   "sync_remote_loading": {
     "message": "Fetching latest rules from cloud..."
+  },
+  "auto_update_title": {
+    "message": "Auto Update"
+  },
+  "auto_update_enabled": {
+    "message": "Enable automatic update of blocking rules"
+  },
+  "auto_update_interval": {
+    "message": "Update Interval"
+  },
+  "auto_update_1_day": {
+    "message": "Daily"
+  },
+  "auto_update_3_days": {
+    "message": "Every 3 days"
+  },
+  "auto_update_7_days": {
+    "message": "Weekly"
+  },
+  "auto_update_15_days": {
+    "message": "Every 15 days"
+  },
+  "auto_update_30_days": {
+    "message": "Monthly"
+  },
+  "last_update_never": {
+    "message": "Never updated"
+  },
+  "last_update_time": {
+    "message": "Last updated: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2024-01-01 12:00:00"
+      }
+    }
+  },
+  "auto_update_success": {
+    "message": "Auto update successful, added $COUNT$ new rules",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "auto_update_failed": {
+    "message": "Auto update failed: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Network error"
+      }
+    }
   }
 }

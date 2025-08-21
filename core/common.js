@@ -99,7 +99,12 @@ const APP_CONSTANTS = {
         whitelist: []
       }
     },
-    areaList: []
+    areaList: [],
+    // 自动更新默认配置
+    autoUpdateEnabled: true,
+    autoUpdateInterval: 1, // 默认每天检查
+    lastUpdateCheck: null,
+    lastUpdateTime: null
   },
 
   // 从本地arealist.json文件获取默认区域列表

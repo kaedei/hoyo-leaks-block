@@ -598,5 +598,59 @@
   },
   "sync_remote_loading": {
     "message": "クラウドから最新ルールを取得中..."
+  },
+  "auto_update_title": {
+    "message": "自動更新"
+  },
+  "auto_update_enabled": {
+    "message": "ブロックルールの自動更新を有効にする"
+  },
+  "auto_update_interval": {
+    "message": "更新間隔"
+  },
+  "auto_update_1_day": {
+    "message": "毎日"
+  },
+  "auto_update_3_days": {
+    "message": "3日ごと"
+  },
+  "auto_update_7_days": {
+    "message": "週1回"
+  },
+  "auto_update_15_days": {
+    "message": "15日ごと"
+  },
+  "auto_update_30_days": {
+    "message": "月1回"
+  },
+  "last_update_never": {
+    "message": "未更新"
+  },
+  "last_update_time": {
+    "message": "最終更新: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2024-01-01 12:00:00"
+      }
+    }
+  },
+  "auto_update_success": {
+    "message": "自動更新成功、$COUNT$ 個の新しいルールを追加しました",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "auto_update_failed": {
+    "message": "自動更新失敗: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "ネットワークエラー"
+      }
+    }
   }
 }

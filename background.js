@@ -3,34 +3,9 @@
 importScripts('core/common.js');
 importScripts('core/remote-config-manager.js');
 importScripts('shared/base-config-manager.js');
+importScripts('core/auto-update-manager.js');
 
 DebugLogger.log('Hoyo Leaks Block Extension background script loaded');
-
-// Initialize default storage values
-chrome.runtime.onInstalled.addListener((details) => {
-  const defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
-
-  // 设置默认配置
-  chrome.storage.sync.set(defaultConfig);
-
-  // 初始化统计数据
-  const today = new Date().toDateString();
-  chrome.storage.local.get(['todayBlocked', 'totalBlocked', 'lastUpdateDate'], (result) => {
-    chrome.storage.local.set({
-      todayBlocked: result.todayBlocked || 0,
-      totalBlocked: result.totalBlocked || 0,
-      lastUpdateDate: result.lastUpdateDate || today
-    });
-  });
-
-  // 获取并设置默认区域列表
-  fetchDefaultAreaList();
-
-  // 如果是首次安装或更新，尝试从云端获取默认规则
-  if (details.reason === 'install' || details.reason === 'update') {
-    fetchAndMergeRemoteRules();
-  }
-});
 
 // 获取默认区域列表配置
 async function fetchDefaultAreaList() {
@@ -83,6 +58,61 @@ async function fetchAndMergeRemoteRules() {
     console.warn('[HoyoBlock-Background] Error fetching remote rules:', error);
   }
 }
+
+// 启动时检查自动更新
+async function checkAutoUpdateOnStartup() {
+  try {
+    DebugLogger.log('[HoyoBlock-Background] Checking for auto update...');
+
+    const autoUpdateManager = new AutoUpdateManager();
+    const result = await autoUpdateManager.checkAndPerformAutoUpdate();
+
+    if (result.success && !result.skipped) {
+      DebugLogger.log(`[HoyoBlock-Background] Auto update completed: merged ${result.mergedCount} rules, skipped ${result.skippedCount} duplicates`);
+    } else if (result.skipped) {
+      DebugLogger.log('[HoyoBlock-Background] Auto update skipped (not needed)');
+    } else {
+      console.warn('[HoyoBlock-Background] Auto update failed:', result.error);
+    }
+  } catch (error) {
+    console.warn('[HoyoBlock-Background] Error during auto update check:', error);
+  }
+}
+
+// 浏览器启动时执行自动更新检查
+chrome.runtime.onStartup.addListener(() => {
+  DebugLogger.log('[HoyoBlock-Background] Browser startup detected, checking auto update...');
+  checkAutoUpdateOnStartup();
+});
+
+// 扩展启动时也执行检查（用于开发和首次安装）
+chrome.runtime.onInstalled.addListener(async (details) => {
+  const defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
+
+  // 设置默认配置
+  chrome.storage.sync.set(defaultConfig);
+
+  // 初始化统计数据
+  const today = new Date().toDateString();
+  chrome.storage.local.get(['todayBlocked', 'totalBlocked', 'lastUpdateDate'], (result) => {
+    chrome.storage.local.set({
+      todayBlocked: result.todayBlocked || 0,
+      totalBlocked: result.totalBlocked || 0,
+      lastUpdateDate: result.lastUpdateDate || today
+    });
+  });
+
+  // 获取并设置默认区域列表
+  fetchDefaultAreaList();
+
+  // 如果是首次安装或更新，尝试从云端获取默认规则
+  if (details.reason === 'install' || details.reason === 'update') {
+    await fetchAndMergeRemoteRules();
+  }
+
+  // 执行自动更新检查
+  await checkAutoUpdateOnStartup();
+});
 
 // 监听来自content script的消息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

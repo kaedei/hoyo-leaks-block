@@ -203,6 +203,68 @@ body {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+/* 自动更新设置样式 */
+.auto-update-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.auto-update-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.auto-update-section .form-group {
+  margin-bottom: 12px;
+}
+
+.auto-update-section select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  transition: border-color 0.3s ease;
+}
+
+.auto-update-section select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.auto-update-section .checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.auto-update-section .checkbox-label input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+
+.auto-update-section .info-text {
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#auto-update-interval-group {
+  transition: opacity 0.3s ease;
+}
+
+#auto-update-interval-group.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .actions {
   margin-top: 20px;
   display: flex;

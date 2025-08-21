@@ -598,5 +598,59 @@
   },
   "sync_remote_loading": {
     "message": "正在從雲端獲取最新規則..."
+  },
+  "auto_update_title": {
+    "message": "定期更新"
+  },
+  "auto_update_enabled": {
+    "message": "啟用定期更新屏蔽規則"
+  },
+  "auto_update_interval": {
+    "message": "更新間隔"
+  },
+  "auto_update_1_day": {
+    "message": "每天"
+  },
+  "auto_update_3_days": {
+    "message": "每3天"
+  },
+  "auto_update_7_days": {
+    "message": "每週"
+  },
+  "auto_update_15_days": {
+    "message": "每15天"
+  },
+  "auto_update_30_days": {
+    "message": "每月"
+  },
+  "last_update_never": {
+    "message": "從未更新"
+  },
+  "last_update_time": {
+    "message": "上次更新: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1",
+        "example": "2024-01-01 12:00:00"
+      }
+    }
+  },
+  "auto_update_success": {
+    "message": "自動更新屏蔽規則成功，新增 $COUNT$ 條規則",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "auto_update_failed": {
+    "message": "自動更新屏蔽規則失敗: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "網路錯誤"
+      }
+    }
   }
 }
