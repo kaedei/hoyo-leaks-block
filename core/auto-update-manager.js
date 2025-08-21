@@ -86,6 +86,11 @@ class AutoUpdateManager {
       return false;
     }
 
+    // 如果间隔设置为0，表示永不自动更新
+    if (config.interval === 0) {
+      return false;
+    }
+
     const now = new Date();
     const today = now.toDateString();
 
@@ -104,9 +109,7 @@ class AutoUpdateManager {
     const daysSinceLastUpdate = Math.floor((now - lastUpdate) / (1000 * 60 * 60 * 24));
 
     return daysSinceLastUpdate >= config.interval;
-  }
-
-  /**
+  }  /**
    * 执行自动更新
    */
   async performAutoUpdate() {

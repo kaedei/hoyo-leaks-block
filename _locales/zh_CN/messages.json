@@ -626,6 +626,9 @@
   "auto_update_interval": {
     "message": "更新间隔"
   },
+  "auto_update_never": {
+    "message": "不检查更新"
+  },
   "auto_update_1_day": {
     "message": "每天"
   },

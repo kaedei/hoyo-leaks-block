@@ -602,6 +602,9 @@
   "auto_update_interval": {
     "message": "Update Interval"
   },
+  "auto_update_never": {
+    "message": "Never check for updates"
+  },
   "auto_update_1_day": {
     "message": "Daily"
   },

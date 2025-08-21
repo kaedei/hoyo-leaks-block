@@ -608,6 +608,9 @@
   "auto_update_interval": {
     "message": "更新間隔"
   },
+  "auto_update_never": {
+    "message": "更新をチェックしない"
+  },
   "auto_update_1_day": {
     "message": "毎日"
   },
