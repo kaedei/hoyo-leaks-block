@@ -4,7 +4,7 @@ class ContentBlocker {
     this.platform = platform;
     this.configManager = configManager;
     this.processedElements = new WeakSet(); // 缓存已处理的元素
-    this.blockTimeout = 1000; // 增加到1秒，减少检查频率
+    this.blockTimeout = 500; // 减少到500ms，提高响应速度
     this.intervalId = null;
 
     // 日志控制变量
@@ -13,6 +13,7 @@ class ContentBlocker {
     this.lastItemCounts = {};
     this.noActiveAreasLogged = false;
     this.lastPageContentHash = null; // 添加页面内容哈希缓存
+    this.lastContentCheckTime = 0; // 添加最后检查时间记录
   }
 
   // 获取area配置中使用的平台名称
@@ -166,24 +167,37 @@ class ContentBlocker {
       area.area === areaPlatformName && area.on === true
     );
 
-    // 快速检查：计算页面内容的简单哈希
-    const pageItemsCount = activeAreas.reduce((count, area) => {
-      return count + document.querySelectorAll(area.item).length;
-    }, 0);
+    // 改进的页面内容检查：计算更详细的内容哈希
+    const pageItemsInfo = activeAreas.map(area => {
+      const items = document.querySelectorAll(area.item);
+      return {
+        selector: area.item,
+        count: items.length,
+        // 为了检测新内容，我们记录每个item的基本信息
+        itemIds: Array.from(items).slice(0, 10).map(item => {
+          // 尝试获取唯一标识符
+          return item.id || item.getAttribute('data-id') || item.getAttribute('href') ||
+            (item.textContent || '').slice(0, 50);
+        }).join('|')
+      };
+    });
 
-    const currentContentHash = `${pageItemsCount}-${activeAreas.length}-${location.href}`;
+    const currentContentHash = `${JSON.stringify(pageItemsInfo)}-${location.href}`;
 
-    // 如果页面内容没有变化，跳过处理（但每60秒至少执行一次）
+    // 如果页面内容没有变化，跳过处理（但每30秒至少执行一次）
+    const now = Date.now();
     if (this.lastPageContentHash === currentContentHash &&
-      this.lastLogTime && Date.now() - this.lastLogTime < 60000) {
+      this.lastContentCheckTime && now - this.lastContentCheckTime < 30000) {
       return 0;
     }
 
     this.lastPageContentHash = currentContentHash;
+    this.lastContentCheckTime = now;
 
     // 只在首次执行或有意义的状态变化时输出日志
-    if (!this.lastLogTime || Date.now() - this.lastLogTime > 60000) { // 增加到60秒间隔
-      DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking check - Platform: ${this.platform} -> ${areaPlatformName}, Active areas: ${activeAreas.length}, Items: ${pageItemsCount}`);
+    if (!this.lastLogTime || now - this.lastLogTime > 60000) { // 保持60秒间隔
+      const totalItems = pageItemsInfo.reduce((sum, info) => sum + info.count, 0);
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Content blocking check - Platform: ${this.platform} -> ${areaPlatformName}, Active areas: ${activeAreas.length}, Items: ${totalItems}`);
       DebugLogger.log(`[HoyoBlock-${this.platform}] Current URL: ${location.href}`);
       DebugLogger.log(`[HoyoBlock-${this.platform}] All areas for platform:`, areaList.filter(area => area.area === areaPlatformName).map(area => ({
         name: area.name,
@@ -191,7 +205,7 @@ class ContentBlocker {
         main: area.main,
         item: area.item
       })));
-      this.lastLogTime = Date.now();
+      this.lastLogTime = now;
     }
 
     if (activeAreas.length === 0) {
@@ -360,6 +374,26 @@ class ContentBlocker {
 
     // 立即执行一次
     this.blockContent();
+  }
+
+  // 立即检查内容，无视缓存（供外部调用）
+  forceBlockContent() {
+    const previousHash = this.lastPageContentHash;
+    const previousCheckTime = this.lastContentCheckTime;
+
+    // 临时重置缓存，强制执行检查
+    this.lastPageContentHash = null;
+    this.lastContentCheckTime = 0;
+
+    const result = this.blockContent();
+
+    // 如果没有找到新内容，恢复之前的缓存状态
+    if (result === 0) {
+      this.lastPageContentHash = previousHash;
+      this.lastContentCheckTime = previousCheckTime;
+    }
+
+    return result;
   }
 
   stopBlocking() {

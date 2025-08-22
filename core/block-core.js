@@ -79,6 +79,16 @@ class HoyoLeaksBlockCore {
     this.statsManager.resetStats();
   }
 
+  // 手动触发内容检查
+  blockContent() {
+    return this.contentBlocker.blockContent();
+  }
+
+  // 强制检查内容，无视缓存
+  forceBlockContent() {
+    return this.contentBlocker.forceBlockContent();
+  }
+
   // 清理和销毁
   destroy() {
     this.contentBlocker.stopBlocking();
