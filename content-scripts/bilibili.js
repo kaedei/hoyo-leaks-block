@@ -37,7 +37,7 @@
             // 页面变化时重新初始化
             setTimeout(() => {
               DebugLogger.log('[HoyoBlock-Bilibili] Re-running block content after URL change');
-              this.blockContent();
+              blockInstance.blockContent();
             }, 1000);
           } else {
             // 对于DOM变化但URL未变化的情况，减少日志输出

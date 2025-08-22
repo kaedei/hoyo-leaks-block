@@ -35,10 +35,22 @@ class AreaManager {
     DebugLogger.log('[HoyoBlock-Options] Loading area list...');
 
     chrome.storage.sync.get(['areaList'], (result) => {
-      const areaList = result.areaList || [];
+      let areaList = result.areaList;
+
+      // 确保 areaList 是数组
+      if (!Array.isArray(areaList)) {
+        DebugLogger.log('[HoyoBlock-Options] areaList is not an array, initializing as empty array. Received:', areaList);
+        areaList = [];
+      }
+
       DebugLogger.log('[HoyoBlock-Options] Area list loaded:', areaList);
 
       const container = document.getElementById('area-items');
+      if (!container) {
+        DebugLogger.log('[HoyoBlock-Options] Area items container not found');
+        return;
+      }
+
       container.innerHTML = '';
 
       if (areaList.length === 0) {

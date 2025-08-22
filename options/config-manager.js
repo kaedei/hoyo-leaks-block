@@ -179,6 +179,9 @@ class OptionsConfigManager extends BaseConfigManager {
 
     rules.push(value);
     this.renderTagList(platform, ruleType, rules);
+
+    // 立即保存配置，使更改实时生效
+    this.autoSaveRules();
   }
 
   /**
@@ -193,6 +196,9 @@ class OptionsConfigManager extends BaseConfigManager {
 
       if (removedItem) {
         window.Utils.showMessage(chrome.i18n.getMessage('rule_deleted').replace('{item}', removedItem), 'success');
+
+        // 立即保存配置，使更改实时生效
+        this.autoSaveRules();
       }
     }
   }
@@ -254,13 +260,49 @@ class OptionsConfigManager extends BaseConfigManager {
   }
 
   /**
+   * 自动保存配置（不显示成功消息，用于实时保存）
+   */
+  autoSaveRules() {
+    DebugLogger.log('[HoyoBlock-Options] Auto saving rules...');
+
+    // 只保存 blockRules 部分，避免覆盖其他配置
+    const rulesToSave = { blockRules: this.config.blockRules };
+
+    chrome.storage.sync.set(rulesToSave, () => {
+      if (chrome.runtime.lastError) {
+        console.error('[HoyoBlock-Options] Error auto saving rules:', chrome.runtime.lastError);
+        // 显示错误消息，但不影响用户操作
+        window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
+      } else {
+        DebugLogger.log('[HoyoBlock-Options] Rules auto saved successfully');
+      }
+    });
+  }
+
+  /**
    * 重置配置为默认值
    */
   resetRules() {
     if (confirm(chrome.i18n.getMessage('confirm_reset_rules'))) {
-      chrome.storage.sync.set(this.defaultConfig, () => {
-        this.loadConfig();
-        window.Utils.showMessage(chrome.i18n.getMessage('rules_reset'), 'success');
+      // 获取当前完整配置
+      chrome.storage.sync.get(null, (currentConfig) => {
+        // 只重置 blockRules 部分，保留其他配置（如 areaList）
+        const updatedConfig = {
+          ...currentConfig,
+          blockRules: this.defaultConfig.blockRules
+        };
+
+        // 保存更新后的配置
+        chrome.storage.sync.set(updatedConfig, () => {
+          if (chrome.runtime.lastError) {
+            console.error('[HoyoBlock-Options] Error resetting rules:', chrome.runtime.lastError);
+            window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
+          } else {
+            // 重新加载配置到UI
+            this.loadConfig();
+            window.Utils.showMessage(chrome.i18n.getMessage('rules_reset'), 'success');
+          }
+        });
       });
     }
   }
@@ -365,6 +407,9 @@ class OptionsConfigManager extends BaseConfigManager {
     this.config.blockRules[platform][ruleType].push(...newRules);
     this.renderTagList(platform, ruleType, this.config.blockRules[platform][ruleType]);
 
+    // 立即保存配置
+    this.autoSaveRules();
+
     window.Utils.showMessage(chrome.i18n.getMessage('rules_imported_count').replace('{count}', newRules.length), 'success');
   }
 
@@ -406,6 +451,10 @@ class OptionsConfigManager extends BaseConfigManager {
     if (confirm(chrome.i18n.getMessage('confirm_clear_rules').replace('{type}', this.getRuleTypeName(ruleType)))) {
       this.config.blockRules[platform][ruleType] = [];
       this.renderTagList(platform, ruleType, []);
+
+      // 立即保存配置
+      this.autoSaveRules();
+
       window.Utils.showMessage(chrome.i18n.getMessage('rules_cleared').replace('{type}', this.getRuleTypeName(ruleType)), 'success');
     }
   }

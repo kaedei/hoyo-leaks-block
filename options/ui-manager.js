@@ -134,13 +134,6 @@ class UIManager {
     };
 
     // 配置相关按钮
-    const saveRulesBtn = getElement('save-rules');
-    if (saveRulesBtn) {
-      saveRulesBtn.addEventListener('click', () => {
-        window.ConfigManager.saveRules();
-      });
-    }
-
     const resetRulesBtn = getElement('reset-rules');
     if (resetRulesBtn) {
       resetRulesBtn.addEventListener('click', () => {
@@ -161,9 +154,12 @@ class UIManager {
       autoUpdateEnabledCheckbox.addEventListener('change', (event) => {
         const enabled = event.target.checked;
         window.ConfigManager.updateAutoUpdateUI(enabled);
-        // 保存配置（异步，不阻塞UI）
-        window.ConfigManager.saveAutoUpdateConfig().catch(error => {
+        // 立即保存配置
+        window.ConfigManager.saveAutoUpdateConfig().then(() => {
+          DebugLogger.log('[UIManager] Auto update config saved successfully');
+        }).catch(error => {
           console.error('[UIManager] Failed to save auto update config:', error);
+          window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', error.message), 'error');
         });
       });
     }
@@ -171,9 +167,12 @@ class UIManager {
     const autoUpdateIntervalSelect = getElement('auto-update-interval');
     if (autoUpdateIntervalSelect) {
       autoUpdateIntervalSelect.addEventListener('change', () => {
-        // 保存配置（异步，不阻塞UI）
-        window.ConfigManager.saveAutoUpdateConfig().catch(error => {
+        // 立即保存配置
+        window.ConfigManager.saveAutoUpdateConfig().then(() => {
+          DebugLogger.log('[UIManager] Auto update interval saved successfully');
+        }).catch(error => {
           console.error('[UIManager] Failed to save auto update config:', error);
+          window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', error.message), 'error');
         });
       });
     }

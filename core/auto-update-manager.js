@@ -34,9 +34,11 @@ class AutoUpdateManager {
         });
       });
 
+      const interval = result[this.STORAGE_KEYS.AUTO_UPDATE_INTERVAL] || 1;
+
       return {
         enabled: result[this.STORAGE_KEYS.AUTO_UPDATE_ENABLED] || true, // 默认开启
-        interval: result[this.STORAGE_KEYS.AUTO_UPDATE_INTERVAL] || 1, // 默认每天
+        interval: interval < 1 ? 1 : interval, // 如果是旧的0值，重置为1天
         lastUpdateCheck: result[this.STORAGE_KEYS.LAST_UPDATE_CHECK] || null,
         lastUpdateTime: result[this.STORAGE_KEYS.LAST_UPDATE_TIME] || null
       };
@@ -83,11 +85,6 @@ class AutoUpdateManager {
     const config = await this.getAutoUpdateConfig();
 
     if (!config.enabled) {
-      return false;
-    }
-
-    // 如果间隔设置为0，表示永不自动更新
-    if (config.interval === 0) {
       return false;
     }
 
