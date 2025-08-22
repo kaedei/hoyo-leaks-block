@@ -277,10 +277,31 @@
         "beta",
         "insider",
         "spoiler",
-        "unreleased"
+        "unreleased",
+        "v2",
+        "v3",
+        "v4"
       ],
-      "blacklist": [],
-      "whitelist": []
+      "blacklist": [
+        "Raiden Shotgun",
+        "Nixo",
+        "Rika Rivailer",
+        "Astro Gaming"
+      ],
+      "whitelist": [
+        "Genshin Impact",
+        "原神-Genshin-公式",
+        "Honkai: Star Rail",
+        "崩壊：スターレイル",
+        "Zenless Zone Zero",
+        "ゼンレスゾーンゼロ-ZZZ-公式",
+        "Honkai Impact 3rd",
+        "崩壊3rd公式",
+        "崩壊学園公式",
+        "未定事件簿",
+        "Tears of Themis",
+        "未定事件簿 日本語版 公式"
+      ]
     },
     "twitter": {
       "keywords": [
