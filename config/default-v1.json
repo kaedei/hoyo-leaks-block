@@ -279,8 +279,10 @@
         "spoiler",
         "unreleased",
         "v2",
-        "v3",
-        "v4"
+        "WutheringWaves",
+        "wuthering waves",
+        "鳴潮",
+        "鸣潮"
       ],
       "blacklist": [
         "Raiden Shotgun",
@@ -309,7 +311,12 @@
         "beta",
         "insider",
         "spoiler",
-        "unreleased"
+        "unreleased",
+        "v2",
+        "WutheringWaves",
+        "wuthering waves",
+        "鳴潮",
+        "鸣潮"
       ],
       "blacklist": [
         "@zenlesszoneleak",
