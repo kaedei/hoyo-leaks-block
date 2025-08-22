@@ -225,6 +225,20 @@ class UIManager {
       });
     }
 
+    // 指示条配置事件监听器
+    const showIndicatorCheckbox = getElement('show-indicator');
+    if (showIndicatorCheckbox) {
+      showIndicatorCheckbox.addEventListener('change', () => {
+        // 立即保存配置
+        window.ConfigManager.saveIndicatorConfig().then(() => {
+          DebugLogger.log('[UIManager] Indicator config saved successfully');
+        }).catch(error => {
+          console.error('[UIManager] Failed to save indicator config:', error);
+          window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', error.message), 'error');
+        });
+      });
+    }
+
     // 动态创建的按钮事件委托
     this.bindDynamicEvents();
 

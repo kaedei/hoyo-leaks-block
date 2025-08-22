@@ -2,9 +2,15 @@
 class UIManager {
   constructor(platform) {
     this.platform = platform;
+    this.configManager = null; // 将在 setConfigManager 中设置
   }
 
-  setupUI() {
+  // 设置配置管理器引用
+  setConfigManager(configManager) {
+    this.configManager = configManager;
+  }
+
+  async setupUI() {
     if (document.getElementById('hoyo-block-button')) {
       return; // UI已存在
     }
@@ -12,6 +18,13 @@ class UIManager {
     // 检查 document.body 是否可用
     if (!document.body) {
       console.warn(`[HoyoBlock-${this.platform}] Document body not available, UI setup skipped`);
+      return;
+    }
+
+    // 检查指示条显示配置
+    const showIndicator = await this.getIndicatorConfig();
+    if (!showIndicator) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Indicator display disabled, skipping UI setup`);
       return;
     }
 
@@ -26,6 +39,31 @@ class UIManager {
     });
 
     document.body.appendChild(button);
+  }
+
+  // 获取指示条配置
+  async getIndicatorConfig() {
+    try {
+      if (this.configManager && this.configManager.config) {
+        // 如果配置中没有 showIndicator 字段，默认为 true
+        return this.configManager.config.showIndicator !== false;
+      }
+
+      // 如果配置管理器不可用，直接查询存储
+      return new Promise((resolve) => {
+        chrome.storage.sync.get(['showIndicator'], (result) => {
+          if (chrome.runtime.lastError) {
+            DebugLogger.log(`[HoyoBlock-${this.platform}] Failed to get indicator config, defaulting to true`);
+            resolve(true);
+          } else {
+            resolve(result.showIndicator !== false); // 默认为 true
+          }
+        });
+      });
+    } catch (error) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Error getting indicator config:`, error);
+      return true; // 默认显示
+    }
   }
 
   openSettings() {

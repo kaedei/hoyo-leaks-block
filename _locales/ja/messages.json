@@ -655,5 +655,14 @@
         "example": "ネットワークエラー"
       }
     }
+  },
+  "indicator_settings_title": {
+    "message": "インジケーター設定"
+  },
+  "show_indicator_label": {
+    "message": "対応ウェブサイト閲覧時にインジケーターを表示"
+  },
+  "show_indicator_description": {
+    "message": "ページの右側に設定ボタンを表示して、プラグイン機能への素早いアクセスを提供します"
   }
 }

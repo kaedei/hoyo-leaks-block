@@ -206,8 +206,8 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-/* 自动更新设置样式 */
-.auto-update-section {
+/* 设置区域样式 */
+.settings-section {
   margin: 20px 0;
   padding: 15px;
   background: #f8fafc;
@@ -215,17 +215,17 @@ body {
   border-left: 4px solid #3b82f6;
 }
 
-.auto-update-section h3 {
+.settings-section h3 {
   color: #1a202c;
   margin-bottom: 15px;
   font-size: 16px;
 }
 
-.auto-update-section .form-group {
+.settings-section .form-group {
   margin-bottom: 12px;
 }
 
-.auto-update-section select {
+.settings-section select {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #cbd5e0;
@@ -236,25 +236,25 @@ body {
   color: #1a202c;
 }
 
-.auto-update-section select:focus {
+.settings-section select:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.auto-update-section .checkbox-label {
+.settings-section .checkbox-label {
   display: flex;
   align-items: center;
   cursor: pointer;
   font-weight: 500;
 }
 
-.auto-update-section .checkbox-label input[type="checkbox"] {
+.settings-section .checkbox-label input[type="checkbox"] {
   margin-right: 8px;
   transform: scale(1.1);
 }
 
-.auto-update-section .info-text {
+.settings-section .info-text {
   color: #4a5568;
   font-size: 12px;
   line-height: 1.4;

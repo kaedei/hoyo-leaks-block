@@ -655,5 +655,14 @@
         "example": "網路錯誤"
       }
     }
+  },
+  "indicator_settings_title": {
+    "message": "指示條設定"
+  },
+  "show_indicator_label": {
+    "message": "瀏覽支援的網站時顯示指示條"
+  },
+  "show_indicator_description": {
+    "message": "在頁面右側顯示一個設定按鈕，方便快速存取外掛功能"
   }
 }

@@ -649,5 +649,14 @@
         "example": "Network error"
       }
     }
+  },
+  "indicator_settings_title": {
+    "message": "Indicator Settings"
+  },
+  "show_indicator_label": {
+    "message": "Show indicator bar when browsing supported websites"
+  },
+  "show_indicator_description": {
+    "message": "Display a settings button on the right side of the page for quick access to plugin functions"
   }
 }

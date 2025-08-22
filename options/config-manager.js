@@ -33,6 +33,9 @@ class OptionsConfigManager extends BaseConfigManager {
       // 加载自动更新配置
       this.loadAutoUpdateConfig();
 
+      // 加载指示条配置
+      this.loadIndicatorConfig();
+
       DebugLogger.log('[HoyoBlock-Options] Configuration loaded to UI');
     });
   }
@@ -588,6 +591,46 @@ class OptionsConfigManager extends BaseConfigManager {
       } else {
         lastUpdateElement.textContent = chrome.i18n.getMessage('last_update_never');
       }
+    }
+  }
+
+  /**
+   * 加载指示条配置到UI
+   */
+  loadIndicatorConfig() {
+    try {
+      const showIndicatorCheckbox = document.getElementById('show-indicator');
+      if (showIndicatorCheckbox) {
+        showIndicatorCheckbox.checked = this.config.showIndicator !== false; // 默认开启
+      }
+    } catch (error) {
+      console.error('[ConfigManager] Failed to load indicator config:', error);
+    }
+  }
+
+  /**
+   * 保存指示条配置
+   */
+  async saveIndicatorConfig() {
+    try {
+      const showIndicatorCheckbox = document.getElementById('show-indicator');
+
+      const config = {
+        showIndicator: showIndicatorCheckbox ? showIndicatorCheckbox.checked : true // 默认开启
+      };
+
+      // 更新本地配置
+      this.config.showIndicator = config.showIndicator;
+
+      // 保存到存储
+      chrome.storage.sync.set(config, () => {
+        DebugLogger.log('[ConfigManager] Indicator config saved:', config);
+      });
+
+      return true;
+    } catch (error) {
+      console.error('[ConfigManager] Failed to save indicator config:', error);
+      return false;
     }
   }
 }

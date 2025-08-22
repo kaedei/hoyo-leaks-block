@@ -104,7 +104,9 @@ const APP_CONSTANTS = {
     autoUpdateEnabled: true,
     autoUpdateInterval: 1, // 默认每天检查
     lastUpdateCheck: null,
-    lastUpdateTime: null
+    lastUpdateTime: null,
+    // 指示条显示配置
+    showIndicator: true
   },
 
   // 从本地arealist.json文件获取默认区域列表

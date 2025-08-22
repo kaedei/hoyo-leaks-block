@@ -673,5 +673,14 @@
         "example": "网络错误"
       }
     }
+  },
+  "indicator_settings_title": {
+    "message": "指示条设置"
+  },
+  "show_indicator_label": {
+    "message": "浏览支持的网站时显示指示条"
+  },
+  "show_indicator_description": {
+    "message": "在页面右侧显示一个设置按钮，方便快速访问插件功能"
   }
 }

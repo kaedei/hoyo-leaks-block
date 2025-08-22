@@ -10,6 +10,9 @@ class HoyoLeaksBlockCore {
     this.uiManager = new UIManager(platform);
     this.contentBlocker = new ContentBlocker(platform, this.configManager);
 
+    // 设置UI管理器的配置管理器引用
+    this.uiManager.setConfigManager(this.configManager);
+
     this.init();
   }
 
@@ -29,7 +32,7 @@ class HoyoLeaksBlockCore {
 
       // 等待DOM加载完成后再设置UI
       await Utils.waitForDocumentReady(this.platform);
-      this.uiManager.setupUI();
+      await this.uiManager.setupUI();
       DebugLogger.log(`[HoyoBlock-${this.platform}] UI setup complete`);
 
       // 启动内容屏蔽
@@ -102,7 +105,14 @@ class HoyoLeaksBlockCore {
   async reinitialize() {
     DebugLogger.log(`[HoyoBlock-${this.platform}] Reinitializing...`);
     this.stopBlocking();
+
+    // 重新加载配置
     await this.configManager.loadConfig();
+
+    // 重新设置UI（可能需要根据新的指示条配置显示或隐藏UI）
+    this.uiManager.removeUI();
+    await this.uiManager.setupUI();
+
     this.startBlocking();
     DebugLogger.log(`[HoyoBlock-${this.platform}] Reinitialized`);
   }
