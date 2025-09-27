@@ -308,6 +308,12 @@
   "help_link": {
     "message": "說明文件"
   },
+  "block_reason_keyword": {
+    "message": "關鍵字屏蔽：$1"
+  },
+  "block_reason_user_blacklist": {
+    "message": "使用者黑名單：$1"
+  },
   "block_button": {
     "message": "米遊內鬼資訊屏蔽"
   },

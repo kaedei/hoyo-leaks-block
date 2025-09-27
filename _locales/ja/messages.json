@@ -308,6 +308,12 @@
   "help_link": {
     "message": "ヘルプドキュメント"
   },
+  "block_reason_keyword": {
+    "message": "キーワードでブロック：$1"
+  },
+  "block_reason_user_blacklist": {
+    "message": "ユーザーブラックリスト：$1"
+  },
   "block_button": {
     "message": "HoYoリーク情報ブロック"
   },

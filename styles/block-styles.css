@@ -4,7 +4,6 @@
   filter: blur(5px) !important;
   opacity: 0.6 !important;
   transition: all 0.5s ease !important;
-  position: relative !important;
 }
 
 .hoyo-blur-block:hover,
@@ -23,7 +22,6 @@ article.hoyo-blur-block,
   filter: blur(5px) !important;
   opacity: 0.6 !important;
   transition: all 0.5s ease !important;
-  position: relative !important;
 }
 
 body .hoyo-blur-block:hover,
@@ -160,7 +158,49 @@ article.hoyo-blur-block:hover,
   border-radius: 4px !important;
 }
 
-/* 防止样式冲突 */
-[data-hoyo-blocked="true"] {
+/* 防止样式冲突：容器定位已由 .hoyo-blur-container 提供，这里不再强制被模糊元素定位 */
+
+/* 覆盖层：不影响布局，铺满容器 */
+.hoyo-block-overlay {
+  position: absolute !important;
+  inset: 0 !important; /* top/right/bottom/left: 0 */
+  z-index: 99998 !important;
+  display: flex !important;
+  align-items: center !important; /* 垂直居中 */
+  justify-content: center !important;
+  pointer-events: none !important; /* 不抢占点击 */
+}
+
+/* 屏蔽原因标签（置于覆盖层中居中显示）*/
+.hoyo-block-label {
+  margin-top: 0 !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  color: #fff !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border-radius: 12px !important;
+  white-space: nowrap !important;
+  max-width: 90% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* 容器用于承载标签并避免自身被模糊 */
+.hoyo-blur-container {
   position: relative !important;
+}
+
+/* 悬停时隐藏原因覆盖层（同时页面已减弱模糊）*/
+.hoyo-blur-container:hover > .hoyo-block-overlay {
+  display: none !important;
+}
+
+/* Bilibili 搜索结果等卡片的保护性样式，确保覆盖层不参与布局且相对卡片定位 */
+.bili-video-card > .hoyo-block-overlay,
+.video-card > .hoyo-block-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
 }

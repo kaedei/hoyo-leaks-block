@@ -21,6 +21,9 @@ class ContentBlocker {
     return this.platform;
   }
 
+  // 判断是否需要屏蔽，并返回原因信息
+  // 返回值：
+  // { blocked: boolean, reasonType?: 'keyword'|'user', reasonValue?: string }
   shouldBlock(text, user) {
     // 转换平台名称为配置键格式：首字母大写
     const platformKey = this.platform.charAt(0).toUpperCase() + this.platform.slice(1);
@@ -57,11 +60,13 @@ class ContentBlocker {
 
     // 检查标题黑名单
     let titleMatch = false;
+    let titleMatchedRule = null;
     if (titleRules.length > 0 && text.trim()) {
       const textLower = text.trim().toLowerCase();
       for (const rule of titleRules) {
         if (textLower.includes(rule.toLowerCase())) {
           titleMatch = true;
+          titleMatchedRule = rule;
           if (DebugLogger.isDebugMode) {
             DebugLogger.log(`[HoyoBlock-${this.platform}] Title "${text}" matched rule "${rule}"`);
           }
@@ -72,11 +77,13 @@ class ContentBlocker {
 
     // 检查用户黑名单
     let userMatch = false;
+    let userMatchedRule = null;
     if (userRules.length > 0 && user.trim()) {
       const userLower = user.trim().toLowerCase();
       for (const rule of userRules) {
         if (userLower.includes(rule.toLowerCase())) {
           userMatch = true;
+          userMatchedRule = rule;
           if (DebugLogger.isDebugMode) {
             DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" matched rule "${rule}"`);
           }
@@ -89,14 +96,97 @@ class ContentBlocker {
       if (DebugLogger.isDebugMode) {
         DebugLogger.log(`[HoyoBlock-${this.platform}] BLOCKING - Title match: ${titleMatch}, User match: ${userMatch}`);
       }
-      return true;
+      // 优先展示用户黑名单原因，其次展示关键词
+      if (userMatch) {
+        return { blocked: true, reasonType: 'user', reasonValue: userMatchedRule || (user || '').slice(0, 20) };
+      }
+      return { blocked: true, reasonType: 'keyword', reasonValue: titleMatchedRule || '' };
     }
 
     // 只在调试模式且有意义的情况下输出允许日志
     if (DebugLogger.isDebugMode && (text.length > 0 || user.length > 0)) {
       DebugLogger.log(`[HoyoBlock-${this.platform}] Content allowed - no matches found`);
     }
-    return false;
+    return { blocked: false };
+  }
+
+  // 获取原因文本（带本地化与降级）
+  getReasonText(reasonType, reasonValue) {
+    const safe = (s) => (typeof s === 'string' ? s : String(s || ''));
+    const val = safe(reasonValue);
+    try {
+      if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getMessage) {
+        if (reasonType === 'keyword') {
+          const msg = chrome.i18n.getMessage('block_reason_keyword', [val]);
+          if (msg) return msg;
+        } else if (reasonType === 'user') {
+          const msg = chrome.i18n.getMessage('block_reason_user_blacklist', [val]);
+          if (msg) return msg;
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+    // 回退文案（简短）
+    if (reasonType === 'keyword') return `关键词屏蔽：${val}`;
+    if (reasonType === 'user') return `用户黑名单：${val}`;
+    return '';
+  }
+
+  // 在被屏蔽元素上增加/更新覆盖层与标签（居中显示，不影响布局）
+  addOrUpdateReasonLabel(element, reasonType, reasonValue) {
+    if (!element) return;
+    try {
+      const overlayClass = 'hoyo-block-overlay';
+      const labelClass = 'hoyo-block-label';
+      let overlay = element.querySelector(`:scope > .${overlayClass}`);
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = overlayClass;
+        // 覆盖层内联样式兜底，避免站点样式干扰导致参与布局
+        overlay.style.position = 'absolute';
+        overlay.style.inset = '0';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.pointerEvents = 'none';
+        overlay.style.zIndex = '99998';
+        element.appendChild(overlay);
+      }
+
+      // 确保容器是定位元素
+      try {
+        const pos = window.getComputedStyle(element).position;
+        if (!pos || pos === 'static') {
+          element.style.position = 'relative';
+        }
+      } catch (_) { }
+
+      let label = overlay.querySelector(`:scope > .${labelClass}`);
+      const text = this.getReasonText(reasonType, reasonValue);
+
+      if (!label) {
+        label = document.createElement('div');
+        label.className = labelClass;
+        overlay.appendChild(label);
+      }
+      label.textContent = text;
+      label.title = text;
+      label.setAttribute('data-hoyo-reason-type', reasonType || '');
+    } catch (e) {
+      DebugLogger.log(`[HoyoBlock-${this.platform}] Failed to render reason label:`, e);
+    }
+  }
+
+  // 移除原因标签
+  removeReasonLabel(element) {
+    if (!element) return;
+    try {
+      const overlay = element.querySelector(':scope > .hoyo-block-overlay');
+      if (overlay) overlay.remove();
+    } catch (e) {
+      // ignore
+    }
   }
 
   applyBlur(element, shouldBlur) {
@@ -149,7 +239,51 @@ class ContentBlocker {
       element.style.filter = '';
       element.style.opacity = '';
       element.style.transition = '';
+      // 同时移除标签
+      this.removeReasonLabel(element);
     }
+  }
+
+  // 对容器的直接子元素应用模糊（避免容器内的标签一起被模糊）
+  applyBlurToItemContents(container, shouldBlur) {
+    if (!container) return;
+    const children = Array.from(container.children || []);
+    children.forEach((child) => {
+      // 跳过原因标签
+      if (child.classList && (child.classList.contains('hoyo-block-label') || child.classList.contains('hoyo-block-overlay'))) return;
+      // 跳过骨架/占位/加载等元素，避免改变其隐藏状态导致撑高布局
+      try {
+        const cls = (child.className || '').toString();
+        if (
+          (child.classList && child.classList.contains('hide')) ||
+          /skeleton|placeholder|loading|suspense/i.test(cls) ||
+          child.getAttribute('aria-hidden') === 'true'
+        ) {
+          return;
+        }
+        const style = window.getComputedStyle(child);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+          return; // 本就不可见的子元素无需处理
+        }
+      } catch (_) { }
+      this.applyBlur(child, shouldBlur);
+    });
+  }
+
+  // 纠正：如骨架/占位元素被误加了模糊样式，移除之，避免撑高布局
+  fixSkeletonsIfNeeded(container) {
+    try {
+      const nodes = container.querySelectorAll('.hide, [class*="skeleton"], [class*="placeholder"], [class*="loading"], [aria-hidden="true"]');
+      nodes.forEach((el) => {
+        el.classList && el.classList.remove('hoyo-blur-block');
+        if (el.getAttribute && el.getAttribute('data-hoyo-blocked') === 'true') {
+          el.removeAttribute('data-hoyo-blocked');
+        }
+        el.style && (el.style.filter = '');
+        el.style && (el.style.opacity = '');
+        el.style && (el.style.transition = '');
+      });
+    } catch (_) { }
   }
 
   blockContent() {
@@ -331,22 +465,32 @@ class ContentBlocker {
           DebugLogger.log(`[HoyoBlock-${this.platform}] Item ${itemIndex + 1}: Combined text: "${text}", User: "${user}"`);
         }
 
-        const shouldBlockThis = this.shouldBlock(text, user);
+        const blockDecision = this.shouldBlock(text, user);
 
-        if (shouldBlockThis) {
-          this.applyBlur(item, true);
+        if (blockDecision && blockDecision.blocked) {
+          // 标记容器，用于定位标签
+          item.classList.add('hoyo-blur-container');
+          // 模糊容器的内容（而不是容器本身），确保标签清晰
+          this.applyBlurToItemContents(item, true);
+          // 双保险：纠正骨架/占位元素被误处理的情况
+          this.fixSkeletonsIfNeeded(item);
           // 也模糊媒体元素
           const mediaElements = item.querySelectorAll(area.media);
           mediaElements.forEach(media => this.applyBlur(media, true));
           totalBlocked++;
+          // 渲染原因标签（仅在item上显示一次）
+          this.addOrUpdateReasonLabel(item, blockDecision.reasonType, blockDecision.reasonValue);
           // 只在调试模式下输出屏蔽日志
           if (DebugLogger.isDebugMode) {
             DebugLogger.log(`[HoyoBlock-${this.platform}] Blocked item: "${text.substring(0, 50)}..." from user: "${user}"`);
           }
         } else {
-          this.applyBlur(item, false);
+          item.classList.remove('hoyo-blur-container');
+          this.applyBlurToItemContents(item, false);
           const mediaElements = item.querySelectorAll(area.media);
           mediaElements.forEach(media => this.applyBlur(media, false));
+          // 移除原因标签
+          this.removeReasonLabel(item);
         }
 
         // 标记为已处理
@@ -414,6 +558,11 @@ class ContentBlocker {
       element.style.opacity = '';
       element.style.transition = '';
     });
+    // 移除容器标记与原因标签
+    const containers = document.querySelectorAll('.hoyo-blur-container');
+    containers.forEach(c => c.classList.remove('hoyo-blur-container'));
+    const overlays = document.querySelectorAll('.hoyo-block-overlay');
+    overlays.forEach(o => o.remove());
     // 清除缓存
     this.processedElements = new WeakSet();
   }

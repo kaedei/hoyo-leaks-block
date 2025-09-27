@@ -302,6 +302,12 @@
   "help_link": {
     "message": "Help"
   },
+  "block_reason_keyword": {
+    "message": "Keyword blocked: $1"
+  },
+  "block_reason_user_blacklist": {
+    "message": "Author blacklisted: $1"
+  },
   "block_button": {
     "message": "HoYo Leaks Block"
   },

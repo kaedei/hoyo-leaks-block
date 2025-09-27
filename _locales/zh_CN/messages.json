@@ -326,6 +326,12 @@
   "help_link": {
     "message": "帮助文档"
   },
+  "block_reason_keyword": {
+    "message": "关键词屏蔽：$1"
+  },
+  "block_reason_user_blacklist": {
+    "message": "用户黑名单：$1"
+  },
   "block_button": {
     "message": "米游内鬼信息屏蔽"
   },
