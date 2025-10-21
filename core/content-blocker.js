@@ -45,11 +45,11 @@ class ContentBlocker {
       DebugLogger.log(`[HoyoBlock-${this.platform}] Block rules - Title rules: ${titleRules.length}, User rules: ${userRules.length}, White rules: ${whiteRules.length}`);
     }
 
-    // 检查白名单 - 如果用户在白名单中，直接放行
+    // 检查白名单 - 完全匹配则放行
     if (whiteRules.length > 0 && user.trim()) {
       const userLower = user.trim().toLowerCase();
       for (const rule of whiteRules) {
-        if (userLower.includes(rule.toLowerCase())) {
+        if (userLower === rule.toLowerCase()) {
           if (DebugLogger.isDebugMode) {
             DebugLogger.log(`[HoyoBlock-${this.platform}] User "${user}" matched whitelist rule "${rule}", allowing content`);
           }

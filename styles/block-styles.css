@@ -52,6 +52,11 @@ article.hoyo-blur-block:hover,
   opacity: 1.0 !important;
 }
 
+/* Bilibili视频搜索页面样式异常 */
+.bili-video-card.hoyo-blur-container .bili-video-card__skeleton.hide{
+  display: none!important;
+}
+
 /* Bilibili特定的强制样式 */
 .bilibili-com .hoyo-blur-block,
 .bilibili-com [data-hoyo-blocked="true"],
