@@ -34,7 +34,7 @@ class AreaManager {
   loadAreaList() {
     DebugLogger.log('[HoyoBlock-Options] Loading area list...');
 
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       let areaList = result.areaList;
 
       // 确保 areaList 是数组
@@ -96,7 +96,7 @@ class AreaManager {
    * @param {number} index 区域索引
    */
   toggleArea(index) {
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
@@ -105,7 +105,7 @@ class AreaManager {
 
         if (confirm(confirmMsg)) {
           area.on = !area.on;
-          chrome.storage.sync.set({ areaList }, () => {
+          chrome.storage.local.set({ areaList }, () => {
             this.loadAreaList();
             const successMsg = this.getI18nMessage('area_toggled_success', '{name}已{action}').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name)).replace('{action}', action);
             window.Utils.showMessage(successMsg, 'success');
@@ -120,7 +120,7 @@ class AreaManager {
    * @param {number} index 区域索引
    */
   editArea(index) {
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
@@ -134,14 +134,14 @@ class AreaManager {
    * @param {number} index 区域索引
    */
   deleteArea(index) {
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         const area = areaList[index];
         const confirmMsg = chrome.i18n.getMessage('confirm_delete_area').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
         if (confirm(confirmMsg)) {
           areaList.splice(index, 1);
-          chrome.storage.sync.set({ areaList }, () => {
+          chrome.storage.local.set({ areaList }, () => {
             this.loadAreaList();
             const successMsg = chrome.i18n.getMessage('area_deleted_success').replace('{name}', window.SharedUtils.getLocalizedAreaName(area.name));
             window.Utils.showMessage(successMsg, 'success');
@@ -362,7 +362,7 @@ class AreaManager {
     const index = parseInt(form.getAttribute('data-index'));
     const dialog = form.closest('.edit-dialog-overlay');
 
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
       if (areaList[index]) {
         areaList[index].name = newName;
@@ -374,7 +374,7 @@ class AreaManager {
         areaList[index].user = newUser;
         areaList[index].home = newHome;
 
-        chrome.storage.sync.set({ areaList }, () => {
+        chrome.storage.local.set({ areaList }, () => {
           this.closeDialog(dialog);
           this.loadAreaList();
           window.Utils.showMessage(chrome.i18n.getMessage('area_updated_success'), 'success');
@@ -416,11 +416,11 @@ class AreaManager {
 
     const dialog = form.closest('.edit-dialog-overlay');
 
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       const areaList = result.areaList || [];
       areaList.push(newArea);
 
-      chrome.storage.sync.set({ areaList }, () => {
+      chrome.storage.local.set({ areaList }, () => {
         this.closeDialog(dialog);
         this.loadAreaList();
         window.Utils.showMessage(chrome.i18n.getMessage('area_added_success'), 'success');
@@ -442,7 +442,7 @@ class AreaManager {
    * 加载示例区域数据
    */
   loadSampleAreaData() {
-    chrome.storage.sync.set({ areaList: this.sampleAreas }, () => {
+    chrome.storage.local.set({ areaList: this.sampleAreas }, () => {
       this.loadAreaList();
       window.Utils.showMessage(chrome.i18n.getMessage('sample_area_loaded'), 'success');
     });
@@ -452,7 +452,7 @@ class AreaManager {
    * 初始化区域数据
    */
   initAreaData() {
-    chrome.storage.sync.get(['areaList'], (result) => {
+    chrome.storage.local.get(['areaList'], (result) => {
       if (!result.areaList || result.areaList.length === 0) {
         DebugLogger.log('[HoyoBlock-Options] No area data found, loading sample data');
         this.loadSampleAreaData();
@@ -472,7 +472,7 @@ class AreaManager {
       // 确认用户是否要覆盖当前配置
       const confirmMsg = chrome.i18n.getMessage('confirm_remote_update').replace('{count}', areaList.length);
       if (confirm(confirmMsg)) {
-        chrome.storage.sync.set({ areaList }, () => {
+        chrome.storage.local.set({ areaList }, () => {
           this.loadAreaList();
           const successMsg = chrome.i18n.getMessage('remote_update_success').replace('{count}', areaList.length);
           window.Utils.showMessage(successMsg, 'success');

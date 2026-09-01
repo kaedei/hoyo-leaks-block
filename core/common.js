@@ -213,13 +213,13 @@ const CommonUtils = {
   async safeStorage(action, data = null) {
     return new Promise((resolve, reject) => {
       try {
-        if (!chrome || !chrome.storage || !chrome.storage.sync) {
+        if (!chrome || !chrome.storage || !chrome.storage.local) {
           reject(new Error('Chrome storage not available'));
           return;
         }
 
         if (action === 'get') {
-          chrome.storage.sync.get(data, (result) => {
+          chrome.storage.local.get(data, (result) => {
             if (chrome.runtime.lastError) {
               reject(new Error(chrome.runtime.lastError.message));
             } else {
@@ -227,7 +227,7 @@ const CommonUtils = {
             }
           });
         } else if (action === 'set') {
-          chrome.storage.sync.set(data, () => {
+          chrome.storage.local.set(data, () => {
             if (chrome.runtime.lastError) {
               reject(new Error(chrome.runtime.lastError.message));
             } else {

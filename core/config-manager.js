@@ -19,7 +19,7 @@ class ConfigManager extends BaseConfigManager {
 
       try {
         // 先尝试直接从storage读取
-        chrome.storage.sync.get(null, (directResult) => {
+        chrome.storage.local.get(null, (directResult) => {
           if (chrome.runtime.lastError) {
             console.warn(`[HoyoBlock-${this.platform}] Direct storage read failed:`, chrome.runtime.lastError);
             // 如果直接读取失败，尝试通过消息传递

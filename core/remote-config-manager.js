@@ -78,7 +78,7 @@ class RemoteConfigManager {
     try {
       const areaList = await this.fetchRemoteAreaList();
 
-      chrome.storage.sync.set({ areaList }, () => {
+      chrome.storage.local.set({ areaList }, () => {
         if (chrome.runtime.lastError) {
           const error = new Error(chrome.runtime.lastError.message);
           if (onError) onError(error);
