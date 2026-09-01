@@ -20,7 +20,7 @@ class AutoUpdateManager {
   async getAutoUpdateConfig() {
     try {
       const result = await new Promise((resolve, reject) => {
-        chrome.storage.sync.get([
+        chrome.storage.local.get([
           this.STORAGE_KEYS.AUTO_UPDATE_ENABLED,
           this.STORAGE_KEYS.AUTO_UPDATE_INTERVAL,
           this.STORAGE_KEYS.LAST_UPDATE_CHECK,
@@ -68,7 +68,7 @@ class AutoUpdateManager {
     }
 
     return new Promise((resolve, reject) => {
-      chrome.storage.sync.set(data, () => {
+      chrome.storage.local.set(data, () => {
         if (chrome.runtime.lastError) {
           reject(new Error(chrome.runtime.lastError.message));
         } else {

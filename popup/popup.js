@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function initPopup() {
   // 加载当前配置状态
-  chrome.storage.sync.get(null, function (result) {
+  chrome.storage.local.get(null, function (result) {
     // 设置平台开关状态
     const platforms = ['bili', 'ytb', 'twitter'];
     platforms.forEach(platform => {
@@ -153,20 +153,23 @@ function bindEventListeners() {
   // 清除缓存按钮
   document.getElementById('clear-cache').addEventListener('click', function () {
     if (confirm(chrome.i18n.getMessage('confirm_clear_cache'))) {
+      // 同时清理 sync 旧数据，避免迁移逻辑将残留数据复活
       chrome.storage.sync.clear(function () {
-        showMessage(chrome.i18n.getMessage('cache_cleared'));
-        // 重新设置默认配置
-        chrome.runtime.sendMessage({ action: 'resetToDefault' });
-        setTimeout(() => {
-          window.close();
-        }, 1000);
+        chrome.storage.local.clear(function () {
+          showMessage(chrome.i18n.getMessage('cache_cleared'));
+          // 重新设置默认配置
+          chrome.runtime.sendMessage({ action: 'resetToDefault' });
+          setTimeout(() => {
+            window.close();
+          }, 1000);
+        });
       });
     }
   });
 }
 
 function togglePlatform(platform, enabled) {
-  chrome.storage.sync.get(['areaList'], function (result) {
+  chrome.storage.local.get(['areaList'], function (result) {
     const areaList = result.areaList || [];
     const platformName = platform === 'bili' ? 'bilibili' :
       platform === 'ytb' ? 'youtube' : 'twitter';
@@ -178,7 +181,7 @@ function togglePlatform(platform, enabled) {
       }
     });
 
-    chrome.storage.sync.set({ areaList: areaList }, function () {
+    chrome.storage.local.set({ areaList: areaList }, function () {
       const statusMsg = chrome.i18n.getMessage('platform_status_changed')
         .replace('{platform}', getPlatformName(platform))
         .replace('{status}', enabled ? chrome.i18n.getMessage('status_enabled') : chrome.i18n.getMessage('status_disabled'));

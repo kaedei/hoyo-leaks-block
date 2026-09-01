@@ -18,7 +18,7 @@ class BaseConfigManager {
         return;
       }
 
-      chrome.storage.sync.get(keys, (result) => {
+      chrome.storage.local.get(keys, (result) => {
         if (chrome.runtime.lastError) {
           reject(new Error(chrome.runtime.lastError.message));
           return;
@@ -38,7 +38,7 @@ class BaseConfigManager {
         return;
       }
 
-      chrome.storage.sync.set(data, () => {
+      chrome.storage.local.set(data, () => {
         if (chrome.runtime.lastError) {
           reject(new Error(chrome.runtime.lastError.message));
           return;

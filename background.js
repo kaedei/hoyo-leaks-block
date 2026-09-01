@@ -13,17 +13,17 @@ async function fetchDefaultAreaList() {
 
   try {
     const areaList = await remoteManager.fetchRemoteAreaList();
-    chrome.storage.sync.set({ areaList });
+    chrome.storage.local.set({ areaList });
   } catch (error) {
     console.warn('Failed to fetch default area list:', error);
     // 使用本地默认区域列表
     try {
       const defaultAreaList = await remoteManager.getDefaultAreaList();
-      chrome.storage.sync.set({ areaList: defaultAreaList });
+      chrome.storage.local.set({ areaList: defaultAreaList });
     } catch (fallbackError) {
       console.warn('Failed to get default area list:', fallbackError);
       // 最后的备用方案：使用空数组
-      chrome.storage.sync.set({ areaList: [] });
+      chrome.storage.local.set({ areaList: [] });
     }
   }
 }
@@ -38,7 +38,7 @@ async function fetchAndMergeRemoteRules() {
 
     // 获取当前配置
     const currentConfig = await new Promise((resolve) => {
-      chrome.storage.sync.get(null, (result) => {
+      chrome.storage.local.get(null, (result) => {
         resolve(result);
       });
     });
@@ -82,15 +82,98 @@ async function checkAutoUpdateOnStartup() {
 // 浏览器启动时执行自动更新检查
 chrome.runtime.onStartup.addListener(() => {
   DebugLogger.log('[HoyoBlock-Background] Browser startup detected, checking auto update...');
+  // 兜底执行一次旧数据迁移（幂等，无副作用）
+  migrateSyncToLocal();
   checkAutoUpdateOnStartup();
 });
+
+// 将旧版本存储在 chrome.storage.sync 中的用户数据迁移到 chrome.storage.local（一次性）
+// 该扩展已全面改用 local 存储（规避 sync 单键 8KB 配额限制），迁移完成后清空 sync 旧数据
+async function migrateSyncToLocal() {
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(null, (syncData) => {
+      if (chrome.runtime.lastError || !syncData) {
+        resolve();
+        return;
+      }
+
+      const keys = Object.keys(syncData);
+      if (keys.length === 0) {
+        resolve();
+        return;
+      }
+
+      chrome.storage.local.get(null, (localData) => {
+        const toSet = {};
+        keys.forEach(key => {
+          // 仅迁移本地缺失的键，本地已有数据优先（用户最新修改优先）
+          if (localData[key] === undefined) {
+            toSet[key] = syncData[key];
+          }
+        });
+
+        const finish = () => {
+          // 迁移/检查完成后清空 sync 旧数据，避免残留数据被迁移逻辑"复活"
+          chrome.storage.sync.clear(() => resolve());
+        };
+
+        if (Object.keys(toSet).length > 0) {
+          chrome.storage.local.set(toSet, finish);
+        } else {
+          finish();
+        }
+      });
+    });
+  });
+}
+
+// 合并默认配置：只补全缺失的键，绝不覆盖用户已保存的数据
+// 用于扩展更新场景，避免用户自定义规则（黑名单/白名单/关键词）被默认配置清空
+async function mergeMissingDefaultConfig(defaultConfig) {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(null, (existing) => {
+      const merged = { ...defaultConfig, ...existing };
+
+      // blockRules 深度合并：逐平台、逐规则类型补全缺失部分
+      if (defaultConfig.blockRules) {
+        merged.blockRules = merged.blockRules || {};
+        const platforms = ['bilibili', 'youtube', 'twitter'];
+        const ruleTypes = ['keywords', 'blacklist', 'whitelist'];
+
+        platforms.forEach(platform => {
+          if (!merged.blockRules[platform]) {
+            merged.blockRules[platform] = {};
+          }
+          ruleTypes.forEach(type => {
+            if (!Array.isArray(merged.blockRules[platform][type])) {
+              // 仅当用户数据中该字段缺失时才补默认值
+              merged.blockRules[platform][type] =
+                defaultConfig.blockRules[platform]?.[type] || [];
+            }
+          });
+        });
+      }
+
+      resolve(merged);
+    });
+  });
+}
 
 // 扩展启动时也执行检查（用于开发和首次安装）
 chrome.runtime.onInstalled.addListener(async (details) => {
   const defaultConfig = APP_CONSTANTS.DEFAULT_CONFIG;
 
-  // 设置默认配置
-  chrome.storage.sync.set(defaultConfig);
+  // 先把旧版本 sync 存储中的用户数据迁移到 local，再执行后续配置逻辑
+  await migrateSyncToLocal();
+
+  if (details.reason === 'install') {
+    // 仅首次安装时写入默认配置
+    chrome.storage.local.set(defaultConfig);
+  } else {
+    // 更新/浏览器更新等场景：只补全缺失的配置键，保留用户已有数据
+    const mergedConfig = await mergeMissingDefaultConfig(defaultConfig);
+    chrome.storage.local.set(mergedConfig);
+  }
 
   // 初始化统计数据
   const today = new Date().toDateString();
@@ -120,7 +203,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.action === 'getConfig') {
     DebugLogger.log('[HoyoBlock-Background] Getting config...');
-    chrome.storage.sync.get(null, (result) => {
+    chrome.storage.local.get(null, (result) => {
       DebugLogger.log('[HoyoBlock-Background] Config retrieved:', result);
       sendResponse(result);
     });
@@ -129,7 +212,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.action === 'setConfig') {
     DebugLogger.log('[HoyoBlock-Background] Setting config:', request.config);
-    chrome.storage.sync.set(request.config, () => {
+    chrome.storage.local.set(request.config, () => {
       if (chrome.runtime.lastError) {
         console.warn('[HoyoBlock-Background] Error saving config:', chrome.runtime.lastError);
         sendResponse({ success: false, error: chrome.runtime.lastError.message });

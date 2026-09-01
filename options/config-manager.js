@@ -19,7 +19,7 @@ class OptionsConfigManager extends BaseConfigManager {
   loadConfig() {
     DebugLogger.log('[HoyoBlock-Options] Loading configuration...');
 
-    chrome.storage.sync.get(null, (result) => {
+    chrome.storage.local.get(null, (result) => {
       DebugLogger.log('[HoyoBlock-Options] Raw config loaded:', result);
 
       this.config = result;
@@ -238,7 +238,7 @@ class OptionsConfigManager extends BaseConfigManager {
 
     DebugLogger.log('[HoyoBlock-Options] Config to save:', configToSave);
 
-    chrome.storage.sync.set(configToSave, async () => {
+    chrome.storage.local.set(configToSave, async () => {
       if (chrome.runtime.lastError) {
         console.error('[HoyoBlock-Options] Error saving config:', chrome.runtime.lastError);
         window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
@@ -255,7 +255,7 @@ class OptionsConfigManager extends BaseConfigManager {
         window.Utils.showMessage(chrome.i18n.getMessage('rules_saved'), 'success');
 
         // 验证保存结果
-        chrome.storage.sync.get(null, (result) => {
+        chrome.storage.local.get(null, (result) => {
           DebugLogger.log('[HoyoBlock-Options] Verification - saved config:', result);
         });
       }
@@ -271,7 +271,7 @@ class OptionsConfigManager extends BaseConfigManager {
     // 只保存 blockRules 部分，避免覆盖其他配置
     const rulesToSave = { blockRules: this.config.blockRules };
 
-    chrome.storage.sync.set(rulesToSave, () => {
+    chrome.storage.local.set(rulesToSave, () => {
       if (chrome.runtime.lastError) {
         console.error('[HoyoBlock-Options] Error auto saving rules:', chrome.runtime.lastError);
         // 显示错误消息，但不影响用户操作
@@ -288,7 +288,7 @@ class OptionsConfigManager extends BaseConfigManager {
   resetRules() {
     if (confirm(chrome.i18n.getMessage('confirm_reset_rules'))) {
       // 获取当前完整配置
-      chrome.storage.sync.get(null, (currentConfig) => {
+      chrome.storage.local.get(null, (currentConfig) => {
         // 只重置 blockRules 部分，保留其他配置（如 areaList）
         const updatedConfig = {
           ...currentConfig,
@@ -296,7 +296,7 @@ class OptionsConfigManager extends BaseConfigManager {
         };
 
         // 保存更新后的配置
-        chrome.storage.sync.set(updatedConfig, () => {
+        chrome.storage.local.set(updatedConfig, () => {
           if (chrome.runtime.lastError) {
             console.error('[HoyoBlock-Options] Error resetting rules:', chrome.runtime.lastError);
             window.Utils.showMessage(chrome.i18n.getMessage('save_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
@@ -314,7 +314,7 @@ class OptionsConfigManager extends BaseConfigManager {
    * 导出配置
    */
   exportConfig() {
-    chrome.storage.sync.get(null, (result) => {
+    chrome.storage.local.get(null, (result) => {
       window.Utils.downloadJSON(result, chrome.i18n.getMessage('config_filename'));
       window.Utils.showMessage(chrome.i18n.getMessage('config_exported'), 'success');
     });
@@ -331,7 +331,7 @@ class OptionsConfigManager extends BaseConfigManager {
     try {
       const config = await window.Utils.readJSONFile(file);
 
-      chrome.storage.sync.set(config, () => {
+      chrome.storage.local.set(config, () => {
         this.loadConfig();
         // 如果区域管理器可用，也重新加载区域列表
         if (window.AreaManager) {
@@ -357,7 +357,7 @@ class OptionsConfigManager extends BaseConfigManager {
     try {
       const areaList = await this.remoteManager.fetchRemoteAreaList();
 
-      chrome.storage.sync.set({ areaList }, () => {
+      chrome.storage.local.set({ areaList }, () => {
         if (chrome.runtime.lastError) {
           window.Utils.showMessage(chrome.i18n.getMessage('save_config_failed').replace('{error}', chrome.runtime.lastError.message), 'error');
         } else {
@@ -379,6 +379,7 @@ class OptionsConfigManager extends BaseConfigManager {
    */
   clearAllData() {
     if (confirm(chrome.i18n.getMessage('confirm_clear_all_data'))) {
+      // 同时清理 local（当前存储）与 sync（旧版本残留），避免迁移逻辑将残留数据复活
       chrome.storage.sync.clear(() => {
         chrome.storage.local.clear(() => {
           this.loadConfig();
@@ -623,7 +624,7 @@ class OptionsConfigManager extends BaseConfigManager {
       this.config.showIndicator = config.showIndicator;
 
       // 保存到存储
-      chrome.storage.sync.set(config, () => {
+      chrome.storage.local.set(config, () => {
         DebugLogger.log('[ConfigManager] Indicator config saved:', config);
       });
 

@@ -51,7 +51,7 @@ class UIManager {
 
       // 如果配置管理器不可用，直接查询存储
       return new Promise((resolve) => {
-        chrome.storage.sync.get(['showIndicator'], (result) => {
+        chrome.storage.local.get(['showIndicator'], (result) => {
           if (chrome.runtime.lastError) {
             DebugLogger.log(`[HoyoBlock-${this.platform}] Failed to get indicator config, defaulting to true`);
             resolve(true);
